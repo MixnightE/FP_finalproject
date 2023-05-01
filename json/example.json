@@ -1,0 +1,19 @@
+{
+    "json_type": "cJson",
+    "settings": {
+        "option": "option",
+        "command": "command",
+        "function": "function",
+        "capslock": "capslock",
+        "tab": "tab",
+        "escape": "escape",
+        "control": "control"
+    },
+    "number": 123,
+    "readsize": 114514.140000,
+    "name": [
+        "MixnightE",
+        "Crbubble",
+        "Jason"
+    ]
+}
