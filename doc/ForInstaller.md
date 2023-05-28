@@ -1,6 +1,7 @@
 # 專案架構
 
 -   src ：存放原始碼和內部標頭檔
+-   setting ：存放設定檔(.json, .txt, etc)
 -   include ：存放公開標頭檔
 -   dist ：存放專案產出
 -   bin ：當專案產出為應用程式時，可用 bin 取代 dist
