@@ -1,8 +1,9 @@
 #include<stdio.h>
 #include<string.h>
 
+
 typedef struct {
-    char name[50];
+    char name[20];
     int type;   //卡片種類
     int value_1; // 數值123
     int value_2; //
