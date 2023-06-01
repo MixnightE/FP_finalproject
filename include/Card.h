@@ -53,15 +53,54 @@ void card_deck_add(CardPile *cardPile, FuncTable *mappingTable, const char *name
  */
 int card_find(CardDeck *cardDeck, const char *name);
 
+/**
+ * @brief 初始化卡池
+ */
 void card_pile_initialize(CardPile *cardPile);
+
+/**
+ * @brief 初始化卡匣(如果pile已經初始化，就不用初始化這個了)
+ */
 void card_deck_initialize(CardDeck *cardDeck);
+
+/**
+ * @brief 將卡片2的內容複製給卡片1
+ */
 void card_assign(Card *card1, Card *card2);
+
+/**
+ * @brief 將卡匣內名為name的卡刪除
+ */
 int card_remove(CardDeck *cardDeck, const char *name);
+
+/**
+ * @brief 將卡新增進卡匣
+ */
 void card_add(CardDeck *cardDeck, Card *card);
+
+/**
+ * @brief 將名為name的卡從手牌移到棄牌堆
+ */
 void fold_card(CardPile *cardPile, const char *name);
+
+/**
+ * @brief 將所有的棄牌全部洗回抽牌堆
+ */
 void shuffle_card(CardPile *cardPile);
+
+/**
+ * @brief 將抽牌堆中名為name的牌移到手牌堆
+ */
 void draw_card(CardPile *cardPile, const char *name);
+
+/**
+ * @brief 將抽排堆的隨機一張牌移到手牌堆
+ */
 void draw_card_random(CardPile *cardPile);
+
+/**
+ * @brief 將卡匣內的卡複製進抽牌堆中(戰鬥開始時用)
+ */
 void put_card(CardPile *cardPile);
 
 #endif // _CARD_H_
