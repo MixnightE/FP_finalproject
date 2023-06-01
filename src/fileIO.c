@@ -32,3 +32,19 @@ cJSON *cJSON_Read(const char *filename)
 
     return json;
 }
+
+void cJSON_Write(const char *filename, const cJSON *object)
+{
+    char *tmp = cJSON_Print(object);
+    FILE *fp = fopen(filename, "w");
+    if (fp == NULL)
+    {
+        fprintf(stderr, "cJSON Write Error: Unable to open the file: %s.\n", filename);
+        exit(1);
+    }
+    fprintf(stdout, "%s\n", tmp);
+    fputs(tmp, fp);
+    fclose(fp);
+    cJSON_free(tmp);
+    cJSON_Delete(object);
+}

@@ -11,4 +11,9 @@
  */
 cJSON *cJSON_Read(const char *filename);
 
+/**
+ * @brief 將object寫入filename檔案中，並刪除object的資料
+ */
+void cJSON_Write(const char *filename, const cJSON *object);
+
 #endif // _FILE_IO_H_

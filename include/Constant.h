@@ -12,9 +12,11 @@
 // 卡牌概述最大字元數
 #define MAX_DESCRIPTION_LENGTH 100
 
-/* The Constant Macro of CardPool Data */
+/* The Constant Macro of CardDeck Data */
 
 // 角色最大可持有卡牌數量
 #define MAX_DECK_SIZE 120
+// 總共的牌數
+#define MAX_CARD_NUM 150
 
 #endif // _CONSTANT_H_
