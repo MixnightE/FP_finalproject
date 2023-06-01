@@ -8,7 +8,7 @@ void card_create(const char *name, const char *description, char *func_name, voi
     cJSON *new_obj = cJSON_CreateObject();
     if (new_obj == NULL)
     {
-        fprintf(stderr, "NermalAttack_create Error: Create object failed.\n");
+        fprintf(stderr, "Card Create Error: Create object failed.\n");
         exit(1);
     }
     if (!cJSON_HasObjectItem(json, name))
