@@ -42,7 +42,7 @@ typedef struct CardPileData
 /**
  * @brief 創造卡片
  */
-void card_create(const char *name, const char *description, char *func_name, void(*function), bool isUpdated, CardType type, FuncTable *ftable);
+void card_create(const char *name, const char *description, char *func_name, void (*function)(Player *, Enemy *, Field *), bool isUpdated, CardType type, FuncTable *ftable);
 
 /**
  * @brief 將卡片轉為名為name的卡片

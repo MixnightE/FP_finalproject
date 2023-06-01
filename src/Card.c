@@ -149,5 +149,6 @@ void put_card(CardPile *cardPile)
 
 void card_action(CardPile *cardPile, int idx, Player *player, Enemy *enemy, Field *field)
 {
-    cardPile->handCard.card[idx].function(player, enemy, field);
+    if (idx < cardPile->handCard.size && idx >= 0)
+        cardPile->handCard.card[idx].function(player, enemy, field);
 }
