@@ -10,7 +10,7 @@ void function_table_initialize(FuncTable *ftable)
     ftable->size = 0;
 }
 
-void func_table_add(FuncTable *ftable, char *name, void(*fp))
+void func_table_add(FuncTable *ftable, char *name, void (*fp)(Player *, Enemy *, Field *))
 {
     ftable->data[ftable->size - 1].fp = fp;
     ftable->data[ftable->size - 1].name = name;

@@ -2,7 +2,7 @@
 #include <cJSON.h>
 #include <fileIO.h>
 
-void card_create(const char *name, const char *description, char *func_name, void(*function), bool isUpdated, CardType type, FuncTable *ftable)
+void card_create(const char *name, const char *description, char *func_name, void (*function)(Player *, Enemy *, Field *), bool isUpdated, CardType type, FuncTable *ftable)
 {
     cJSON *json = cJSON_Read("./data/card.json");
     cJSON *new_obj = cJSON_CreateObject();
@@ -145,4 +145,9 @@ void put_card(CardPile *cardPile)
         card_assign(cardPile->drawCard.card + i, cardPile->deckCard.card + i);
     }
     cardPile->drawCard.size = cardPile->deckCard.size;
+}
+
+void card_action(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    card->function(player, enemy, field);
 }

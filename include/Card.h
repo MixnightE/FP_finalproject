@@ -4,6 +4,9 @@
 #include <Constant.h>
 #include <head.h>
 #include <FuncTable.h>
+#include <Player.h>
+#include <Enemy.h>
+#include <Field.h>
 
 typedef enum CardType
 {
@@ -19,7 +22,7 @@ typedef struct CardData
     char *description; // 卡片描述
     bool isUpdated;
     CardType type;
-    void(*function);
+    void (*function)(Player *, Enemy *, Field *);
 } Card;
 
 typedef struct CardDeckData

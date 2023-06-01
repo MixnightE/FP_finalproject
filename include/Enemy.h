@@ -1,7 +1,7 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 
-typedef struct
+typedef struct EnemyData
 {
     int hp;
     int atk;
