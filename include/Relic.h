@@ -10,7 +10,7 @@ typedef struct RelicData
 {
     char name[MAX_NAME_LENGTH];
     char description[MAX_DESCRIPTION_LENGTH];
-    void (*function)(struct RelicData *Relic, Player *player, Enemy *enemy, Field *field);
+    void(*function);
 } Relic;
 
 #endif // _RELIC_H_

@@ -3,9 +3,7 @@
 
 #include <Constant.h>
 #include <head.h>
-#include <Player.h>
-#include <Enemy.h>
-#include <Field.h>
+#include <FuncTable.h>
 
 typedef enum CardType
 {
@@ -17,17 +15,53 @@ typedef enum CardType
 
 typedef struct CardData
 {
-    char name[MAX_NAME_LENGTH];               // 卡片屬性
-    char description[MAX_DESCRIPTION_LENGTH]; // 卡片描述
+    char *name;        // 卡片屬性
+    char *description; // 卡片描述
     bool isUpdated;
     CardType type;
-    void (*function)(struct CardData *card, Player *player, Enemy *enemy, Field *field);
+    void(*function);
 } Card;
 
 typedef struct CardDeckData
 {
     int size;
-    int card[MAX_DECK_SIZE]; // 記錄卡片id
+    Card card[MAX_DECK_SIZE]; // 記錄卡片id
 } CardDeck;
+
+typedef struct CardPileData
+{
+    CardDeck handCard;
+    CardDeck foldCard;
+    CardDeck drawCard;
+    CardDeck deckCard;
+} CardPile;
+
+/**
+ * @brief 創造卡片
+ */
+void card_create(const char *name, const char *description, char *func_name, void(*function), bool isUpdated, CardType type, FuncTable *ftable);
+
+/**
+ * @brief 將卡片轉為名為name的卡片
+ * @return 如果成功回傳卡片指針，失敗回傳NULL
+ */
+void card_deck_add(CardPile *cardPile, FuncTable *mappingTable, const char *name);
+
+/**
+ * @brief 找到cardDeck中的name卡片
+ * @return 如果成功回傳idx，否則回傳-1
+ */
+int card_find(CardDeck *cardDeck, const char *name);
+
+void card_pile_initialize(CardPile *cardPile);
+void card_deck_initialize(CardDeck *cardDeck);
+void card_assign(Card *card1, Card *card2);
+int card_remove(CardDeck *cardDeck, const char *name);
+void card_add(CardDeck *cardDeck, Card *card);
+void fold_card(CardPile *cardPile, const char *name);
+void shuffle_card(CardPile *cardPile);
+void draw_card(CardPile *cardPile, const char *name);
+void draw_card_random(CardPile *cardPile);
+void put_card(CardPile *cardPile);
 
 #endif // _CARD_H_

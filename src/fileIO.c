@@ -28,7 +28,7 @@ cJSON *cJSON_Read(const char *filename)
     }
 
     char *out = cJSON_Print(json);
-    fprintf(stdout, "%s", out);
+    // fprintf(stdout, "%s", out);
 
     return json;
 }
@@ -46,5 +46,4 @@ void cJSON_Write(const char *filename, const cJSON *object)
     fputs(tmp, fp);
     fclose(fp);
     cJSON_free(tmp);
-    cJSON_Delete(object);
 }

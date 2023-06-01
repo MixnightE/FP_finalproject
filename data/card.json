@@ -1,7 +1,9 @@
 {
-    "NormalAttack": {
-        "name" : "NormalAttack",
-        "description" : "Normal Attack by 5 damage.",
-        "function" : "NormalAttack"
-    }
+	"NormalAttack":	{
+		"name":	"NormalAttack",
+		"description":	"Deal 6 damage.",
+		"function":	"NormalAttack",
+		"isUpdated":	false,
+		"type":	0
+	}
 }
