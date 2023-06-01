@@ -18,7 +18,12 @@ typedef struct FuncTableData
 /**
  * @brief 初始化FuncTable
  */
-void func_table_initialize(FuncTable *ftable);
+void function_table_initialize(FuncTable *ftable);
+
+/**
+ * @brief 新增對應關係至ftable中
+ */
+void func_table_add(FuncTable *ftable, const char *name, void(*fp));
 
 /**
  * @brief 以ftable為映射表，找到對應於name的function pointer
