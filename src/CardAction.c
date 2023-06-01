@@ -1,4 +1,4 @@
-#include <Action.h>
+#include <CardAction.h>
 
 void NormalAttack(Player *player, Enemy *enemy, Field *field)
 {
