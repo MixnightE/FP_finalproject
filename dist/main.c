@@ -25,6 +25,46 @@ void NormalAttack(Player *player, Enemy *enemy, Field *field)
     }
 }
 
+void Battle(Player *player, Enemy *enemy, Field *field, CardPile *cardPile)
+{
+    int choose_action;
+    while (1)
+    {
+        do
+        {
+            scanf("%d", &choose_action);
+            if (choose_action != -1)
+                break;
+
+            card_action(cardPile, choose_action, player, enemy, field);
+        } while (player->energy > 0 && player->hp > 0 && enemy->hp > 0);
+
+        if(player->hp <= 0)
+        {
+            printf("Game Over\n");
+            break;
+        }
+        else if(enemy->hp <= 0)
+        {
+            printf("Win\n");
+            break;
+        }
+
+        // Enemy_action(Player *player, Enemy *enemy, Field *field);
+
+        if(player->hp <= 0)
+        {
+            printf("Game Over\n");
+            break;
+        }
+        else if(enemy->hp <= 0)
+        {
+            printf("Win\n");
+            break;
+        }
+    }
+}
+
 signed main(int argc, char *argv[])
 {
     CardPile cardPile;
@@ -44,5 +84,7 @@ signed main(int argc, char *argv[])
     draw_card_random(&cardPile);
     fold_card(&cardPile, "NormalAttack");
     fold_card(&cardPile, "12345");
+
+
     return 0;
 }
