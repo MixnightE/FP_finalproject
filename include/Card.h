@@ -109,6 +109,6 @@ void put_card(CardPile *cardPile);
 /**
  * @brief 執行卡片的動作
  */
-void card_action(Card *card, Player *player, Enemy *enemy, Field *field);
+void card_action(CardPile *cardPile, int idx, Player *player, Enemy *enemy, Field *field);
 
 #endif // _CARD_H_

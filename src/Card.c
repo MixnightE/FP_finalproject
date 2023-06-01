@@ -147,7 +147,7 @@ void put_card(CardPile *cardPile)
     cardPile->drawCard.size = cardPile->deckCard.size;
 }
 
-void card_action(Card *card, Player *player, Enemy *enemy, Field *field)
+void card_action(CardPile *cardPile, int idx, Player *player, Enemy *enemy, Field *field)
 {
-    card->function(player, enemy, field);
+    cardPile->handCard.card[idx].function(player, enemy, field);
 }
