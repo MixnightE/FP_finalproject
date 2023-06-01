@@ -1,10 +1,7 @@
 {
     "NormalAttack": {
         "name" : "NormalAttack",
-        "id" : 1,
-        "type" : 0,
-        "value" : 5,
         "description" : "Normal Attack by 5 damage.",
-        "ability" : 0
+        "function" : "NormalAttack"
     }
 }
