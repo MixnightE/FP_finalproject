@@ -10,7 +10,7 @@ typedef struct playerDataType
     int max_blood;                         // 最大血量
     int max_energy;                        // 最大能量值
     int max_card;                          // 最大手牌數
-    CardData card;                         // 卡
+    CardDeck card;                         // 卡
 } PlayerData;
 
 #endif // _PLAYER_DATA_H_
