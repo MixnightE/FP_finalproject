@@ -8,8 +8,8 @@
 
 typedef struct RelicData
 {
-    char name[MAX_NAME_LENGTH];
-    char description[MAX_DESCRIPTION_LENGTH];
+    char *name;
+    char *description;
     void(*function);
 } Relic;
 

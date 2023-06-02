@@ -2,43 +2,6 @@
 #include <cJSON.h>
 #include <fileIO.h>
 
-void card_create(const char *name, const char *description, char *func_name, void (*function)(Player *, Enemy *, Field *), bool isUpdated, CardType type, FuncTable *ftable)
-{
-    cJSON *json = cJSON_Read("./data/card.json");
-    cJSON *new_obj = cJSON_CreateObject();
-    if (new_obj == NULL)
-    {
-        fprintf(stderr, "Card Create Error: Create object failed.\n");
-        exit(1);
-    }
-    if (!cJSON_HasObjectItem(json, name))
-    {
-        ftable->data[ftable->size].name = func_name;
-        ftable->data[ftable->size].fp = function;
-        ftable->size++;
-        cJSON_AddStringToObject(new_obj, "name", name);
-        cJSON_AddStringToObject(new_obj, "description", description);
-        cJSON_AddStringToObject(new_obj, "function", (const char *const)func_name);
-        cJSON_AddBoolToObject(new_obj, "isUpdated", isUpdated);
-        cJSON_AddNumberToObject(new_obj, "type", type);
-        cJSON_AddItemToObject(json, name, new_obj);
-        cJSON_Write("./data/card.json", json);
-    }
-    cJSON_Delete(json);
-}
-
-void card_deck_add(CardPile *cardPile, FuncTable *mappingTable, const char *name)
-{
-    cJSON *json = cJSON_Read("./data/card.json");
-    cJSON *card_data = cJSON_GetObjectItemCaseSensitive(json, name);
-    cardPile->deckCard.card[cardPile->deckCard.size].name = cJSON_GetObjectItemCaseSensitive(card_data, "name")->valuestring;
-    cardPile->deckCard.card[cardPile->deckCard.size].description = cJSON_GetObjectItemCaseSensitive(card_data, "description")->valuestring;
-    cardPile->deckCard.card[cardPile->deckCard.size].function = name_to_function_pointer(mappingTable, cJSON_GetObjectItemCaseSensitive(card_data, "function")->valuestring);
-    cardPile->deckCard.card[cardPile->deckCard.size].isUpdated = cJSON_GetObjectItemCaseSensitive(card_data, "isUpdated")->type;
-    cardPile->deckCard.card[cardPile->deckCard.size].type = cJSON_GetObjectItemCaseSensitive(card_data, "type")->valuedouble;
-    cardPile->deckCard.size++;
-}
-
 int card_find(CardDeck *cardDeck, const char *name)
 {
     for (int i = 0; i < cardDeck->size; i++)

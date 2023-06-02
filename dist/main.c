@@ -39,12 +39,12 @@ void Battle(Player *player, Enemy *enemy, Field *field, CardPile *cardPile)
             card_action(cardPile, choose_action, player, enemy, field);
         } while (player->energy > 0 && player->hp > 0 && enemy->hp > 0);
 
-        if(player->hp <= 0)
+        if (player->hp <= 0)
         {
             printf("Game Over\n");
             break;
         }
-        else if(enemy->hp <= 0)
+        else if (enemy->hp <= 0)
         {
             printf("Win\n");
             break;
@@ -52,12 +52,12 @@ void Battle(Player *player, Enemy *enemy, Field *field, CardPile *cardPile)
 
         // Enemy_action(Player *player, Enemy *enemy, Field *field);
 
-        if(player->hp <= 0)
+        if (player->hp <= 0)
         {
             printf("Game Over\n");
             break;
         }
-        else if(enemy->hp <= 0)
+        else if (enemy->hp <= 0)
         {
             printf("Win\n");
             break;
@@ -71,20 +71,6 @@ signed main(int argc, char *argv[])
     FuncTable ftable;
     function_table_initialize(&ftable);
     card_pile_initialize(&cardPile);
-    card_create("NormalAttack", "Deal 6 damage.", "NormalAttack", NormalAttack, false, TYPE_ATK, &ftable);
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    card_deck_add(&cardPile, &ftable, "NormalAttack");
-    put_card(&cardPile);
-    draw_card(&cardPile, "NormalAttack");
-    draw_card_random(&cardPile);
-    fold_card(&cardPile, "NormalAttack");
-    fold_card(&cardPile, "12345");
-
-
+    card_create("NormalAttack", "cause 6 damage.", NormalAttack, false, TYPE_ATK, &ftable);
     return 0;
 }

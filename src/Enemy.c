@@ -27,3 +27,19 @@ void enemy_create(const char *name, const char *description, char *func_name, vo
     }
     cJSON_Delete(json);
 }
+
+int enemy_calculate_damage(Enemy *enemy, Field *field)
+{
+}
+
+void print_enemy_damage(Enemy *enemy)
+{
+    fprintf(stdout, "\t\t\tEnemy: %s\t\t\t\n", enemy->name);
+    fprintf(stdout, "\tHP: %d, DEF: %d, ATK: %d\t\n", enemy->hp, enemy->def, enemy->atk);
+    fprintf(stdout, "\t\t\tBUFF:\t\t\t\n");
+    for (int i = 0; i < enemy->buff_size; i++)
+        fprintf(stdout, "%s: %dlevel, ", enemy->buff[i].name, enemy->buff[i].level);
+    fprintf(stdout, "\t\t\tDEBUFF:\t\t\t\n");
+    for (int i = 0; i < enemy->debuff_size; i++)
+        fprintf(stdout, "%s: %dlevel", enemy->debuff[i].name, enemy->debuff[i].level);
+}

@@ -2,8 +2,11 @@
 	"NormalAttack":	{
 		"name":	"NormalAttack",
 		"description":	"Deal 6 damage.",
-		"function":	"NormalAttack",
 		"isUpdated":	false,
-		"type":	0
+		"type":	1,
+		"atk": 6,
+		"buff": [
+			
+		]
 	}
 }

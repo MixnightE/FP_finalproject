@@ -4,25 +4,19 @@
 #include <Constant.h>
 #include <head.h>
 #include <FuncTable.h>
-#include <Player.h>
-#include <Enemy.h>
-#include <Field.h>
 
-typedef enum CardType
-{
-    TYPE_ATK, // 傷害
-    TYPE_AFF, // 效果
-    TYPE_STG, // 狀態
-    TYPE_CRV  // 詛咒
-} CardType;
+#define TYPE_ATK (1)
+#define TYPE_DEF (1 << 1)
+#define TYPE_HEL (1 << 2)
 
 typedef struct CardData
 {
-    char *name;        // 卡片屬性
+    char *name;        // 卡片名稱
     char *description; // 卡片描述
     bool isUpdated;
-    CardType type;
-    void (*function)(Player *, Enemy *, Field *);
+    int type;
+    int value_heal, value_atk, value_def;
+    int energy;
 } Card;
 
 typedef struct CardDeckData
@@ -38,17 +32,6 @@ typedef struct CardPileData
     CardDeck drawCard;
     CardDeck deckCard;
 } CardPile;
-
-/**
- * @brief 創造卡片
- */
-void card_create(const char *name, const char *description, char *func_name, void (*function)(Player *, Enemy *, Field *), bool isUpdated, CardType type, FuncTable *ftable);
-
-/**
- * @brief 將卡片轉為名為name的卡片
- * @return 如果成功回傳卡片指針，失敗回傳NULL
- */
-void card_deck_add(CardPile *cardPile, FuncTable *mappingTable, const char *name);
 
 /**
  * @brief 找到cardDeck中的name卡片
@@ -105,10 +88,5 @@ void draw_card_random(CardPile *cardPile);
  * @brief 將卡匣內的卡複製進抽牌堆中(戰鬥開始時用)
  */
 void put_card(CardPile *cardPile);
-
-/**
- * @brief 執行卡片的動作
- */
-void card_action(CardPile *cardPile, int idx, Player *player, Enemy *enemy, Field *field);
 
 #endif // _CARD_H_
