@@ -18,3 +18,58 @@
 -   Makefile ：make(1) 或 gmake(1) 預設的設定檔
 -   configure ：Autotools 的命令稿
 -   CMakeLists.txt ：cmake(1) 預設的設定檔
+
+./
+├── GUI
+│ └── home.c
+├── Makefile
+├── README.md
+├── bin
+│ └── main.c
+├── data
+│ ├── buff.json
+│ ├── card.json
+│ └── enemy.json
+├── dist
+│ └── main.c
+├── doc
+│ ├── ForInstaller.md
+│ └── standard.md
+├── example
+├── image
+├── include
+│ ├── Action.h
+│ ├── Buff.h
+│ ├── BuffAction.h
+│ ├── Card.h
+│ ├── CardAction.h
+│ ├── Constant.h
+│ ├── Enemy.h
+│ ├── EnemyAction.h
+│ ├── Field.h
+│ ├── FuncTable.h
+│ ├── Map.h
+│ ├── Player.h
+│ ├── Relic.h
+│ ├── cJSON.h
+│ ├── fileIO.h
+│ └── head.h
+├── myproject
+├── setting
+│ └── setting.json
+├── src
+│ ├── Action.c
+│ ├── Buff.c
+│ ├── Card.c
+│ ├── CardAction.c
+│ ├── Enemy.c
+│ ├── EnemyAction.c
+│ ├── FuncTable.c
+│ ├── cJSON.c
+│ └── fileIO.c
+└── test
+├── Bettle.c
+├── Card.h
+├── EnemyData.h
+├── room.c
+└── test.c
