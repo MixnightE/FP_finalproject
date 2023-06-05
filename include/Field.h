@@ -2,7 +2,9 @@
 #define _FIELD_H_
 
 #include <Constant.h>
+#include <head.h>
 #include <Relic.h>
+#include <Buff.h>
 
 typedef struct FieldData
 {
