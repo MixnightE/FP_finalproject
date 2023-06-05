@@ -71,7 +71,6 @@ signed main(int argc, char *argv[])
     FuncTable ftable;
     function_table_initialize(&ftable);
     card_pile_initialize(&cardPile);
-    card_create("NormalAttack", "cause 6 damage.", NormalAttack, false, TYPE_ATK, &ftable);
     card_create("InfernalBlade", "Add a random card cost 0.\nExhaust.", InfernalBlade, false, TYPE_ATK, &ftable);
     card_create("Intimidate", "Apply 1 Weak to ALL enemies.\nExhaust.", Intimidate, false, TYPE_ATK, &ftable);
     card_create("Metallicize", "At the end of your turn, gain 3 Block.", Metallicize, false, TYPE_DEF, &ftable);
@@ -88,5 +87,23 @@ signed main(int argc, char *argv[])
     card_create("ShockWave", "Apply 3 Weak and Icon Vulnerable Vulnerable to ALL enemies.\nExhaust.", ShockWave, false, TYPE_ATK, &ftable);
     card_create("Uppercut", "Deal 13 damage. Apply 1 Weak. Apply 1 Vulnerable.", Uppercut, false, TYPE_ATK, &ftable);
     card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", Whirlwind, false, TYPE_ATK, &ftable);
+    card_create("Strike", "Deal 6(9) damage.", Strike, false, TYPE_ATK, &ftable);
+    card_create("Defend", "Gain 5(8) shield.", Defend, false, TYPE_DEF, &ftable);
+    card_create("Bash", "Deal 8(10) damage, apply 2(3) vulnerable.", Bash, false, TYPE_ATK, &ftable);
+    card_create("Anger", "Deal 6(8) damage, add a copy of this card to the discard pile", Anger, false, TYPE_ATK, &ftable);
+    card_create("Armament", "Gain 5 shield, upgrade a card in your hand.", Armament, false, TYPE_DEF, &ftable);
+    card_create("Body Slam", "Deal damage equal to your current shield.", Body_Slam, false, TYPE_ATK, &ftable);
+    card_create("Clash", "Deal 10(12) damage", Clash, false, TYPE_ATK, &ftable);
+    card_create("Cleave", "Deal 8(11) damage to all enemy.", Cleave, false, TYPE_ATK, &ftable);
+    card_create("Clothesline", "Deal 12(14) damage, apply 2 weak.", Clothesline, false, TYPE_ATK, &ftable);
+    card_create("Headbutt", "Deal 9 damage, get a card from discard pile.", Headbutt, false, TYPE_ATK, &ftable);
+    card_create("Heavy Blade", "Deal 14 damage.", Heavy_Blade, false, TYPE_ATK, &ftable);
+    card_create("Iron Wave", "Deal 5 damage, and gain 5 shield.", Iron_Wave, false, TYPE_ATK, &ftable);
+    card_create("Perfected Strike", "Deal 6 damage, and deal additional 2 damage if you have Strike.", Perfected_Strike, false, TYPE_ATK, &ftable);
+    card_create("Pommel Strike", "Deal 9 damage, and draw 1 card.", Pommel_Strike, false, TYPE_ATK, &ftable);
+    card_create("Shrug it Off", "Gain 8 shield, and draw 1 card.", Shrug_it_Off, false, TYPE_DEF, &ftable);
+    card_create("Sword Boomerang", "Deal 3 damage to enemy 3 times.", Sword_Boomerang, false, TYPE_ATK, &ftable);
+    card_create("Thunderclap", "Deal 4 damage, apply 1 vulnerable.", Thunderclap, false, TYPE_ATK, &ftable);
+    card_create("True Grit", "Gain 7 shield, and random remove a card in hand.", True_Grit, false, TYPE_ATK, &ftable);
     return 0;
 }
