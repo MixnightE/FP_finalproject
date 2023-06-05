@@ -3,6 +3,7 @@
 
 #include <Constant.h>
 #include <head.h>
+#include <FuncTable.h>
 
 #define TYPE_ATK (1)
 #define TYPE_DEF (1 << 1)

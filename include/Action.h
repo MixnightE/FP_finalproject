@@ -1,7 +1,10 @@
 #ifndef _ACTION_H_
 #define _ACTION_H_
 
-#include <FuncTable.h>
+#include <Player.h>
+#include <Enemy.h>
+#include <Field.h>
+#include <Card.h>
 
 Card *buff_result(Card *card, Player *player, Enemy *enemy, Field *field, FuncTable *buffTable);
 

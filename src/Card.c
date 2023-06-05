@@ -27,14 +27,11 @@ void card_pile_initialize(CardPile *cardPile)
 
 void card_assign(Card *card1, Card *card2)
 {
-    card1->name = card2->name;
     card1->description = card2->description;
+    card1->function = card2->function;
     card1->isUpdated = card2->isUpdated;
+    card1->name = card2->name;
     card1->type = card2->type;
-    card1->energy = card2->energy;
-    card1->value_atk = card2->value_atk;
-    card1->value_def = card2->value_def;
-    card1->value_heal = card2->value_heal;
 }
 
 int card_remove(CardDeck *cardDeck, const char *name)
@@ -111,4 +108,10 @@ void put_card(CardPile *cardPile)
         card_assign(cardPile->drawCard.card + i, cardPile->deckCard.card + i);
     }
     cardPile->drawCard.size = cardPile->deckCard.size;
+}
+
+void card_action(CardPile *cardPile, int idx, Player *player, Enemy *enemy, Field *field)
+{
+    if (idx < cardPile->handCard.size && idx >= 0)
+        cardPile->handCard.card[idx].function(player, enemy, field);
 }
