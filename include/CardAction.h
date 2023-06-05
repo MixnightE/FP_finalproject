@@ -6,7 +6,6 @@
 #include <Enemy.h>
 #include <Field.h>
 
-void NormalAttack(Card *card, Player *player, Enemy *enemy, Field *field);
 void InfernalBlade(Card *card, Player *player, Enemy *enemy, Field *field);
 void Intimidate(Card *card, Player *player, Enemy *enemy, Field *field);
 void Metallicize(Card *card, Player *player, Enemy *enemy, Field *field);
