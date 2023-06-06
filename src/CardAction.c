@@ -461,3 +461,275 @@ void True_Grit(Card *card, Player *player, Enemy *enemy, Field *field)
     fprintf(stdout, "Player got %d shield and exhaust a card.\n", card->value_def);
     //移除卡牌
 }
+
+void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    if(card->isUpdated)
+    {
+        atk += 2;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void Warcry(Card *card, Player *player, Enemy *enemy, Field *field)
+{   
+    //沒實作出"Put a card from your hand  onto the top of your draw pile"
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        draw_card_random(cardPile);
+    }
+    draw_card_random(cardPile);
+    
+    fprintf(stdout, "Player draw cards.\n");
+}
+
+void WildStrike(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    if(card->isUpdated)
+    {
+        atk += 5;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void BattleTrance(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        draw_card_random(cardPile);
+    }
+    for(int i = 0; i < 3; i++)
+    {
+        draw_card_random(cardPile);
+    }
+    fprintf(stdout, "Player draw cards.\n");
+}
+
+void BloodforBlood(Card *card, Player *player, Enemy *enemy, Field *field)
+{   
+    //沒實作出"Costs 1 less RedEnergy for each time you lose HP this combat"
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        atk += 4;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void Bloodletting(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    player->hp -= 3;
+    if(card->isUpdated)
+    {
+        player->energy += 1;
+    }
+    player->energy += 2;
+}
+
+void BurningPact(Card *card, Player *player, Enemy *enemy, Field *field)
+{   
+    //沒實作出"Exhaust 1 card."
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        draw_card_random(cardPile);
+    }
+    for(int i = 0; i < 2; i++)
+    {
+        draw_card_random(cardPile);
+    }
+    fprintf(stdout, "Player draw cards.\n");
+}
+
+void Carnage(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    if(card->isUpdated)
+    {
+        atk += 8;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void Combust(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    player->hp -= 1;
+    int atk = card->value_atk;
+    if(card->isUpdated)
+    {
+        atk += 2;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player -1 hp ,cause %d damage.\n", atk);
+}
+
+void DarkEmbrace(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    //Whenever a card is Exhausted,
+    draw_card_random(cardPile);
+    fprintf(stdout, "Player draw cards.\n");
+}
+
+void Disarm(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        enemy->atk -= 1;
+    }
+    enemy->atk -= 2;
+}
+
+void Dropkick(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    if(card->isUpdated)
+    {
+        atk += 3;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    //if(enemy vulnerable){
+    //     player->energy += 1;
+    //     draw_card_random(cardPile);
+    // }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void DualWield(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+}
+
+void Entrench(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    player->def *= 2;
+    fprintf(stdout, "Player now have %d def.\n", player->def);
+}
+
+void Evolve(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    //if (you draw a Status card){
+    if(card->isUpdated)
+    {
+        draw_card_random(cardPile);
+    }
+    draw_card_random(cardPile);
+    fprintf(stdout, "Player draw cards.\n");
+}
+
+void FeelNoPain(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    //Whenever a card is Exhausted,
+    if(card->isUpdated)
+    {
+        player->def += 1;
+    }
+    player->def += card->value_def;
+    fprintf(stdout, "Player now have %d def.\n", player->def);
+}
+
+void FireBreathing(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    // Whenever you draw a Status or Curse card
+    if(card->isUpdated)
+    {
+        atk += 4;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player cause %d damage.\n", atk);
+}
+
+void FlameBarrier(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    //沒實作出"Whenever you are attacked this turn,, deal 4(updated 6)damage back."
+    if(card->isUpdated)
+    {
+        player->def += 4;
+    }
+    player->def += card->value_def;
+    fprintf(stdout, "Player now have %d def.\n", player->def);
+}
+
+void GhostlyArmor(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    if(card->isUpdated)
+    {
+        player->def += 3;
+    }
+    player->def += card->value_def;
+    fprintf(stdout, "Player now have %d def.\n", player->def);
+}
+
+void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player->energy -= card->energy;
+    int atk = card->value_atk;
+    player->hp -= 2;
+    if(card->isUpdated)
+    {
+        atk += 5;
+    }
+    enemy->def -= atk;
+    if (enemy->def < 0)
+    {
+        enemy->hp += enemy->def;
+        enemy->def = 0;
+    }
+    fprintf(stdout, "Player -2 hp ,cause %d damage.\n", atk);
+}
