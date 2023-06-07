@@ -10,7 +10,6 @@ typedef enum BuffType
     TYPE_POISON,      // 中毒
     TYPE_WEAK,        // 虛弱
     TYPE_VULNERABLE,  // 易傷
-    TYPE_DAZED,       // 迷茫
     TYPE_STRENGTH,    // 力量
     TYPE_DEFENSE,     // 格擋
 } BuffType;

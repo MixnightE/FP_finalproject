@@ -30,7 +30,9 @@ void add_buff_into_deck(BuffDeck *deck, const char *buffname, int level)
     int idx;
     if ((idx = find_buff_from_deck(deck, buffname)) == -1)
     {
-        buff_assign(deck->deck + deck->size, import_buff_from_json(buffname));
+        Buff *buff = import_buff_from_json(buffname);
+        buff_assign(deck->deck + deck->size, buff);
+        free(buff);
         idx = deck->size;
         deck->size++;
     }

@@ -49,6 +49,11 @@ void card_create(const char *name, const char *description, void (*function)(Car
 void enemy_create(const char *name, const char *description, void (*function)(Card *, Player *, Enemy *, Field *), int hp, int atk, int def, FuncTable *ftable);
 
 /**
+ * @brief 創造buff
+ */
+void buff_create(const char *name, const char *description, void (*function)(Card *, Player *, Enemy *, Field *));
+
+/**
  * @brief 將卡片轉為名為name的卡片
  * @return 如果成功回傳卡片指針，失敗回傳NULL
  */

@@ -8,8 +8,13 @@
 
 typedef struct FieldData
 {
-    Relic relic[MAX_DECK_SIZE];
+    RelicDeck relic;
     int round;
 } Field;
+
+/**
+ * @brief 初始化field
+ */
+void field_initialize(Field *field);
 
 #endif // _FIELD_H_
