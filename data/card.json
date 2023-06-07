@@ -5,8 +5,6 @@
 		"isUpdated":	false,
 		"type":	1,
 		"atk": 6,
-		"buff": [
-			
-		]
+		"buff": []
 	}
 }

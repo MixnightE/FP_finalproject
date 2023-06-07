@@ -1,12 +1,11 @@
 #ifndef _CARD_H_
 #define _CARD_H_
 
-#include <Constant.h>
-#include <head.h>
+#include <Buff.h>
 
-#define TYPE_ATK (1)
-#define TYPE_DEF (1 << 1)
-#define TYPE_HEL (1 << 2)
+#define TYPE_ATK (1)      // 攻擊卡
+#define TYPE_SKL (1 << 1) // 技能卡
+#define TYPE_ABL (1 << 2) // 能力卡
 
 typedef struct CardData
 {
@@ -14,8 +13,9 @@ typedef struct CardData
     char *description; // 卡片描述
     bool isUpdated;
     int type;
-    int value_heal, value_atk, value_def;
+    int atk;
     int energy;
+    BuffDeck buff;
 } Card;
 
 typedef struct CardDeckData

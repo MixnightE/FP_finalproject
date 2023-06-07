@@ -1,15 +1,11 @@
 
 #include <head.h>
-#include <Buff.h>
-#include <Card.h>
 #include <cJSON.h>
-#include <Constant.h>
-#include <Enemy.h>
-#include <Field.h>
 #include <fileIO.h>
 #include <FuncTable.h>
-#include <Player.h>
-#include <Relic.h>
+#include <EnemyAction.h>
+#include <BuffAction.h>
+#include <CardAction.h>
 
 void NormalAttack(Player *player, Enemy *enemy, Field *field)
 {

@@ -1,9 +1,7 @@
 #ifndef _ENEMY_H_
 #define _ENEMY_H_
 
-#include <Constant.h>
-#include <head.h>
-#include <Buff.h>
+#include <Card.h>
 
 typedef struct EnemyData
 {
@@ -13,6 +11,12 @@ typedef struct EnemyData
     int atk;
     int def;
     BuffDeck buff;
+    CardDeck deck;
 } Enemy;
+
+/**
+ * @brief 初始化Enemy
+ */
+void enemy_initialize(Enemy *enemy);
 
 #endif // _ENEMY_H_
