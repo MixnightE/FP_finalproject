@@ -12,6 +12,7 @@ typedef enum BuffType
     TYPE_VULNERABLE,  // 易傷
     TYPE_STRENGTH,    // 力量
     TYPE_DEFENSE,     // 格擋
+    TYPE_RITUAL,      // 儀式(for邪教徒)
 } BuffType;
 
 typedef struct BuffData

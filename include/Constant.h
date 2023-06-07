@@ -1,6 +1,10 @@
 #ifndef _CONSTANT_H_
 #define _CONSTANT_H_
 
+#include <head.h>
+
+#define DEBUG fprintf(stderr, "Now Running At %s file, %d line.\n", __FILE__, __LINE__);
+
 /* The Constant Macro of Player Data */
 
 #define MAX_PLAYER_NAME_LENGTH 20

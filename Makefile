@@ -1,6 +1,6 @@
 # 變數設定
 CC=gcc
-CFLAGS=-Iinclude src
+CFLAGS=-Iinclude
 DEPS := $(shell find include -name "*.h")
 OBJ := $(shell find src -name "*.c") dist/main.c
 TARGET=myproject

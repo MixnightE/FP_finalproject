@@ -88,4 +88,20 @@ void draw_card_random(CardPile *cardPile);
  */
 void put_card(CardPile *cardPile);
 
+/**
+ * @brief 將buff_data中的所有buff放入卡片中的buff_deck中
+ * @param buff_data cJSON物件。為該卡片的json資料的buff欄位資料，意即buff_data = cJSON_GetObjectItem(card.json.name, buff)
+ */
+void put_buff_into_card(Card *card, cJSON *buff_data);
+
+/**
+ * @brief 將卡片從json中導出並複製給card
+ */
+void import_card_from_json(Card *card, const char *name);
+
+/**
+ * @brief 將卡片名稱為name的卡片從json中找出並加入卡匣
+ */
+void add_card_into_deck(CardDeck *deck, const char *name);
+
 #endif // _CARD_H_

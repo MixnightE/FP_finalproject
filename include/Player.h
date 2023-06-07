@@ -15,6 +15,6 @@ typedef struct PlayerData
 /**
  * @brief 初始化Player
  */
-void player_initialize(Player *player);
+void player_initialize(Player *player, int hp);
 
 #endif // _PLAYER_H_

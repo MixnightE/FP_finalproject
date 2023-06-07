@@ -1,5 +1,79 @@
 #include <CardAction.h>
 
+// --通用函式--------------------------------------------------------
+void player_deal_damage(Card *card, Player *player, Enemy *enemy)
+{
+    if (enemy->def < card->atk)
+    {
+        enemy->hp -= card->atk - enemy->def;
+        enemy->def = 0;
+    }
+    else
+    {
+        enemy->def -= card->atk;
+    }
+}
+
+void enemy_deal_damage(Card *card, Player *player, Enemy *enemy)
+{
+    if (player->def < card->atk)
+    {
+        player->hp -= card->atk - player->def;
+        player->def = 0;
+    }
+    else
+    {
+        player->def -= card->atk;
+    }
+}
+// --通用函式--------------------------------------------------------
+
+// --敵人的卡--------------------------------------------------------
+void Incantation(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(enemy->buff), "Ritual", 3);
+}
+
+void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    enemy_deal_damage(card, player, enemy);
+}
+// --敵人的卡--------------------------------------------------------
+
+/*
+範例
+給玩家加六點護盾（Defense）
+add_buff_into_deck(&(player->buff), "Defense", 6);
+給敵人二點Vulnerable
+add_buff_into_deck(&(enemy->buff), "Vulnerable", 2);
+對敵人造成傷害
+player_deal_damage(card, player, enemy); // atk已經在卡裡面了 除非是有破盾效果的傷害要另外寫
+對玩家造成傷害
+enemy_deal_damage(card, player, enemy);
+*/
+// --玩家的卡--------------------------------------------------------
+void Strike(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player_deal_damage(card, player, enemy);
+}
+
+void Defend(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(player->buff), "Defense", 6);
+}
+
+void Bash(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    player_deal_damage(card, player, enemy);
+    add_buff_into_deck(&(enemy->buff), "Vulnerable", 2);
+}
+
+void Inflame(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(enemy->buff), "Strength", 2);
+}
+
+/*
 void InfernalBlade(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     player->energy -= card->energy;
@@ -480,7 +554,7 @@ void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 }
 
 void Warcry(Card *card, Player *player, Enemy *enemy, Field *field)
-{   
+{
     //沒實作出"Put a card from your hand  onto the top of your draw pile"
     player->energy -= card->energy;
     if(card->isUpdated)
@@ -488,7 +562,7 @@ void Warcry(Card *card, Player *player, Enemy *enemy, Field *field)
         draw_card_random(cardPile);
     }
     draw_card_random(cardPile);
-    
+
     fprintf(stdout, "Player draw cards.\n");
 }
 
@@ -524,7 +598,7 @@ void BattleTrance(Card *card, Player *player, Enemy *enemy, Field *field)
 }
 
 void BloodforBlood(Card *card, Player *player, Enemy *enemy, Field *field)
-{   
+{
     //沒實作出"Costs 1 less RedEnergy for each time you lose HP this combat"
     player->energy -= card->energy;
     if(card->isUpdated)
@@ -552,7 +626,7 @@ void Bloodletting(Card *card, Player *player, Enemy *enemy, Field *field)
 }
 
 void BurningPact(Card *card, Player *player, Enemy *enemy, Field *field)
-{   
+{
     //沒實作出"Exhaust 1 card."
     player->energy -= card->energy;
     if(card->isUpdated)
@@ -642,7 +716,7 @@ void Dropkick(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void DualWield(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-}
+}Since we get two different limits by approaching from two different paths, the limit does not exist.
 
 void Entrench(Card *card, Player *player, Enemy *enemy, Field *field)
 {
@@ -733,3 +807,5 @@ void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field)
     }
     fprintf(stdout, "Player -2 hp ,cause %d damage.\n", atk);
 }
+
+*/

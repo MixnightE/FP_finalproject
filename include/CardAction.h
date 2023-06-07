@@ -1,11 +1,23 @@
-#ifndef _ACTION_H_
-#define _ACTION_H_
+#ifndef _CARD_ACTION_H_
+#define _CARD_ACTION_H_
 
-#include <Card.h>
-#include <Player.h>
-#include <Enemy.h>
-#include <Field.h>
+#include <Action.h>
 
+/* cards for enemy */
+
+// Cultist
+void Incantation(Card *card, Player *player, Enemy *enemy, Field *field);
+// Cultist
+void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field);
+
+/* cards for player */
+
+void Inflame(Card *card, Player *player, Enemy *enemy, Field *field);
+void Strike(Card *card, Player *player, Enemy *enemy, Field *field);
+void Defend(Card *card, Player *player, Enemy *enemy, Field *field);
+void Bash(Card *card, Player *player, Enemy *enemy, Field *field);
+
+/*
 void InfernalBlade(Card *card, Player *player, Enemy *enemy, Field *field);
 void Intimidate(Card *card, Player *player, Enemy *enemy, Field *field);
 void Metallicize(Card *card, Player *player, Enemy *enemy, Field *field);
@@ -59,5 +71,5 @@ void FireBreathing(Card *card, Player *player, Enemy *enemy, Field *field);
 void FlameBarrier(Card *card, Player *player, Enemy *enemy, Field *field);
 void GhostlyArmor(Card *card, Player *player, Enemy *enemy, Field *field);
 void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field);
-
-#endif // _ACTION_H_
+*/
+#endif // _CARD_ACTION_H_

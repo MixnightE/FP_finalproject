@@ -42,7 +42,7 @@ void cJSON_Write(const char *filename, const cJSON *object)
         fprintf(stderr, "cJSON Write Error: Unable to open the file: %s.\n", filename);
         exit(1);
     }
-    fprintf(stdout, "%s\n", tmp);
+    // fprintf(stdout, "%s\n", tmp);
     fputs(tmp, fp);
     fclose(fp);
     cJSON_free(tmp);
