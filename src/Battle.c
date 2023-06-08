@@ -41,20 +41,27 @@ void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
 
         player_new_round(player, enemy, field);
 
+        put_card(&(player->deck));
         // 抽卡
         for (int i = 0; i < 5; i++)
             draw_card_random(&(player->deck));
 
         while (player->energy > 0)
         {
+            print_battlefield(player, enemy, field);
+            print_card_deck(&(player->deck.handCard));
             char choose_card[MAX_NAME_LENGTH + 1];
-            scanf("choose card: %s", choose_card);
+            fprintf(stdout, "choose card: ");
+            fscanf(stdin, "%s", choose_card);
             player_choose_card(player, enemy, field, cardtable, choose_card);
         }
+        for (int i = 0; i < player->deck.handCard.size; i++)
+            fold_card(&(player->deck), player->deck.handCard.card[i].name);
 
         enemy_new_round(player, enemy, field);
 
         char name[MAX_NAME_LENGTH + 1];
-        scanf("choose card: %s", name);
+        fprintf(stdout, "choose card: ");
+        fscanf(stdin, "%s", name);
     }
 }

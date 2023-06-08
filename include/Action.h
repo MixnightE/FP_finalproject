@@ -15,10 +15,12 @@ void enemy_buff_action(Card *card, Player *player, Enemy *enemy, Field *field);
 
 void player_buff_action(Card *card, Player *player, Enemy *enemy, Field *field);
 
+void print_battlefield(Player *player, Enemy *enemy, Field *field);
+
 /**
  * @brief 創造卡片
  */
-void card_create(char *name, const char *description, void (*function)(Card *, Player *, Enemy *, Field *), int type, CardTable *table);
+void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, void (*function)(Card *, Player *, Enemy *, Field *), CardTable *table);
 
 /**
  * @brief 創造敵人

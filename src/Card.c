@@ -112,45 +112,39 @@ void put_card(CardPile *cardPile)
     cardPile->drawCard.size = cardPile->deckCard.size;
 }
 
-void put_buff_into_card(Card *card, cJSON *buff_data)
+void add_card_into_deck(CardDeck *deck, const char *name)
 {
-    if (buff_data != NULL && cJSON_IsObject(buff_data))
-    {
-        cJSON *item = buff_data->child;
-        card->buff.size = 0;
-        while (item != NULL)
-        {
-            if (cJSON_IsNumber(item))
-            {
-                card->buff.deck[card->buff.size].name = item->string;
-                card->buff.deck[card->buff.size].level = item->valueint;
-                card->buff.size++;
-            }
-            item = item->next;
-        }
-    }
-}
-
-void import_card_from_json(Card *card, const char *name)
-{
+    Card *card = &(deck->card[deck->size]);
     cJSON *json = cJSON_Read("./data/card.json");
     cJSON *card_data = cJSON_GetObjectItem(json, name);
     card->atk = cJSON_GetObjectItem(card_data, "atk")->valueint;
-    cJSON *buff_data = cJSON_GetObjectItem(card_data, "buff");
-    put_buff_into_card(card, buff_data);
+    // cJSON *buff_data = cJSON_GetObjectItem(card_data, "buff");
+    // if (buff_data != NULL && cJSON_IsObject(buff_data))
+    // {
+    //     cJSON *item = buff_data->child;
+    //     card->buff.size = 0;
+    //     while (item != NULL)
+    //     {
+    //         if (cJSON_IsNumber(item))
+    //         {
+    //             card->buff.deck[card->buff.size].name = item->string;
+    //             card->buff.deck[card->buff.size].level = item->valueint;
+    //             card->buff.size++;
+    //         }
+    //         item = item->next;
+    //     }
+    // }
     card->description = cJSON_GetObjectItem(card_data, "description")->valuestring;
     card->energy = cJSON_GetObjectItem(card_data, "energy")->valueint;
     card->name = cJSON_GetObjectItem(card_data, "name")->valuestring;
     card->type = cJSON_GetObjectItem(card_data, "type")->valueint;
+    deck->size++;
 }
 
-void add_card_into_deck(CardDeck *deck, const char *name)
+void print_card_deck(CardDeck *deck)
 {
-    cJSON *json = cJSON_Read("./data/card.json");
-    cJSON *card_data = cJSON_GetObjectItem(json, name);
-
-    DEBUG
-
-    import_card_from_json(&(deck->card[deck->size]), name);
-    deck->size++;
+    for (int i = 0; i < deck->size; i++)
+    {
+        fprintf(stdout, "%s: %s\n", deck->card[i].name, deck->card[i].description);
+    }
 }

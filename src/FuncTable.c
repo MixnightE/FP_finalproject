@@ -43,3 +43,25 @@ void *enemy_table_transform(EnemyTable *table, const char *name)
     }
     return NULL;
 }
+
+void buff_table_initialize(BuffTable *table)
+{
+    table->size = 0;
+}
+
+void buff_table_add(BuffTable *table, char *name, void (*fp)(Card *, Player *, Enemy *, Field *, CardTable *))
+{
+    table->data[table->size].fp = fp;
+    table->data[table->size].name = name;
+    table->size++;
+}
+
+void *buff_table_transform(BuffTable *table, const char *name)
+{
+    for (int i = 0; i < table->size; i++)
+    {
+        if (!strcmp(table->data[i].name, name))
+            return table->data[i].fp;
+    }
+    return NULL;
+}

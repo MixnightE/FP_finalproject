@@ -1,39 +1,35 @@
 
 #include <Battle.h>
 
-void all_initialize(Player *player, CardTable *cardtable, EnemyTable *enemytable)
+void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable)
 {
     card_table_initialize(cardtable);
     enemy_table_initialize(enemytable);
-    player_initialize(player, 80);
+    player_initialize(player, 80, 3);
+    enemy_initialize(enemy);
+    field_initialize(field);
 
     /* create player cards */
 
-    card_create("Strike", "Deal 6 damage.", Strike, TYPE_ATK, cardtable);
-    card_create("Defend", "Gain 5 Block.", Defend, TYPE_SKL, cardtable);
-    card_create("Bash", "Deal 8 damage. Apply 2 Vulnerable.", Bash, TYPE_ATK, cardtable);
-    card_create("Inflame", "Gain 2 Strength.", Inflame, TYPE_ABL, cardtable);
+    card_create("Strike", "Deal 6 damage.", TYPE_ATK, 6, 0, 1, Strike, cardtable);
+    card_create("Defend", "Gain 5 Block.", TYPE_SKL, 0, 0, 1, Defend, cardtable);
+    card_create("Bash", "Deal 8 damage. Apply 2 Vulnerable.", TYPE_ATK, 8, 0, 2, Bash, cardtable);
+    card_create("Inflame", "Gain 2 Strength.", TYPE_ABL, 0, 0, 1, Inflame, cardtable);
 
     /* create enemy cards */
 
-    card_create("DarkStrike", "None.", DarkStrike, TYPE_ATK, cardtable);
-    card_create("Incantation", "None.", Incantation, TYPE_SKL, cardtable);
+    card_create("DarkStrike", "None.", TYPE_ATK, 0, 0, 0, DarkStrike, cardtable);
+    card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
 
     /* create enemy */
-
-    DEBUG
 
     CardDeck deck;
     BuffDeck buff;
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
-    DEBUG
-
     add_card_into_deck(&deck, "DarkStrike");
     add_card_into_deck(&deck, "Incantation");
-
-    DEBUG
 
     enemy_create("Cultist", Cultist, 50, 0, &deck, &buff, enemytable);
 
@@ -75,11 +71,27 @@ void all_initialize(Player *player, CardTable *cardtable, EnemyTable *enemytable
     */
 }
 
+void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable)
+{
+    call_enemy(enemy, "Cultist");
+    for (int i = 0; i < 6; i++)
+        add_card_into_deck(&(player->deck.deckCard), "Strike");
+    for (int i = 0; i < 6; i++)
+        add_card_into_deck(&(player->deck.deckCard), "Defend");
+    add_card_into_deck(&(player->deck.deckCard), "Bash");
+    add_card_into_deck(&(player->deck.deckCard), "Inflame");
+
+    Battle(player, enemy, field, cardtable);
+}
+
 signed main(int argc, char *argv[])
 {
     Player player;
+    Enemy enemy;
+    Field field;
     CardTable cardtable;
     EnemyTable enemytable;
-    all_initialize(&player, &cardtable, &enemytable);
+    all_initialize(&player, &enemy, &field, &cardtable, &enemytable);
+    BattleTest(&player, &enemy, &field, &cardtable, &enemytable);
     return 0;
 }

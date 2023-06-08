@@ -2,31 +2,49 @@
 	"Strike":	{
 		"name":	"Strike",
 		"description":	"Deal 6 damage.",
-		"type":	1
+		"type":	1,
+		"atk":	6,
+		"isUpdated":	false,
+		"energy":	1
 	},
 	"Defend":	{
 		"name":	"Defend",
 		"description":	"Gain 5 Block.",
-		"type":	2
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
 	},
 	"Bash":	{
 		"name":	"Bash",
 		"description":	"Deal 8 damage. Apply 2 Vulnerable.",
-		"type":	1
+		"type":	1,
+		"atk":	8,
+		"isUpdated":	false,
+		"energy":	2
 	},
 	"Inflame":	{
 		"name":	"Inflame",
 		"description":	"Gain 2 Strength.",
-		"type":	4
+		"type":	4,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
 	},
 	"DarkStrike":	{
 		"name":	"DarkStrike",
 		"description":	"None.",
-		"type":	1
+		"type":	1,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	0
 	},
 	"Incantation":	{
 		"name":	"Incantation",
 		"description":	"None.",
-		"type":	2
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	0
 	}
 }

@@ -52,10 +52,12 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
     // 選卡
     int idx;
     Card card;
+
     if ((idx = card_find(&(player->deck.handCard), name)) != -1)
     {
         card_assign(&card, &(player->deck.handCard.card[idx]));
     }
+
     // Buff結算
     player_buff_action(&card, player, enemy, field);
     // CardAction
@@ -122,8 +124,9 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
     }
 }
 
-void card_create(char *name, const char *description, void (*function)(Card *, Player *, Enemy *, Field *), int type, CardTable *table)
+void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, void (*function)(Card *, Player *, Enemy *, Field *), CardTable *table)
 {
+    Card *card;
     cJSON *json = cJSON_Read("./data/card.json");
     cJSON *new_obj = cJSON_CreateObject();
     if (new_obj == NULL)
@@ -131,15 +134,18 @@ void card_create(char *name, const char *description, void (*function)(Card *, P
         fprintf(stderr, "Card Create Error: Create object failed.\n");
         exit(1);
     }
+    card_table_add(table, name, function);
+    cJSON_AddStringToObject(new_obj, "name", name);
+    cJSON_AddStringToObject(new_obj, "description", description);
+    cJSON_AddNumberToObject(new_obj, "type", type);
+    cJSON_AddNumberToObject(new_obj, "atk", atk);
+    cJSON_AddBoolToObject(new_obj, "isUpdated", false);
+    cJSON_AddNumberToObject(new_obj, "energy", energy);
     if (!cJSON_HasObjectItem(json, name))
-    {
-        card_table_add(table, name, function);
-        cJSON_AddStringToObject(new_obj, "name", name);
-        cJSON_AddStringToObject(new_obj, "description", description);
-        cJSON_AddNumberToObject(new_obj, "type", type);
         cJSON_AddItemToObject(json, name, new_obj);
-        cJSON_Write("./data/card.json", json);
-    }
+    else
+        cJSON_ReplaceItemInObject(json, name, new_obj);
+    cJSON_Write("./data/card.json", json);
     cJSON_Delete(json);
 }
 
@@ -152,41 +158,45 @@ void enemy_create(char *name, void (*function)(Card *, Player *, Enemy *, Field 
         fprintf(stderr, "Enemy Create Error: Create object failed.\n");
         exit(1);
     }
-    if (!cJSON_HasObjectItem(json, name))
+    enemy_table_add(table, name, function);
+    cJSON_AddStringToObject(new_obj, "name", name);
+    cJSON_AddNumberToObject(new_obj, "hp", hp);
+    cJSON_AddNumberToObject(new_obj, "def", def);
+    cJSON *new_arr = cJSON_CreateArray();
+    if (new_arr == NULL)
     {
-        enemy_table_add(table, name, function);
-        cJSON_AddStringToObject(new_obj, "name", name);
-        cJSON_AddNumberToObject(new_obj, "hp", hp);
-        cJSON_AddNumberToObject(new_obj, "def", def);
-        cJSON *new_arr = cJSON_CreateArray();
-        if (new_arr == NULL)
-        {
-            fprintf(stderr, "Enemy Create Error: Create array failed.\n");
-            exit(1);
-        }
-        for (int i = 0; i < deck->size; i++)
-        {
-            cJSON *string = cJSON_CreateString(deck->card[i].name);
-            cJSON_AddItemToArray(new_arr, string);
-        }
-        cJSON_AddItemToObject(new_obj, "deck", new_arr);
-        cJSON *new_buff_obj = cJSON_CreateObject();
-        if (new_buff_obj == NULL)
-        {
-            fprintf(stderr, "Enemy Create Error: Create object failed.\n");
-            exit(1);
-        }
-        for (int i = 0; i < buff->size; i++)
-        {
-            cJSON_AddNumberToObject(new_buff_obj, buff->deck[i].name, buff->deck[i].level);
-        }
-        cJSON_AddItemToObject(new_obj, "buff", new_buff_obj);
-        cJSON_AddItemToObject(json, name, new_obj);
-        cJSON_Write("./data/enemy.json", json);
+        fprintf(stderr, "Enemy Create Error: Create array failed.\n");
+        exit(1);
     }
+    for (int i = 0; i < deck->size; i++)
+    {
+        cJSON *string = cJSON_CreateString(deck->card[i].name);
+        cJSON_AddItemToArray(new_arr, string);
+    }
+    cJSON_AddItemToObject(new_obj, "deck", new_arr);
+    cJSON *new_buff_obj = cJSON_CreateObject();
+    if (new_buff_obj == NULL)
+    {
+        fprintf(stderr, "Enemy Create Error: Create object failed.\n");
+        exit(1);
+    }
+    for (int i = 0; i < buff->size; i++)
+    {
+        cJSON_AddNumberToObject(new_buff_obj, buff->deck[i].name, buff->deck[i].level);
+    }
+    cJSON_AddItemToObject(new_obj, "buff", new_buff_obj);
+
+    if (!cJSON_HasObjectItem(json, name))
+        cJSON_AddItemToObject(json, name, new_obj);
+    else
+        cJSON_ReplaceItemInObject(json, name, new_obj);
+    cJSON_Write("./data/enemy.json", json);
     cJSON_Delete(json);
 }
 
+void buff_create(char *name, BuffTable)
+{
+}
 void card_deck_add(CardPile *cardPile, CardTable *mappingTable, const char *name)
 {
     cJSON *json = cJSON_Read("./data/card.json");
@@ -213,4 +223,13 @@ void battle_over(Player *player, Enemy *enemy, Field *field)
         exit(0);
         // 遊戲結束
     }
+}
+
+void print_battlefield(Player *player, Enemy *enemy, Field *field)
+{
+    fprintf(stdout, "%s\t\t%s\t\t%s\n", "player", "field", "enemy");
+    fprintf(stdout, "energy: %d\t\t\t%s\n", player->energy, enemy->name);
+    fprintf(stdout, "hp: %d\t\tround: %d\thp: %d\n", player->hp, field->round, enemy->hp);
+    fprintf(stdout, "def: %d\t\t\t\tdef: %d\n", player->def, enemy->def);
+    // print_buff（代補
 }

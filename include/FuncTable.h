@@ -30,6 +30,18 @@ typedef struct EnemyTableData
     EnemyMap data[MAX_CARD_NUM];
 } EnemyTable;
 
+typedef struct BuffMapData
+{
+    char *name;
+    void (*fp)(Card *, Player *, Enemy *, Field *);
+} BuffMap;
+
+typedef struct BuffTableData
+{
+    char *name;
+    BuffMap *data[MAX_CARD_NUM];
+} BuffTable;
+
 /* funtion table functions defination */
 
 /**
@@ -63,5 +75,21 @@ void enemy_table_add(EnemyTable *table, char *name, void (*fp)(Card *, Player *,
  * @return 如果找到則回傳function pointer，如果沒找到則回傳NULL
  */
 void *enemy_table_transform(EnemyTable *table, const char *name);
+
+/**
+ * @brief 初始化EnemyTable
+ */
+void buff_table_initialize(BuffTable *table);
+
+/**
+ * @brief 新增對應關係至table中
+ */
+void buff_table_add(BuffTable *table, char *name, void (*fp)(Card *, Player *, Enemy *, Field *, CardTable *));
+
+/**
+ * @brief 以table為映射表，找到對應於name的function pointer
+ * @return 如果找到則回傳function pointer，如果沒找到則回傳NULL
+ */
+void *buff_table_transform(BuffTable *table, const char *name);
 
 #endif // _FUNC_TABLE_H_

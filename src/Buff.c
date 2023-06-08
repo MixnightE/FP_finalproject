@@ -41,7 +41,7 @@ void add_buff_into_deck(BuffDeck *deck, const char *buffname, int level)
 
 Buff *import_buff_from_json(const char *buffname)
 {
-    cJSON *json = cJSON_Read("./buff.json");
+    cJSON *json = cJSON_Read("./data/buff.json");
     if (!cJSON_HasObjectItem(json, buffname))
     {
         fprintf(stderr, "Import Buff From Json Error: Don't have the item: %s.\n", buffname);
