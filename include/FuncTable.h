@@ -6,10 +6,13 @@
 #include <Field.h>
 #include <Card.h>
 
+typedef void (*BuffFunction)(Card *, Player *, Enemy *, Field *);
+typedef void (*CardFunction)(Card *, Player *, Enemy *, Field *);
+
 typedef struct CardMapData
 {
     char *name;
-    void (*fp)(Card *, Player *, Enemy *, Field *);
+    CardFunction fp;
 } CardMap;
 
 typedef struct CardTableData
@@ -18,10 +21,12 @@ typedef struct CardTableData
     CardMap data[MAX_CARD_NUM];
 } CardTable;
 
+typedef void (*EnemyFunction)(Player *, Enemy *, Field *, CardTable *);
+
 typedef struct EnemyMapData
 {
     char *name;
-    void (*fp)(Card *, Player *, Enemy *, Field *, CardTable *);
+    EnemyFunction fp;
 } EnemyMap;
 
 typedef struct EnemyTableData
@@ -33,13 +38,13 @@ typedef struct EnemyTableData
 typedef struct BuffMapData
 {
     char *name;
-    void (*fp)(Card *, Player *, Enemy *, Field *);
+    BuffFunction fp;
 } BuffMap;
 
 typedef struct BuffTableData
 {
-    char *name;
-    BuffMap *data[MAX_CARD_NUM];
+    int size;
+    BuffMap data[MAX_CARD_NUM];
 } BuffTable;
 
 /* funtion table functions defination */
@@ -52,7 +57,7 @@ void card_table_initialize(CardTable *table);
 /**
  * @brief 新增對應關係至table中
  */
-void card_table_add(CardTable *table, char *name, void (*fp)(Card *, Player *, Enemy *, Field *));
+void card_table_add(CardTable *table, char *name, CardFunction fp);
 
 /**
  * @brief 以table為映射表，找到對應於name的function pointer
@@ -68,7 +73,7 @@ void enemy_table_initialize(EnemyTable *table);
 /**
  * @brief 新增對應關係至table中
  */
-void enemy_table_add(EnemyTable *table, char *name, void (*fp)(Card *, Player *, Enemy *, Field *, CardTable *));
+void enemy_table_add(EnemyTable *table, char *name, EnemyFunction fp);
 
 /**
  * @brief 以table為映射表，找到對應於name的function pointer
@@ -84,7 +89,7 @@ void buff_table_initialize(BuffTable *table);
 /**
  * @brief 新增對應關係至table中
  */
-void buff_table_add(BuffTable *table, char *name, void (*fp)(Card *, Player *, Enemy *, Field *, CardTable *));
+void buff_table_add(BuffTable *table, char *name, BuffFunction fp);
 
 /**
  * @brief 以table為映射表，找到對應於name的function pointer

@@ -7,6 +7,6 @@
 
 void call_enemy(Enemy *enemy, char *name);
 
-void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable);
+void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable);
 
 #endif // _BATTLE_H_

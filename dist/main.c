@@ -1,10 +1,12 @@
 
 #include <Battle.h>
 
-void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable)
+void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
 {
+    srand(time(NULL));
     card_table_initialize(cardtable);
     enemy_table_initialize(enemytable);
+    buff_table_initialize(bufftable);
     player_initialize(player, 80, 3);
     enemy_initialize(enemy);
     field_initialize(field);
@@ -19,7 +21,16 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     /* create enemy cards */
 
     card_create("DarkStrike", "None.", TYPE_ATK, 0, 0, 0, DarkStrike, cardtable);
-    card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
+    card_create("Incantation", "None.", TYPE_SKL, 6, 0, 0, Incantation, cardtable);
+
+    /* create buff */
+    DEBUG
+    buff_create("Weak", "Weak creatures deal 25%% less damage with Attacks.", Buff_Weak, bufftable);
+
+    buff_create("Vulnerable", "Target takes 50%% more damage from attacks.", Buff_Vulnerable, bufftable);
+    buff_create("Ritual", "At the end of its turn, gains X Strength.", Buff_Ritual, bufftable);
+    buff_create("Strength", "Increases attack damage by X (per hit).", Buff_Strength, bufftable);
+    buff_create("Block", "Block is the amount of attack damage a character can take before the damage affects their HP.", Buff_Block, bufftable);
 
     /* create enemy */
 
@@ -71,7 +82,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     */
 }
 
-void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable)
+void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
 {
     call_enemy(enemy, "Cultist");
     for (int i = 0; i < 6; i++)
@@ -81,7 +92,7 @@ void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable
     add_card_into_deck(&(player->deck.deckCard), "Bash");
     add_card_into_deck(&(player->deck.deckCard), "Inflame");
 
-    Battle(player, enemy, field, cardtable);
+    Battle(player, enemy, field, cardtable, enemytable, bufftable);
 }
 
 signed main(int argc, char *argv[])
@@ -91,7 +102,8 @@ signed main(int argc, char *argv[])
     Field field;
     CardTable cardtable;
     EnemyTable enemytable;
-    all_initialize(&player, &enemy, &field, &cardtable, &enemytable);
-    BattleTest(&player, &enemy, &field, &cardtable, &enemytable);
+    BuffTable bufftable;
+    all_initialize(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
+    BattleTest(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
     return 0;
 }

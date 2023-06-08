@@ -65,6 +65,24 @@ void fold_card(CardPile *cardPile, const char *name)
     }
 }
 
+void remove_card_by_idx(CardDeck *deck, int idx)
+{
+    for (int i = idx + 1; i < deck->size; i++)
+    {
+        card_assign(&(deck->card[i - 1]), &(deck->card[i]));
+    }
+    deck->size--;
+}
+
+void drop_card(CardPile *deck)
+{
+    while (deck->handCard.size)
+    {
+        card_add(&(deck->foldCard), &(deck->handCard.card[deck->handCard.size - 1]));
+        remove_card_by_idx(&(deck->handCard), deck->handCard.size - 1);
+    }
+}
+
 void shuffle_card(CardPile *cardPile)
 {
     for (int i = 0; i < cardPile->foldCard.size; i++)
@@ -143,6 +161,7 @@ void add_card_into_deck(CardDeck *deck, const char *name)
 
 void print_card_deck(CardDeck *deck)
 {
+    fprintf(stdout, "Your card-----\n");
     for (int i = 0; i < deck->size; i++)
     {
         fprintf(stdout, "%s: %s\n", deck->card[i].name, deck->card[i].description);

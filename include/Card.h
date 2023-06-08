@@ -69,6 +69,16 @@ void card_add(CardDeck *cardDeck, Card *card);
 void fold_card(CardPile *cardPile, const char *name);
 
 /**
+ * @brief 將全部的手牌移到棄牌堆
+ */
+void drop_card(CardPile *deck);
+
+/**
+ * @brief 將deck中第idx張牌刪除
+ */
+void remove_card_by_idx(CardDeck *deck, int idx);
+
+/**
  * @brief 將所有的棄牌全部洗回抽牌堆
  */
 void shuffle_card(CardPile *cardPile);

@@ -4,6 +4,7 @@
 #include <head.h>
 
 #define DEBUG fprintf(stderr, "Now Running At %s file, %d line.\n", __FILE__, __LINE__);
+#define EXIT DEBUG exit(0);
 
 /* The Constant Macro of Player Data */
 

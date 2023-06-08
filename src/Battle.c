@@ -34,8 +34,13 @@ void call_enemy(Enemy *enemy, char *name)
     cJSON_Delete(json);
 }
 
-void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
+void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
 {
+    FILE *fp;
+    field->round = 1;
+    char command[MAX_NAME_LENGTH + 1];
+    char buffer[MAX_NAME_LENGTH + 1];
+    char message[(MAX_DESCRIPTION_LENGTH + 1) * MAX_NAME_LENGTH];
     while (1)
     {
 
@@ -46,22 +51,31 @@ void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
         for (int i = 0; i < 5; i++)
             draw_card_random(&(player->deck));
 
-        while (player->energy > 0)
+        while (1)
         {
-            print_battlefield(player, enemy, field);
-            print_card_deck(&(player->deck.handCard));
-            char choose_card[MAX_NAME_LENGTH + 1];
-            fprintf(stdout, "choose card: ");
-            fscanf(stdin, "%s", choose_card);
-            player_choose_card(player, enemy, field, cardtable, choose_card);
+            print_battlefield(player, enemy, field, "");
+            fprintf(stdout, "command: ");
+            fscanf(stdin, "%s", command);
+            if (!strcmp(command, "End"))
+                break;
+            player_choose_card(player, enemy, field, cardtable, command);
         }
-        for (int i = 0; i < player->deck.handCard.size; i++)
-            fold_card(&(player->deck), player->deck.handCard.card[i].name);
-
+        print_battlefield(player, enemy, field, "");
+        drop_card(&(player->deck));
+        fp = fopen("./data/message.txt", "w");
+        fclose(fp);
         enemy_new_round(player, enemy, field);
-
-        char name[MAX_NAME_LENGTH + 1];
-        fprintf(stdout, "choose card: ");
-        fscanf(stdin, "%s", name);
+        EnemyFunction function = enemy_table_transform(enemytable, enemy->name);
+        function(player, enemy, field, cardtable);
+        fp = fopen("./data/message.txt", "r");
+        while (fgets(buffer, MAX_DESCRIPTION_LENGTH, fp))
+            strcat(message, buffer);
+        fclose(fp);
+        print_battlefield(player, enemy, field, message);
+        fprintf(stdout, "command: ");
+        fscanf(stdin, "%s", command);
+        if (strcmp(command, "NewRound"))
+            print_battlefield(player, enemy, field, message);
+        field->round++;
     }
 }

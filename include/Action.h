@@ -15,22 +15,26 @@ void enemy_buff_action(Card *card, Player *player, Enemy *enemy, Field *field);
 
 void player_buff_action(Card *card, Player *player, Enemy *enemy, Field *field);
 
-void print_battlefield(Player *player, Enemy *enemy, Field *field);
+void print_battlefield(Player *player, Enemy *enemy, Field *field, char *extra_messages);
+
+void print_player_buff(Player *player);
+
+void print_enemy_buff(Enemy *enemy);
 
 /**
  * @brief 創造卡片
  */
-void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, void (*function)(Card *, Player *, Enemy *, Field *), CardTable *table);
+void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, CardFunction function, CardTable *table);
 
 /**
  * @brief 創造敵人
  */
-void enemy_create(char *name, void (*function)(Card *, Player *, Enemy *, Field *, CardTable *), int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table);
+void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table);
 
 /**
  * @brief 創造buff
  */
-void buff_create(char *name, const char *description, void (*function)(Card *, Player *, Enemy *, Field *));
+void buff_create(char *name, const char *description, BuffFunction function, BuffTable *table);
 
 /**
  * @brief 將卡片轉為名為name的卡片

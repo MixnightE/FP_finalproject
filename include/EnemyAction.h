@@ -5,6 +5,6 @@
 
 // void function(Card *, Player *, Enemy *, Field *, CardTable *);
 
-void Cultist(Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable);
+void Cultist(Player *player, Enemy *enemy, Field *field, CardTable *cardtable);
 
 #endif // _ENEMY_ACTION_H_

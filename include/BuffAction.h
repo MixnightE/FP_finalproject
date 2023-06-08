@@ -11,7 +11,7 @@ void Buff_Vulnerable(Card *card, Player *player, Enemy *enemy, Field *field);
 
 void Buff_Strength(Card *card, Player *player, Enemy *enemy, Field *field);
 
-void Buff_Defense(Card *card, Player *player, Enemy *enemy, Field *field);
+void Buff_Block(Card *card, Player *player, Enemy *enemy, Field *field);
 
 void Buff_Inflame(Card *card, Player *player, Enemy *enemy, Field *field);
 

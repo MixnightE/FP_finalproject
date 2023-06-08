@@ -15,8 +15,8 @@ void player_buff_action(Card *card, Player *player, Enemy *enemy, Field *field)
     else if (card->type == TYPE_SKL)
     {
         int idx;
-        if ((idx = find_buff_from_deck(&(player->buff), "Defense")) != -1)
-            Buff_Defense(card, player, NULL, NULL);
+        if ((idx = find_buff_from_deck(&(player->buff), "Block")) != -1)
+            Buff_Block(card, player, NULL, NULL);
     }
     else
     {
@@ -52,7 +52,6 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
     // 選卡
     int idx;
     Card card;
-
     if ((idx = card_find(&(player->deck.handCard), name)) != -1)
     {
         card_assign(&card, &(player->deck.handCard.card[idx]));
@@ -62,7 +61,17 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
     player_buff_action(&card, player, enemy, field);
     // CardAction
     void (*function)(Card *, Player *, Enemy *, Field *) = card_table_transform(table, name);
-    function(&card, player, enemy, field);
+    if (player->energy >= card.energy)
+    {
+        player->energy -= card.energy;
+        function(&card, player, enemy, field);
+    }
+    else
+    {
+        fprintf(stdout, "Out of energy.\n");
+        return;
+    }
+    fold_card(&(player->deck), name);
 }
 
 void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *table, const char *name)
@@ -74,14 +83,10 @@ void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *ta
     // 選卡
     int idx;
     Card card;
-    if ((idx = card_find(&(enemy->deck), name)) != -1)
-    {
-        card_assign(&card, &(enemy->deck.card[idx]));
-    }
     // Buff結算
     enemy_buff_action(&card, player, enemy, field);
     // CardAction
-    void (*function)(Card *, Player *, Enemy *, Field *) = card_table_transform(table, name);
+    CardFunction function = (CardFunction)card_table_transform(table, name);
     function(&card, player, enemy, field);
 }
 
@@ -95,14 +100,12 @@ void player_new_round(Player *player, Enemy *enemy, Field *field)
         player->hp -= player->buff.deck[idx].level--;
     if ((idx = find_buff_from_deck(&(enemy->buff), "Vulnerable")) != -1)
         enemy->buff.deck[idx].level--;
-    if ((idx = find_buff_from_deck(&(enemy->buff), "Defense")) != -1)
+    if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) != -1)
         enemy->buff.deck[idx].level = 0;
-    player->def = 0;
-
+    if (player->energy < 3)
+        player->energy = 3;
     if (player->hp <= 0 || enemy->hp <= 0)
-    {
         battle_over(player, enemy, field);
-    }
 }
 
 void enemy_new_round(Player *player, Enemy *enemy, Field *field)
@@ -124,7 +127,7 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
     }
 }
 
-void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, void (*function)(Card *, Player *, Enemy *, Field *), CardTable *table)
+void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, CardFunction function, CardTable *table)
 {
     Card *card;
     cJSON *json = cJSON_Read("./data/card.json");
@@ -149,7 +152,7 @@ void card_create(char *name, const char *description, int type, int atk, bool is
     cJSON_Delete(json);
 }
 
-void enemy_create(char *name, void (*function)(Card *, Player *, Enemy *, Field *, CardTable *), int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
+void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
 {
     cJSON *json = cJSON_Read("./data/enemy.json");
     cJSON *new_obj = cJSON_CreateObject();
@@ -194,9 +197,27 @@ void enemy_create(char *name, void (*function)(Card *, Player *, Enemy *, Field 
     cJSON_Delete(json);
 }
 
-void buff_create(char *name, BuffTable)
+void buff_create(char *name, const char *description, BuffFunction function, BuffTable *table)
 {
+    Buff *buff;
+    cJSON *json = cJSON_Read("./data/buff.json");
+    cJSON *new_obj = cJSON_CreateObject();
+    if (new_obj == NULL)
+    {
+        fprintf(stderr, "Buff Create Error: Create object failed.\n");
+        exit(1);
+    }
+    buff_table_add(table, name, function);
+    cJSON_AddStringToObject(new_obj, "name", name);
+    cJSON_AddStringToObject(new_obj, "description", description);
+    if (!cJSON_HasObjectItem(json, name))
+        cJSON_AddItemToObject(json, name, new_obj);
+    else
+        cJSON_ReplaceItemInObject(json, name, new_obj);
+    cJSON_Write("./data/buff.json", json);
+    cJSON_Delete(json);
 }
+
 void card_deck_add(CardPile *cardPile, CardTable *mappingTable, const char *name)
 {
     cJSON *json = cJSON_Read("./data/card.json");
@@ -225,11 +246,41 @@ void battle_over(Player *player, Enemy *enemy, Field *field)
     }
 }
 
-void print_battlefield(Player *player, Enemy *enemy, Field *field)
+void print_battlefield(Player *player, Enemy *enemy, Field *field, char *extra_messages)
 {
+#ifdef __APPLE__
+    system("clear");
+#endif
+#ifdef __linux__
+    system("clear");
+#endif
+#ifdef __WIN32__
+    system("cls");
+#endif
     fprintf(stdout, "%s\t\t%s\t\t%s\n", "player", "field", "enemy");
     fprintf(stdout, "energy: %d\t\t\t%s\n", player->energy, enemy->name);
     fprintf(stdout, "hp: %d\t\tround: %d\thp: %d\n", player->hp, field->round, enemy->hp);
     fprintf(stdout, "def: %d\t\t\t\tdef: %d\n", player->def, enemy->def);
-    // print_buff（代補
+    print_player_buff(player);
+    print_enemy_buff(enemy);
+    fprintf(stdout, "%s\n", extra_messages);
+    print_card_deck(&(player->deck.handCard));
+}
+
+void print_player_buff(Player *player)
+{
+    fprintf(stdout, "Player's Buff: \n");
+    for (int i = 0; i < player->buff.size; i++)
+    {
+        fprintf(stdout, "%s: %d\n", player->buff.deck[i].name, player->buff.deck[i].level);
+    }
+}
+
+void print_enemy_buff(Enemy *enemy)
+{
+    fprintf(stdout, "Enemy's Buff: \n");
+    for (int i = 0; i < enemy->buff.size; i++)
+    {
+        fprintf(stdout, "%s: %d\n", enemy->buff.deck[i].name, enemy->buff.deck[i].level);
+    }
 }

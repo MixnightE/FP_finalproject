@@ -43,7 +43,7 @@
 		"name":	"Incantation",
 		"description":	"None.",
 		"type":	2,
-		"atk":	0,
+		"atk":	6,
 		"isUpdated":	false,
 		"energy":	0
 	}

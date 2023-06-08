@@ -57,4 +57,9 @@ void add_buff_into_deck(BuffDeck *deck, const char *buffname, int level);
  */
 Buff *import_buff_from_json(const char *buffname);
 
+/**
+ * @brief 將名為name的buff從buffdeck中移除
+ */
+void remove_buff_from_deck(BuffDeck *buff, const char *name);
+
 #endif // _BUFF_H_

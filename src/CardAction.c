@@ -16,14 +16,19 @@ void player_deal_damage(Card *card, Player *player, Enemy *enemy)
 
 void enemy_deal_damage(Card *card, Player *player, Enemy *enemy)
 {
-    if (player->def < card->atk)
+    int idx;
+    if ((idx = find_buff_from_deck(&(player->buff), "Block")) == -1)
     {
-        player->hp -= card->atk - player->def;
-        player->def = 0;
+        player->hp -= card->atk;
+    }
+    else if (player->buff.deck[idx].level <= card->atk)
+    {
+        player->hp -= card->atk - player->buff.deck[idx].level;
+        remove_buff_from_deck(&(player->buff), "Block");
     }
     else
     {
-        player->def -= card->atk;
+        player->buff.deck[idx].level -= card->atk;
     }
 }
 // --通用函式--------------------------------------------------------
@@ -31,6 +36,9 @@ void enemy_deal_damage(Card *card, Player *player, Enemy *enemy)
 // --敵人的卡--------------------------------------------------------
 void Incantation(Card *card, Player *player, Enemy *enemy, Field *field)
 {
+    FILE *fp = fopen("./data/message.txt", "a");
+    fprintf(fp, "Cultist gain 3 Ritual.\n");
+    fclose(fp);
     add_buff_into_deck(&(enemy->buff), "Ritual", 3);
 }
 
@@ -42,8 +50,8 @@ void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 
 /*
 範例
-給玩家加六點護盾（Defense）
-add_buff_into_deck(&(player->buff), "Defense", 6);
+給玩家加六點護盾（Block）
+add_buff_into_deck(&(player->buff), "Block", 6);
 給敵人二點Vulnerable
 add_buff_into_deck(&(enemy->buff), "Vulnerable", 2);
 對敵人造成傷害
@@ -59,7 +67,7 @@ void Strike(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Defend(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    add_buff_into_deck(&(player->buff), "Defense", 6);
+    add_buff_into_deck(&(player->buff), "Block", 6);
 }
 
 void Bash(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -70,7 +78,7 @@ void Bash(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Inflame(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    add_buff_into_deck(&(enemy->buff), "Strength", 2);
+    add_buff_into_deck(&(player->buff), "Strength", 2);
 }
 
 /*
