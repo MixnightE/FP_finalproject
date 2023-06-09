@@ -28,7 +28,7 @@ void card_assign(Card *card1, Card *card2)
     buff_deck_initialize(&(card1->buff));
     card1->name = card2->name;
     card1->description = card2->description;
-    card1->isUpdated = card2->isUpdated;
+    card1->isExhaust = card2->isExhaust;
     card1->type = card2->type;
     card1->energy = card2->energy;
     card1->atk = card2->atk;

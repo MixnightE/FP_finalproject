@@ -15,4 +15,6 @@ void Buff_Block(Card *card, Player *player, Enemy *enemy, Field *field);
 
 void Buff_Inflame(Card *card, Player *player, Enemy *enemy, Field *field);
 
+void Buff_Rage(Card *card, Player *player, Enemy *enemy, Field *field);
+
 #endif // _BUFF_ACTION_H_

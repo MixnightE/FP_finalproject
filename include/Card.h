@@ -11,7 +11,7 @@ typedef struct CardData
 {
     char *name;        // 卡片名稱
     char *description; // 卡片描述
-    bool isUpdated;
+    bool isExhaust;
     int type;
     int atk;
     int energy;

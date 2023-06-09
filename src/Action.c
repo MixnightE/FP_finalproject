@@ -11,6 +11,8 @@ void player_buff_action(Card *card, Player *player, Enemy *enemy, Field *field)
             Buff_Weak(card, NULL, NULL, NULL);
         if ((idx = find_buff_from_deck(&(player->buff), "Strength")) != -1)
             Buff_Strength(card, player, NULL, NULL);
+        if ((idx = find_buff_from_deck(&(player->buff), "Rage")) != -1)
+            Buff_Rage(NULL, player, NULL, NULL);
     }
     else if (card->type == TYPE_SKL)
     {
@@ -60,7 +62,7 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
     // Buff結算
     player_buff_action(&card, player, enemy, field);
     // CardAction
-    void (*function)(Card *, Player *, Enemy *, Field *) = card_table_transform(table, name);
+    CardFunction function = card_table_transform(table, name);
     if (player->energy >= card.energy)
     {
         player->energy -= card.energy;
@@ -71,7 +73,10 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
         fprintf(stdout, "Out of energy.\n");
         return;
     }
-    fold_card(&(player->deck), name);
+    if (card.isExhaust)
+        card_remove(&(player->deck.handCard), name);
+    else
+        fold_card(&(player->deck), name);
 }
 
 void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *table, const char *name)
@@ -120,6 +125,8 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
         player->buff.deck[idx].level--;
     if ((idx = find_buff_from_deck(&(enemy->buff), "Ritual")) != -1)
         Buff_Ritual(NULL, NULL, enemy, field);
+    if ((idx = find_buff_from_deck(&(player->buff), "Rage")) != -1)
+        remove_buff_from_deck(&(player->buff), "Rage");
 
     if (player->hp <= 0 || enemy->hp <= 0)
     {
@@ -127,7 +134,7 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
     }
 }
 
-void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, CardFunction function, CardTable *table)
+void card_create(char *name, const char *description, int type, int atk, bool isExhaust, int energy, CardFunction function, CardTable *table)
 {
     Card *card;
     cJSON *json = cJSON_Read("./data/card.json");
@@ -142,7 +149,7 @@ void card_create(char *name, const char *description, int type, int atk, bool is
     cJSON_AddStringToObject(new_obj, "description", description);
     cJSON_AddNumberToObject(new_obj, "type", type);
     cJSON_AddNumberToObject(new_obj, "atk", atk);
-    cJSON_AddBoolToObject(new_obj, "isUpdated", false);
+    cJSON_AddBoolToObject(new_obj, "isExhaust", false);
     cJSON_AddNumberToObject(new_obj, "energy", energy);
     if (!cJSON_HasObjectItem(json, name))
         cJSON_AddItemToObject(json, name, new_obj);
@@ -224,7 +231,7 @@ void card_deck_add(CardPile *cardPile, CardTable *mappingTable, const char *name
     cJSON *card_data = cJSON_GetObjectItemCaseSensitive(json, name);
     cardPile->deckCard.card[cardPile->deckCard.size].name = cJSON_GetObjectItemCaseSensitive(card_data, "name")->valuestring;
     cardPile->deckCard.card[cardPile->deckCard.size].description = cJSON_GetObjectItemCaseSensitive(card_data, "description")->valuestring;
-    cardPile->deckCard.card[cardPile->deckCard.size].isUpdated = cJSON_GetObjectItemCaseSensitive(card_data, "isUpdated")->type;
+    cardPile->deckCard.card[cardPile->deckCard.size].isExhaust = cJSON_GetObjectItemCaseSensitive(card_data, "isExhaust")->type;
     cardPile->deckCard.card[cardPile->deckCard.size].type = cJSON_GetObjectItemCaseSensitive(card_data, "type")->valuedouble;
     cardPile->deckCard.size++;
 }

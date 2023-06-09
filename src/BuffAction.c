@@ -52,3 +52,8 @@ void Buff_Block(Card *card, Player *player, Enemy *enemy, Field *field)
         }
     }
 }
+
+void Buff_Rage(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(player->buff), "Block", 3);
+}

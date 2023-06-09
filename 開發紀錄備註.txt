@@ -1,2 +1,2 @@
 
-isUpdated 未實現
+isExhaust 未實現

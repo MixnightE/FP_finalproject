@@ -20,8 +20,8 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     /* create enemy cards */
 
-    card_create("DarkStrike", "None.", TYPE_ATK, 0, 0, 0, DarkStrike, cardtable);
-    card_create("Incantation", "None.", TYPE_SKL, 6, 0, 0, Incantation, cardtable);
+    card_create("DarkStrike", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
+    card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
 
     /* create buff */
     DEBUG

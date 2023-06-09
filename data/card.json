@@ -4,7 +4,7 @@
 		"description":	"Deal 6 damage.",
 		"type":	1,
 		"atk":	6,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	1
 	},
 	"Defend":	{
@@ -12,7 +12,7 @@
 		"description":	"Gain 5 Block.",
 		"type":	2,
 		"atk":	0,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	1
 	},
 	"Bash":	{
@@ -20,7 +20,7 @@
 		"description":	"Deal 8 damage. Apply 2 Vulnerable.",
 		"type":	1,
 		"atk":	8,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	2
 	},
 	"Inflame":	{
@@ -28,7 +28,7 @@
 		"description":	"Gain 2 Strength.",
 		"type":	4,
 		"atk":	0,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	1
 	},
 	"DarkStrike":	{
@@ -36,7 +36,7 @@
 		"description":	"None.",
 		"type":	1,
 		"atk":	0,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	0
 	},
 	"Incantation":	{
@@ -44,7 +44,7 @@
 		"description":	"None.",
 		"type":	2,
 		"atk":	6,
-		"isUpdated":	false,
+		"isExhaust":	false,
 		"energy":	0
 	}
 }

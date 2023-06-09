@@ -1,3 +1,14 @@
 #MainWindow {
     background-image: url("../image/Pngtree_background.png");
+    background-size: cover;
+}
+
+#BattleWindow {
+    background-image: url("../image/BattleField.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.MainButtonClass {
+    opacity: 0.5;
 }

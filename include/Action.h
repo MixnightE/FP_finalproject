@@ -24,7 +24,7 @@ void print_enemy_buff(Enemy *enemy);
 /**
  * @brief 創造卡片
  */
-void card_create(char *name, const char *description, int type, int atk, bool isUpdated, int energy, CardFunction function, CardTable *table);
+void card_create(char *name, const char *description, int type, int atk, bool isExhaust, int energy, CardFunction function, CardTable *table);
 
 /**
  * @brief 創造敵人
