@@ -17,6 +17,19 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Defend", "Gain 5 Block.", TYPE_SKL, 0, 0, 1, Defend, cardtable);
     card_create("Bash", "Deal 8 damage. Apply 2 Vulnerable.", TYPE_ATK, 8, 0, 2, Bash, cardtable);
     card_create("Inflame", "Gain 2 Strength.", TYPE_ABL, 0, 0, 1, Inflame, cardtable);
+    card_create("Anger", "Deal 6 damage. Add a copy of this card to the discard pile.", TYPE_ATK, 6, 0, 0, Anger, cardtable);
+    card_create("Cleave", "Deal 8 damage.", TYPE_ATK, 8, 0, 1, Cleave, cardtable);
+    card_create("Clothesline", "Deal 12 damage. Apply 2 weak.", TYPE_ATK, 12, 0, 2, Clothesline, cardtable);
+    card_create("Flex", "Gain 2 strength.", TYPE_SKL, 0, 0, 0, Flex, cardtable);
+    card_create("Heavy_Blade", "Deal 14 damage.", TYPE_ATK, 14, 0, 2, Heavy_Blade, cardtable);
+    card_create("Iron_Wave", "Gain 5 block. Deal 5 damage.", TYPE_SKL, 5, 0, 1, Iron_Wave, cardtable);
+    card_create("Perfected_Strike", "Deal 6 damage. If you have Strike in your deck, deal additional 2 damage.", TYPE_ATK, 6, 0, 2, Perfected_Strike, cardtable);
+    card_create("Pommel_Strike", "Deal 9 damage. Draw a card.", TYPE_ATK, 9, 0, 1, Pommel_Strike, cardtable);
+    card_create("Shrug_it_Off", "Gain 8 block. Draw a card.", TYPE_SKL, 0, 0, 1, Shrug_it_Off, cardtable);
+    card_create("Sword_Boomerang", "Deal 9 damage.", TYPE_ATK, 3, 0, 1, Sword_Boomerang, cardtable);
+    card_create("Thunderclap", "Deal 4 damage. Apply 1 vulnerable.", TYPE_ATK, 8, 0, 1, Thunderclap, cardtable);
+    card_create("True_Grit", "Gain 7 block. Exhaust a random card", TYPE_SKL, 0, 0, 1, True_Grit, cardtable);
+    card_create("Inflame", "Gain 2 Strength.", TYPE_ABL, 0, 0, 1, Inflame, cardtable);
 
     /* create enemy cards */
 
@@ -61,24 +74,6 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("ShockWave", "Apply 3 Weak and Icon Vulnerable Vulnerable to ALL enemies.\nExhaust.", ShockWave, false, TYPE_ATK, &table);
     card_create("Uppercut", "Deal 13 damage. Apply 1 Weak. Apply 1 Vulnerable.", Uppercut, false, TYPE_ATK, &table);
     card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", Whirlwind, false, TYPE_ATK, &table);
-    card_create("Strike", "Deal 6(9) damage.", Strike, false, TYPE_ATK, &table);
-    card_create("Defend", "Gain 5(8) shield.", Defend, false, TYPE_SKL, &table);
-    card_create("Bash", "Dealplayer_initialize 8(10) damage, apply 2(3) vulnerable.", Bash, false, TYPE_ATK, &table);
-    card_create("Anger", "Deal 6(8) damage, add a copy of this card to the discard pile", Anger, false, TYPE_ATK, &table);
-    card_create("Armament", "Gain 5 shield, upgrade a card in your hand.", Armament, false, TYPE_SKL, &table);
-    card_create("Body Slam", "Deal damage equal to your current shield.", Body_Slam, false, TYPE_ATK, &table);
-    card_create("Clash", "Deal 10(12) damage", Clash, false, TYPE_ATK, &table);
-    card_create("Cleave", "Deal 8(11) damage to all enemy.", Cleave, false, TYPE_ATK, &table);
-    card_create("Clothesline", "Deal 12(14) damage, apply 2 weak.", Clothesline, false, TYPE_ATK, &table);
-    card_create("Headbutt", "Deal 9 damage, get a card from discard pile.", Headbutt, false, TYPE_ATK, &table);
-    card_create("Heavy Blade", "Deal 14 damage.", Heavy_Blade, false, TYPE_ATK, &table);
-    card_create("Iron Wave", "Deal 5 damage, and gain 5 shield.", Iron_Wave, false, TYPE_ATK, &table);
-    card_create("Perfected Strike", "Deal 6 damage, and deal additional 2 damage if you have Strike.", Perfected_Strike, false, TYPE_ATK, &table);
-    card_create("Pommel Strike", "Deal 9 damage, and draw 1 card.", Pommel_Strike, false, TYPE_ATK, &table);
-    card_create("Shrug it Off", "Gain 8 shield, and draw 1 card.", Shrug_it_Off, false, TYPE_SKL, &table);
-    card_create("Sword Boomerang", "Deal 3 damage to enemy 3 times.", Sword_Boomerang, false, TYPE_ATK, &table);
-    card_create("Thunderclap", "Deal 4 damage, apply 1 vulnerable.", Thunderclap, false, TYPE_ATK, &table);
-    card_create("True Grit", "Gain 7 shield, and random remove a card in hand.", True_Grit, false, TYPE_ATK, &table);
     */
 }
 
