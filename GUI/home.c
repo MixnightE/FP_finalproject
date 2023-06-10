@@ -128,17 +128,25 @@ GtkWidget *create_path_choice_view(EventParam *action)
 
 GtkWidget *create_battle_view()
 {
-    GtkWidget *grid = gtk_grid_new();
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
 
+    GtkWidget *bbox = gtk_button_box_new(GTK_ORIENTATION_HORIZONTAL);
+    GtkWidget *settings_button = gtk_button_new_with_label("設置");
+    g_signal_connect(GTK_BUTTON(settings_button), "clicked", G_CALLBACK(setting_button_clicked), NULL);
+    GtkWidget *quit_button = gtk_button_new_with_label("保存並退出");
+    g_signal_connect(GTK_BUTTON(quit_button), "clicked", G_CALLBACK(quit_button_clicked), NULL);
+    gtk_container_add(GTK_CONTAINER(bbox), settings_button);
+    gtk_container_add(GTK_CONTAINER(bbox), quit_button);
+    gtk_box_pack_start(GTK_BOX(box), bbox, TRUE, TRUE, 0);
+
+    GtkWidget *cbox = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
     GtkWidget *player_image = scale_image("./image/Player.png", 300);
     if (!player_image)
     {
         fprintf(stderr, "scale image error: \"./image/Player.png\"\n");
         exit(1);
     }
-    gtk_grid_attach(GTK_GRID(grid), player_image, 0, 0, 1, 1);
-    // GtkWidget *player_hand = create_player_hand();
-    // gtk_grid_attach(GTK_GRID(grid), player_hand, 0, 1, 1, 1);
+    gtk_box_pack_start(GTK_BOX(cbox), player_image, TRUE, TRUE, 0);
 
     GtkWidget *enemy_image = scale_image("./image/Mouse.png", 300);
     if (!enemy_image)
@@ -146,17 +154,13 @@ GtkWidget *create_battle_view()
         fprintf(stderr, "scale image error: \"./image/Mouse.png\"\n");
         exit(1);
     }
-    gtk_grid_attach(GTK_GRID(grid), enemy_image, 1, 0, 1, 1);
+    gtk_box_pack_start(GTK_BOX(cbox), enemy_image, TRUE, TRUE, 0);
 
-    GtkWidget *settings_button = gtk_button_new_with_label("設置");
-    g_signal_connect(GTK_BUTTON(settings_button), "clicked", G_CALLBACK(setting_button_clicked), NULL);
-    gtk_grid_attach(GTK_GRID(grid), settings_button, 1, 2, 1, 1);
+    gtk_box_pack_start(GTK_BOX(box), cbox, TRUE, TRUE, 0);
 
-    GtkWidget *quit_button = gtk_button_new_with_label("保存並退出");
-    g_signal_connect(GTK_BUTTON(quit_button), "clicked", G_CALLBACK(quit_button_clicked), NULL);
-    gtk_grid_attach(GTK_GRID(grid), quit_button, 1, 3, 1, 1);
+    GtkWidget *card_box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL, 0);
 
-    return grid;
+    return box;
 }
 
 // GtkWidget *create_setting_view()
@@ -165,7 +169,6 @@ GtkWidget *create_battle_view()
 
 signed main(int argc, char *argv[])
 {
-
     // init gtk
     gtk_init(&argc, &argv);
     srand(time(NULL));
@@ -195,7 +198,7 @@ signed main(int argc, char *argv[])
 
     gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-    if (!gtk_css_provider_load_from_path(provider, "./style/MainWindow.css", NULL))
+    if (!gtk_css_provider_load_from_path(provider, "./GUI/style.css", NULL))
     {
         g_print("Error loading CSS file\n");
         return 1;

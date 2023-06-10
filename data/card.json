@@ -35,16 +35,16 @@
 		"name":	"DarkStrike",
 		"description":	"None.",
 		"type":	1,
-		"atk":	0,
-		"isUpdated":	false,
+		"atk":	6,
+		"isExhaust":	false,
 		"energy":	0
 	},
 	"Incantation":	{
 		"name":	"Incantation",
 		"description":	"None.",
 		"type":	2,
-		"atk":	6,
-		"isUpdated":	false,
+		"atk":	0,
+		"isExhaust":	false,
 		"energy":	0
 	},
 	"Anger":	{

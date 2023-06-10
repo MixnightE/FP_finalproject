@@ -1,4 +1,3 @@
-
 #include <game.h>
 
 void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
@@ -77,28 +76,29 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     */
 }
 
-void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
+void game_initialize(Game *game, Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable, BuffTable *bufftable, EnemyTable *enemytable)
 {
-    call_enemy(enemy, "Cultist");
+    game->card = card;
+    game->player = player;
+    game->enemy = enemy;
+    game->field = field;
+    game->cardtable = cardtable;
+    game->bufftable = bufftable;
+    game->enemytable = enemytable;
+}
+
+void basic_card_add(Player *player)
+{
     for (int i = 0; i < 6; i++)
         add_card_into_deck(&(player->deck.deckCard), "Strike");
     for (int i = 0; i < 6; i++)
         add_card_into_deck(&(player->deck.deckCard), "Defend");
     add_card_into_deck(&(player->deck.deckCard), "Bash");
     add_card_into_deck(&(player->deck.deckCard), "Inflame");
-
-    Battle(player, enemy, field, cardtable, enemytable, bufftable);
 }
 
-signed main(int argc, char *argv[])
+char *random_enemy_name(EnemyTable *enemytable)
 {
-    Player player;
-    Enemy enemy;
-    Field field;
-    CardTable cardtable;
-    EnemyTable enemytable;
-    BuffTable bufftable;
-    all_initialize(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
-    BattleTest(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
-    return 0;
+    int idx = rand() % enemytable->size;
+    return enemytable->data[idx].name;
 }
