@@ -70,6 +70,7 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         EnemyTable *enemytable = game->enemytable;
         GtkWidget *BattlePage = gtk_stack_get_visible_child(GTK_STACK(stack));
         GList *list = gtk_container_get_children(GTK_CONTAINER(BattlePage));
+        /* 2 : 載入Enemy圖像 */
         GtkWidget *Box = list->next->data;
         g_list_free(list);
         list = gtk_container_get_children(GTK_CONTAINER(Box));
@@ -85,6 +86,24 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
 
 void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
+    // 創造新的GtkDialog顯示卡牌
+}
+
+void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
+{
+    // 創造新的GtkDialog顯示卡牌
+}
+
+void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data)
+{
+    Game *game = data;
+    drop_card(&(game->player->deck));
+    // 將手牌的ui清光
+}
+
+void BattleRoundNextButton_clicked_cb(GtkWidget *widget, gpointer data)
+{
+    // 結束敵人的回合，開啟新的回合
 }
 
 void event_button_clicked(GtkButton *button, gpointer data)

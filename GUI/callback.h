@@ -18,7 +18,7 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
 
 void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data);
 
-void start_button_clicked(GtkWidget *widget, gpointer data);
+void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data);
 
 void setting_button_clicked(GtkWidget *widget, gpointer data);
 

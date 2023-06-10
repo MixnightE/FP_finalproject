@@ -247,6 +247,7 @@
                 <property name="name">BettleImageBox</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
+                <property name="margin-left">100</property>
                 <child>
                   <object class="GtkImage" id="PlayerImage">
                     <property name="name">PlayerImage</property>
