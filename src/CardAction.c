@@ -351,277 +351,92 @@ void Whirlwind(Card *card, Player *player, Enemy *enemy, Field *field)
     }
     player->energy = 0;
 }
-
+*/
 void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 2;
+{   
+    for(int i=0; i<2 ;i++){
+        player_deal_damage(card, player, enemy);
     }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
 }
 
 void Warcry(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     //沒實作出"Put a card from your hand  onto the top of your draw pile"
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        draw_card_random(cardPile);
-    }
-    draw_card_random(cardPile);
-
-    fprintf(stdout, "Player draw cards.\n");
+    draw_card_random(&(player->deck));
 }
 
 void WildStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 5;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
+    player_deal_damage(card, player, enemy);
 }
 
 void BattleTrance(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        draw_card_random(cardPile);
-    }
     for(int i = 0; i < 3; i++)
     {
-        draw_card_random(cardPile);
+        draw_card_random(&(player->deck));
     }
-    fprintf(stdout, "Player draw cards.\n");
 }
 
 void BloodforBlood(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     //沒實作出"Costs 1 less RedEnergy for each time you lose HP this combat"
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        atk += 4;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
+    player_deal_damage(card, player, enemy);
 }
 
 void Bloodletting(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
     player->hp -= 3;
-    if(card->isExhaust)
-    {
-        player->energy += 1;
-    }
     player->energy += 2;
 }
 
 void BurningPact(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    //沒實作出"Exhaust 1 card."
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        draw_card_random(cardPile);
-    }
     for(int i = 0; i < 2; i++)
     {
-        draw_card_random(cardPile);
+        draw_card_random(&(player->deck));
     }
-    fprintf(stdout, "Player draw cards.\n");
 }
 
 void Carnage(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 8;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
+    player_deal_damage(card, player, enemy);
 }
 
 void Combust(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
     player->hp -= 1;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 2;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player -1 hp ,cause %d damage.\n", atk);
-}
-
-void DarkEmbrace(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    player->energy -= card->energy;
-    //Whenever a card is Exhausted,
-    draw_card_random(cardPile);
-    fprintf(stdout, "Player draw cards.\n");
+    player_deal_damage(card, player, enemy);
 }
 
 void Disarm(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        enemy->atk -= 1;
-    }
     enemy->atk -= 2;
 }
 
-void Dropkick(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 3;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    //if(enemy vulnerable){
-    //     player->energy += 1;
-    //     draw_card_random(cardPile);
-    // }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
-}
-
-void DualWield(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-}Since we get two different limits by approaching from two different paths, the limit does not exist.
-
 void Entrench(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    player->def *= 2;
-    fprintf(stdout, "Player now have %d def.\n", player->def);
+    add_buff_into_deck(&(player->buff), "Block", player->def);
 }
 
 void Evolve(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    //if (you draw a Status card){
-    if(card->isExhaust)
-    {
-        draw_card_random(cardPile);
-    }
     draw_card_random(cardPile);
-    fprintf(stdout, "Player draw cards.\n");
 }
 
 void FeelNoPain(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    //Whenever a card is Exhausted,
-    if(card->isExhaust)
-    {
-        player->def += 1;
-    }
-    player->def += card->value_def;
-    fprintf(stdout, "Player now have %d def.\n", player->def);
-}
-
-void FireBreathing(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    // Whenever you draw a Status or Curse card
-    if(card->isExhaust)
-    {
-        atk += 4;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
-}
-
-void FlameBarrier(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    player->energy -= card->energy;
-    //沒實作出"Whenever you are attacked this turn,, deal 4(updated 6)damage back."
-    if(card->isExhaust)
-    {
-        player->def += 4;
-    }
-    player->def += card->value_def;
-    fprintf(stdout, "Player now have %d def.\n", player->def);
+    add_buff_into_deck(&(player->buff), "Block", 3);
 }
 
 void GhostlyArmor(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    if(card->isExhaust)
-    {
-        player->def += 3;
-    }
-    player->def += card->value_def;
-    fprintf(stdout, "Player now have %d def.\n", player->def);
+    add_buff_into_deck(&(player->buff), "Block", 10);
 }
 
 void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
     player->hp -= 2;
-    if(card->isExhaust)
-    {
-        atk += 5;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player -2 hp ,cause %d damage.\n", atk);
+    player_deal_damage(card, player, enemy);
 }
 
-*/
