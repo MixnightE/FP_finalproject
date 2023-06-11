@@ -30,6 +30,22 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Thunderclap", "Deal 4 damage. Apply 1 vulnerable.", TYPE_ATK, 8, 0, 1, Thunderclap, cardtable);
     card_create("True_Grit", "Gain 7 block. Exhaust a random card", TYPE_SKL, 0, 0, 1, True_Grit, cardtable);
     card_create("Inflame", "Gain 2 Strength.", TYPE_ABL, 0, 0, 1, Inflame, cardtable);
+    
+    card_create("TwinStrike", "Deal 5 damage twice.", TYPE_ATK, 5, 0, 1, TwinStrike, cardtable);
+    card_create("Warcry", "Draw 1 card.", TYPE_SKL, 0, 1, 0, Warcry, cardtable);
+    card_create("WildStrike", "Deal 12 damage.", TYPE_ATK, 12, 0, 1, WildStrike, cardtable);
+    card_create("BattleTrance", "Draw 3 cards.", TYPE_SKL, 0, 0, 0, BattleTrance, cardtable);
+    card_create("BloodforBlood", "Deal 18 damage.", TYPE_ATK, 18, 0, 4, BloodforBlood, cardtable);
+    card_create("Bloodletting", "Lose 3 HP,Gain 2 Energy.", TYPE_SKL, 0, 0, 0, Bloodletting, cardtable);
+    card_create("BurningPact", "Draw 2 cards.", TYPE_SKL, 0, 0, 1, BurningPact, cardtable);
+    card_create("Carnage", "Deal 20 damage.", TYPE_ATK, 20, 0, 2, Carnage, cardtable);
+    card_create("Combust", "lose 1 HP and deal 5 damage to ALL enemies.", TYPE_ABL, 5, 0, 1, Combust, cardtable);
+    card_create("Disarm", "Enemy loses 2 Icon Strength.", TYPE_ABL, 0, 1, 1, Disarm, cardtable);
+    card_create("Entrench", "Double your Block.", TYPE_SKL, 0, 0, 2, Entrench, cardtable);
+    card_create("Evolve", "draw 1 card.", TYPE_ABL, 0, 0, 1, Evolve, cardtable);
+    card_create("FeelNoPain", "gain 3  Block.", TYPE_ABL, 0, 0, 1, FeelNoPain, cardtable);
+    card_create("GhostlyArmor", "Gain 10 Block.", TYPE_SKL, 0, 0, 1, GhostlyArmor, cardtable);
+    card_create("Hemokinesis", "Lose 2 HP.Deal 15 damage.", TYPE_ATK, 15, 0, 1,Hemokinesis, cardtable);
 
     /* create enemy cards */
 
