@@ -44,6 +44,7 @@ void SeverSoul(Card *card, Player *player, Enemy *enemy, Field *field);
 void ShockWave(Card *card, Player *player, Enemy *enemy, Field *field);
 void Uppercut(Card *card, Player *player, Enemy *enemy, Field *field);
 void Whirlwind(Card *card, Player *player, Enemy *enemy, Field *field);
+*/
 void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field);
 void Warcry(Card *card, Player *player, Enemy *enemy, Field *field);
 void WildStrike(Card *card, Player *player, Enemy *enemy, Field *field);
@@ -53,16 +54,11 @@ void Bloodletting(Card *card, Player *player, Enemy *enemy, Field *field);
 void BurningPact(Card *card, Player *player, Enemy *enemy, Field *field);
 void Carnage(Card *card, Player *player, Enemy *enemy, Field *field);
 void Combust(Card *card, Player *player, Enemy *enemy, Field *field);
-void DarkEmbrace(Card *card, Player *player, Enemy *enemy, Field *field);
 void Disarm(Card *card, Player *player, Enemy *enemy, Field *field);
-void Dropkick(Card *card, Player *player, Enemy *enemy, Field *field);
-void DualWield(Card *card, Player *player, Enemy *enemy, Field *field);
 void Entrench(Card *card, Player *player, Enemy *enemy, Field *field);
 void Evolve(Card *card, Player *player, Enemy *enemy, Field *field);
 void FeelNoPain(Card *card, Player *player, Enemy *enemy, Field *field);
-void FireBreathing(Card *card, Player *player, Enemy *enemy, Field *field);
-void FlameBarrier(Card *card, Player *player, Enemy *enemy, Field *field);
 void GhostlyArmor(Card *card, Player *player, Enemy *enemy, Field *field);
 void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field);
-*/
+
 #endif // _CARD_ACTION_H_
