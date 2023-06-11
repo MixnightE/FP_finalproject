@@ -1,0 +1,6 @@
+
+isExhaust 未實現
+
+Event UI 未實現
+缺少UI與程式邏輯的連結
+介面完成

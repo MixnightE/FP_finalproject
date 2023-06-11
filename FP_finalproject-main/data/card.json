@@ -1,0 +1,146 @@
+{
+	"Strike":	{
+		"name":	"Strike",
+		"description":	"Deal 6 damage.",
+		"type":	1,
+		"atk":	6,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Defend":	{
+		"name":	"Defend",
+		"description":	"Gain 5 Block.",
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Bash":	{
+		"name":	"Bash",
+		"description":	"Deal 8 damage. Apply 2 Vulnerable.",
+		"type":	1,
+		"atk":	8,
+		"isUpdated":	false,
+		"energy":	2
+	},
+	"Inflame":	{
+		"name":	"Inflame",
+		"description":	"Gain 2 Strength.",
+		"type":	4,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"DarkStrike":	{
+		"name":	"DarkStrike",
+		"description":	"None.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Incantation":	{
+		"name":	"Incantation",
+		"description":	"None.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Anger":	{
+		"name":	"Anger",
+		"description":	"Deal 6 damage. Add a copy of this card to the discard pile.",
+		"type":	1,
+		"atk":	6,
+		"isUpdated":	false,
+		"energy":	0
+	},
+	"Clothesline":	{
+		"name":	"Clothesline",
+		"description":	"Deal 12 damage. Apply 2 weak.",
+		"type":	1,
+		"atk":	12,
+		"isUpdated":	false,
+		"energy":	2
+	},
+	"Cleave":	{
+		"name":	"Cleave",
+		"description":	"Deal 8 damage.",
+		"type":	1,
+		"atk":	8,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Flex":	{
+		"name":	"Flex",
+		"description":	"Gain 2 strength.",
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	0
+	},
+	"Heavy_Blade":	{
+		"name":	"Heavy_Blade",
+		"description":	"Deal 14 damage.",
+		"type":	1,
+		"atk":	14,
+		"isUpdated":	false,
+		"energy":	2
+	},
+	"Iron_Wave":	{
+		"name":	"Iron_Wave",
+		"description":	"Gain 5 block. Deal 5 damage.",
+		"type":	2,
+		"atk":	5,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Perfected_Strike":	{
+		"name":	"Perfected_Strike",
+		"description":	"Deal 6 damage. If you have Strike in your deck, deal additional 2 damage.",
+		"type":	1,
+		"atk":	6,
+		"isUpdated":	false,
+		"energy":	0
+	},
+	"Pommel_Strike":	{
+		"name":	"Pommel_Strike",
+		"description":	"Deal 9 damage. Draw a card.",
+		"type":	1,
+		"atk":	9,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Shrug_it_Off":	{
+		"name":	"Shrug_it_Off",
+		"description":	"Gain 8 block. Draw a card.",
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Sword_Boomerang":	{
+		"name":	"Sword_Boomerang",
+		"description":	"Deal 9 damage.",
+		"type":	1,
+		"atk":	3,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"Thunderclap":	{
+		"name":	"Thunderclap",
+		"description":	"Deal 4 damage. Apply 1 vulnerable.",
+		"type":	1,
+		"atk":	8,
+		"isUpdated":	false,
+		"energy":	1
+	},
+	"True_Grit":	{
+		"name":	"True_Grit",
+		"description":	"Gain 7 block. Exhaust a random card.",
+		"type":	2,
+		"atk":	0,
+		"isUpdated":	false,
+		"energy":	1
+	}
+}
