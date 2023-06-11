@@ -1,10 +1,2 @@
 {
-	"Cultist":	{
-		"name":	"Cultist",
-		"hp":	50,
-		"def":	0,
-		"deck":	["DarkStrike", "Incantation"],
-		"buff":	{
-		}
-	}
 }
