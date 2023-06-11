@@ -94,7 +94,7 @@ void Intimidate(Card *card, Player *player, Enemy *enemy, Field *field)
 void Anger(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     player_deal_damage(card, player, enemy);
-    fold_card(&(cardPile->drawCard), "Anger");
+    fold_card(&(player->deck), "Anger");
 }
 
 void Cleave(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -127,7 +127,8 @@ void Iron_Wave(Card *card, Player *player, Enemy *enemy, Field *field)
 void Perfected_Strike(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     player_deal_damage(card, player, enemy);
-    if(card_find(&(player->deck.handCard), "Strike") != -1){
+    if (card_find(&(player->deck.handCard), "Strike") != -1)
+    {
         if (enemy->def < 2)
         {
             enemy->hp -= 2 - enemy->def;
@@ -154,7 +155,8 @@ void Shrug_it_Off(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Sword_Boomerang(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    for(int i = 0; i < 3; i++){
+    for (int i = 0; i < 3; i++)
+    {
         player_deal_damage(card, player, enemy);
     }
 }
@@ -168,7 +170,7 @@ void Thunderclap(Card *card, Player *player, Enemy *enemy, Field *field)
 void True_Grit(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     add_buff_into_deck(&(player->buff), "Block", 7);
-    //exhaust
+    // exhaust
 }
 /*
 void Metallicize(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -353,15 +355,16 @@ void Whirlwind(Card *card, Player *player, Enemy *enemy, Field *field)
 }
 */
 void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field)
-{   
-    for(int i=0; i<2 ;i++){
+{
+    for (int i = 0; i < 2; i++)
+    {
         player_deal_damage(card, player, enemy);
     }
 }
 
 void Warcry(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    //沒實作出"Put a card from your hand  onto the top of your draw pile"
+    // 沒實作出"Put a card from your hand  onto the top of your draw pile"
     draw_card_random(&(player->deck));
 }
 
@@ -372,7 +375,7 @@ void WildStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void BattleTrance(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    for(int i = 0; i < 3; i++)
+    for (int i = 0; i < 3; i++)
     {
         draw_card_random(&(player->deck));
     }
@@ -380,7 +383,7 @@ void BattleTrance(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void BloodforBlood(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    //沒實作出"Costs 1 less RedEnergy for each time you lose HP this combat"
+    // 沒實作出"Costs 1 less RedEnergy for each time you lose HP this combat"
     player_deal_damage(card, player, enemy);
 }
 
@@ -392,7 +395,7 @@ void Bloodletting(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void BurningPact(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    for(int i = 0; i < 2; i++)
+    for (int i = 0; i < 2; i++)
     {
         draw_card_random(&(player->deck));
     }
@@ -411,7 +414,7 @@ void Combust(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Disarm(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    enemy->atk -= 2;
+    add_buff_into_deck(&(enemy->buff), "Strength", -2);
 }
 
 void Entrench(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -421,7 +424,7 @@ void Entrench(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Evolve(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    draw_card_random(cardPile);
+    draw_card_random(&(player->deck));
 }
 
 void FeelNoPain(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -439,4 +442,3 @@ void Hemokinesis(Card *card, Player *player, Enemy *enemy, Field *field)
     player->hp -= 2;
     player_deal_damage(card, player, enemy);
 }
-
