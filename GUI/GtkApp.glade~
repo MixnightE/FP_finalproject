@@ -519,7 +519,7 @@
                 <property name="name">EventDescriptionLabel</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
-                <property name="label" translatable="yes">label</property>
+                <property name="label" translatable="yes">Choose:</property>
                 <attributes>
                   <attribute name="font-desc" value="Arial Bold 24"/>
                   <attribute name="background" value="#ffffffffffff"/>
@@ -539,11 +539,12 @@
                 <property name="orientation">vertical</property>
                 <child>
                   <object class="GtkButton" id="EventChooseButton1">
-                    <property name="label" translatable="yes">EventChooseButton1</property>
+                    <property name="label" translatable="yes">+6 HP</property>
                     <property name="name">EventChooseButton1</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="EventChooseButton1_clicked_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -553,30 +554,17 @@
                 </child>
                 <child>
                   <object class="GtkButton" id="EventChooseButton2">
-                    <property name="label" translatable="yes">EventChooseButton2</property>
+                    <property name="label" translatable="yes">get a card and -6 HP</property>
                     <property name="name">EventChooseButton2</property>
                     <property name="visible">True</property>
                     <property name="can-focus">True</property>
                     <property name="receives-default">True</property>
+                    <signal name="clicked" handler="EventChooseButton2_clicked_cb" swapped="no"/>
                   </object>
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="EventChooseButton3">
-                    <property name="label" translatable="yes">EventChooseButton3</property>
-                    <property name="name">EventChooseButton3</property>
-                    <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
                   </packing>
                 </child>
               </object>
@@ -619,6 +607,7 @@
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
+                <signal name="clicked" handler="CardChooseButton_clicked_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -707,7 +696,7 @@ Click To Choose The Cards</property>
             </child>
             <child>
               <object class="GtkButton" id="WinButton">
-                <property name="label" translatable="yes">button</property>
+                <property name="label" translatable="yes">Choose a card</property>
                 <property name="name">WinButton</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>

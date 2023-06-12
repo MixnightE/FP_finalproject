@@ -100,7 +100,7 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
             int rd = rand() % (game->cardtable->size - 6);
             add_card_into_deck(&deck, game->cardtable->data[rd].name);
             char name[101];
-            sprintf("%s: %s", deck.card[i].name, deck.card[i].description);
+            sprintf(name, "%s: %s", deck.card[i].name, deck.card[i].description);
             gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(ComboText), name);
         }
     }
@@ -186,7 +186,7 @@ void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
 void CardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     Game *game = (Game *)data;
-    GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "CardChooseBox"));
     char name[MAX_NAME_LENGTH + 1];
     char *str = gtk_combo_box_text_get_active_text(cbox);
     int len = strlen(str);
@@ -194,8 +194,10 @@ void CardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
     for (i = 0; i < len && str[i] != ':'; i++)
         name[i] = str[i];
     name[i] = '\0';
+    DEBUG
     printf("card name: %s\n", name);
     add_card_into_deck(&(game->player->deck.deckCard), name);
+    DEBUG
     gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "PathPage");
 }
 
