@@ -46,6 +46,25 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("FeelNoPain", "gain 3  Block.", TYPE_ABL, 0, 0, 1, FeelNoPain, cardtable);
     card_create("GhostlyArmor", "Gain 10 Block.", TYPE_SKL, 0, 0, 1, GhostlyArmor, cardtable);
     card_create("Hemokinesis", "Lose 2 HP.Deal 15 damage.", TYPE_ATK, 15, 0, 1,Hemokinesis, cardtable);
+    
+    card_create("InfernalBlade", "Add a random card cost 0.\nExhaust.",TYPE_SKL, 0 , 1, 1,  InfernalBlade, cardtable);
+    card_create("Inflame", "Gain 2 strength", TYPE_STRENGTH, 0, 0, 1, Inflame, cardtable);
+    card_create("Intimidate", "Apply 1 Weak to ALL enemies.\nExhaust.", TYPE_SKL, 0, 1, 0, Intimidate, cardtable);
+    card_create("Metallicize", "At the end of your turn, gain 3 Block.",TYPE_ABL, 0, 0, 1,  Metallicize, cardtable);
+    //card_create("PowerThrough", "Add 2 Wounds to your hand. Gain 15 Block.", PowerThrough, false, TYPE_SKL, &table);
+    card_create("Pummel", "Deal 2 damage 4 times.\nExhaust.", TYPE_ATK, 2, 1, 1, Pummel, cardtable);
+    card_create("Rage", "Whenever you play Attack this turn, gain 3 Block.", TYPE_SKL, 0, 0, 0, Rage, cardtable);
+    card_create("Rampage", "Deal 8 damage. Increase this card's damage by 5.", TYPE_ATK, 8, 0, 1, Rampage, cardtable);
+    //card_create("RecklessCharge", "Deal 7 damage. Shuffle a Dazed into your draw pile.", RecklessCharge, false, TYPE_ATK, &table);
+    card_create("Rupture", "Whenever you lose HP from a card, gain 1 Strength.", TYPE_ABL, 0, 0, 1, Rupture, cardtable);
+    card_create("SearingBlow", "Deal 12 damage. Can be upgraded any number of times.", TYPE_ATK, 12, 0, 2, SearingBlow, cardtable);
+    card_create("SecondWind", "Exhaust all non-Attack cards in your hand and gain 5 Block for each card Exhausted.", TYPE_SKL, 0, 0, 1, SecondWind, cardtable);
+    card_create("SeeingRed", "Gain 2 energy.\nExhaust.", TYPE_SKL, 0, 1, 1, SeeingRed, cardtable);
+    card_create("Sentinel", "Gain 5 Block. If this card is Exhausted, gain 2 energy.", TYPE_SKL, 0, 0, 1, Sentinel, cardtable);
+    card_create("SeverSoul", "Exhaust all non-Attack cards in your hand. Deal 16 damage.", TYPE_ATK, 16, 0, 2, SeverSoul, cardtable);
+    card_create("ShockWave", "Apply 3 Weak and Icon Vulnerable Vulnerable to ALL enemies.\nExhaust.", TYPE_SKL, 0, 1, 2, ShockWave, cardtable);
+    card_create("Uppercut", "Deal 13 damage. Apply 1 Weak. Apply 1 Vulnerable.", TYPE_ATK, 13, 0, 2, Uppercut, cardtable);
+    card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", TYPE_ATK, 5, 0, 0, Whirlwind, cardtable);
 
     /* create enemy cards */
 
@@ -73,24 +92,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     enemy_create("Cultist", Cultist, 50, 0, &deck, &buff, enemytable);
 
-    /*
-    card_create("InfernalBlade", "Add a random card cost 0.\nExhaust.", InfernalBlade, false, TYPE_ATK, &table);
-    card_create("Intimidate", "Apply 1 Weak to ALL enemies.\nExhaust.", Intimidate, false, TYPE_ATK, &table);
-    card_create("Metallicize", "At the end of your turn, gain 3 Block.", Metallicize, false, TYPE_SKL, &table);
-    card_create("PowerThrough", "Add 2 Wounds to your hand. Gain 15 Block.", PowerThrough, false, TYPE_SKL, &table);
-    card_create("Pummel", "Deal 2 damage 4 times.\nExhaust.", Pummel, false, TYPE_ATK, &table);
-    card_create("Rage", "Whenever you play Attack this turn, gain 3 Block.", Rage, false, TYPE_SKL, &table);
-    card_create("Rampage", "Deal 8 damage. Increase this card's damage by 5.", Rampage, false, TYPE_ATK, &table);
-    card_create("RecklessCharge", "Deal 7 damage. Shuffle a Dazed into your draw pile.", RecklessCharge, false, TYPE_ATK, &table);
-    card_create("SearingBlow", "Deal 12 damage. Can be upgraded any number of times.", SearingBlow, false, TYPE_ATK, &table);
-    // card_create("SecondWind", "Exhaust all non-Attack cards in your hand and gain 5 Block for each card Exhausted.", SecondWind, false, TYPE_SKL, &table);
-    card_create("SeeingRed", "Gain 2 energy.\nExhaust.", SeeingRed, false, TYPE_ATK, &table);
-    card_create("Sentinel", "Gain 5 Block. If this card is Exhausted, gain 2 energy.", Sentinel, false, TYPE_SKL, &table);
-    card_create("SeverSoul", "Exhaust all non-Attack cards in your hand. Deal 16 damage.", SeverSoul, false, TYPE_ATK, &table);
-    card_create("ShockWave", "Apply 3 Weak and Icon Vulnerable Vulnerable to ALL enemies.\nExhaust.", ShockWave, false, TYPE_ATK, &table);
-    card_create("Uppercut", "Deal 13 damage. Apply 1 Weak. Apply 1 Vulnerable.", Uppercut, false, TYPE_ATK, &table);
-    card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", Whirlwind, false, TYPE_ATK, &table);
-    */
+
 }
 
 void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)
