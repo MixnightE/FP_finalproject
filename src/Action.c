@@ -159,7 +159,7 @@ void card_create(char *name, const char *description, int type, int atk, bool is
     cJSON_Delete(json);
 }
 
-void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
+void enemy_create(char *name, EnemyFunction function, int hp, int def, int max_hp, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
 {
     cJSON *json = cJSON_Read("./data/enemy.json");
     cJSON *new_obj = cJSON_CreateObject();
@@ -172,6 +172,7 @@ void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck 
     cJSON_AddStringToObject(new_obj, "name", name);
     cJSON_AddNumberToObject(new_obj, "hp", hp);
     cJSON_AddNumberToObject(new_obj, "def", def);
+    cJSON_AddNumberToObject(new_obj, "max_hp", max_hp);
     cJSON *new_arr = cJSON_CreateArray();
     if (new_arr == NULL)
     {
