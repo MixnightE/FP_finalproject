@@ -136,3 +136,67 @@ char *random_enemy_name(EnemyTable *enemytable)
     int idx = rand() % enemytable->size;
     return enemytable->data[idx].name;
 }
+
+void round_start(Game *game)
+{
+    for (int i = 0; i < 5; i++)
+        draw_card_random(&(game->player->deck));
+    GtkComboBoxText *ComboBox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    Player *player = game->player;
+    for (int i = 0; i < game->player->deck.handCard.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        memset(name, 0, sizeof(name));
+        strcat(name, player->deck.drawCard.card[i].name);
+        strcat(name, ": ");
+        strcat(name, player->deck.drawCard.card[i].description);
+        gtk_combo_box_text_append_text(ComboBox, name);
+    }
+}
+
+void hp_update(Game *game)
+{
+    GtkProgressBar *player_hp = GTK_PROGRESS_BAR(gtk_builder_get_object(game->builder, "PlayerHpBar"));
+    GtkProgressBar *enemy_hp = GTK_PROGRESS_BAR(gtk_builder_get_object(game->builder, "EnemyHpBar"));
+    double current = game->player->hp;
+    double total = game->player->max_hp;
+    char text[100];
+    sprintf(text, "%.0f/%.0f", current, total); // 创建表示当前进度的字符串
+    gtk_progress_bar_set_text(player_hp, text);
+    current = game->enemy->hp;
+    current = game->enemy->max_hp;
+    sprintf(text, "%.0f/%.0f", current, total);
+    gtk_progress_bar_set_fraction(enemy_hp, current / total); // 计算并设置进度
+}
+
+void clear_box(GtkWidget *box)
+{
+    GList *children, *iter;
+
+    children = gtk_container_get_children(GTK_CONTAINER(box));
+    for (iter = children; iter != NULL; iter = g_list_next(iter))
+        gtk_widget_destroy(GTK_WIDGET(iter->data));
+    g_list_free(children);
+}
+
+void buff_update(Game *game)
+{
+    GtkBox *player_buff = GTK_BOX(gtk_builder_get_object(game->builder, "PlayerBuffBox"));
+    GtkBox *enemy_buff = GTK_BOX(gtk_builder_get_obj(game->builder, "EnemyBuffBox"));
+    clear_box(GTK_WIDGET(player_buff));
+    clear_box(GTK_WIDGET(enemy_buff));
+    for (int i = 0; i < game->player->buff.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        sprintf(name, "%s: %s", game->player->buff.deck[i].name, game->player->buff.deck[i].level);
+        GtkLabel *label = gtk_label_new(name);
+        gtk_box_pack_start(player_buff, label, 0, 0, TRUE);
+    }
+    for (int i = 0; i < game->enemy->buff.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        sprintf(name, "%s: %s", game->enemy->buff.deck[i].name, game->enemy->buff.deck[i].level);
+        GtkLabel *label = gtk_label_new(name);
+        gtk_box_pack_start(enemy_buff, label, 0, 0, TRUE);
+    }
+}
