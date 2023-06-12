@@ -42,7 +42,6 @@ void Incantation(Card *card, Player *player, Enemy *enemy, Field *field)
     fclose(fp);
     add_buff_into_deck(&(enemy->buff), "Ritual", 3);
 }
-// Cultist
 void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     enemy_deal_damage(card, player, enemy);
@@ -52,13 +51,11 @@ void Chomp(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     enemy_deal_damage(card, player, enemy);
 }
-// Mouse
 void Thrash(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     enemy_deal_damage(card, player, enemy);
     add_buff_into_deck(&(enemy->buff), "Block", 5);
 }
-// Mouse
 void Bellow(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     add_buff_into_deck(&(enemy->buff), "Strength", 3);

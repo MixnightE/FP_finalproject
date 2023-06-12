@@ -7,13 +7,10 @@
 
 // Cultist
 void Incantation(Card *card, Player *player, Enemy *enemy, Field *field);
-// Cultist
 void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field);
 // Mouse
 void Chomp(Card *card, Player *player, Enemy *enemy, Field *field);
-// Mouse
 void Thrash(Card *card, Player *player, Enemy *enemy, Field *field);
-// Mouse
 void Bellow(Card *card, Player *player, Enemy *enemy, Field *field);
 /* cards for player */
 

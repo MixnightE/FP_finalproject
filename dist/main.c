@@ -71,9 +71,9 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("DarkStrike", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
     card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
     //Mouse
-    card_create("Chomp", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
-    card_create("Thrash", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
-    card_create("Bellow", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
+    card_create("Chomp", "None.", TYPE_ATK, 11, 0, 0, Chomp, cardtable);
+    card_create("Thrash", "None.", TYPE_ATK, 6, 0, 0, Thrash, cardtable);
+    card_create("Bellow", "None.", TYPE_SKL, 0, 0, 0, Bellow, cardtable);
 
     /* create buff */
     DEBUG
@@ -88,6 +88,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     CardDeck deck;
     BuffDeck buff;
+    //Cultist
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
