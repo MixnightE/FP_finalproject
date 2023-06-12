@@ -39,7 +39,7 @@ void Battle(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, En
     FILE *fp;
     field->round = 1;
     char command[MAX_NAME_LENGTH + 1];
-    char buffer[MAX_NAME_LENGTH + 1];
+    char buffer[MAX_DESCRIPTION_LENGTH + 1];
     char message[(MAX_DESCRIPTION_LENGTH + 1) * MAX_NAME_LENGTH];
     while (1)
     {
