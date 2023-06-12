@@ -30,7 +30,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Thunderclap", "Deal 4 damage. Apply 1 vulnerable.", TYPE_ATK, 8, 0, 1, Thunderclap, cardtable);
     card_create("True_Grit", "Gain 7 block. Exhaust a random card", TYPE_SKL, 0, 0, 1, True_Grit, cardtable);
     card_create("Inflame", "Gain 2 Strength.", TYPE_ABL, 0, 0, 1, Inflame, cardtable);
-    
+
     card_create("TwinStrike", "Deal 5 damage twice.", TYPE_ATK, 5, 0, 1, TwinStrike, cardtable);
     card_create("Warcry", "Draw 1 card.", TYPE_SKL, 0, 1, 0, Warcry, cardtable);
     card_create("WildStrike", "Deal 12 damage.", TYPE_ATK, 12, 0, 1, WildStrike, cardtable);
@@ -45,17 +45,17 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Evolve", "draw 1 card.", TYPE_ABL, 0, 0, 1, Evolve, cardtable);
     card_create("FeelNoPain", "gain 3  Block.", TYPE_ABL, 0, 0, 1, FeelNoPain, cardtable);
     card_create("GhostlyArmor", "Gain 10 Block.", TYPE_SKL, 0, 0, 1, GhostlyArmor, cardtable);
-    card_create("Hemokinesis", "Lose 2 HP.Deal 15 damage.", TYPE_ATK, 15, 0, 1,Hemokinesis, cardtable);
-    
-    card_create("InfernalBlade", "Add a random card cost 0.\nExhaust.",TYPE_SKL, 0 , 1, 1,  InfernalBlade, cardtable);
+    card_create("Hemokinesis", "Lose 2 HP.Deal 15 damage.", TYPE_ATK, 15, 0, 1, Hemokinesis, cardtable);
+
+    card_create("InfernalBlade", "Add a random card cost 0.\nExhaust.", TYPE_SKL, 0, 1, 1, InfernalBlade, cardtable);
     card_create("Inflame", "Gain 2 strength", TYPE_STRENGTH, 0, 0, 1, Inflame, cardtable);
     card_create("Intimidate", "Apply 1 Weak to ALL enemies.\nExhaust.", TYPE_SKL, 0, 1, 0, Intimidate, cardtable);
-    card_create("Metallicize", "At the end of your turn, gain 3 Block.",TYPE_ABL, 0, 0, 1,  Metallicize, cardtable);
-    //card_create("PowerThrough", "Add 2 Wounds to your hand. Gain 15 Block.", PowerThrough, false, TYPE_SKL, &table);
+    card_create("Metallicize", "At the end of your turn, gain 3 Block.", TYPE_ABL, 0, 0, 1, Metallicize, cardtable);
+    // card_create("PowerThrough", "Add 2 Wounds to your hand. Gain 15 Block.", PowerThrough, false, TYPE_SKL, &table);
     card_create("Pummel", "Deal 2 damage 4 times.\nExhaust.", TYPE_ATK, 2, 1, 1, Pummel, cardtable);
     card_create("Rage", "Whenever you play Attack this turn, gain 3 Block.", TYPE_SKL, 0, 0, 0, Rage, cardtable);
     card_create("Rampage", "Deal 8 damage. Increase this card's damage by 5.", TYPE_ATK, 8, 0, 1, Rampage, cardtable);
-    //card_create("RecklessCharge", "Deal 7 damage. Shuffle a Dazed into your draw pile.", RecklessCharge, false, TYPE_ATK, &table);
+    // card_create("RecklessCharge", "Deal 7 damage. Shuffle a Dazed into your draw pile.", RecklessCharge, false, TYPE_ATK, &table);
     card_create("Rupture", "Whenever you lose HP from a card, gain 1 Strength.", TYPE_ABL, 0, 0, 1, Rupture, cardtable);
     card_create("SearingBlow", "Deal 12 damage. Can be upgraded any number of times.", TYPE_ATK, 12, 0, 2, SearingBlow, cardtable);
     card_create("SecondWind", "Exhaust all non-Attack cards in your hand and gain 5 Block for each card Exhausted.", TYPE_SKL, 0, 0, 1, SecondWind, cardtable);
@@ -67,10 +67,10 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", TYPE_ATK, 5, 0, 0, Whirlwind, cardtable);
 
     /* create enemy cards */
-    //Cultist
+    // Cultist
     card_create("DarkStrike", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
     card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
-    //Mouse
+    // Mouse
     card_create("Chomp", "None.", TYPE_ATK, 11, 0, 0, Chomp, cardtable);
     card_create("Thrash", "None.", TYPE_ATK, 6, 0, 0, Thrash, cardtable);
     card_create("Bellow", "None.", TYPE_SKL, 0, 0, 0, Bellow, cardtable);
@@ -78,7 +78,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("LagavulinAttack", "None.", TYPE_ATK, 10, 0, 0, LagavulinAttack, cardtable);
     card_create("SiphonSoul", "None.", TYPE_SKL, 0, 0, 0, SiphonSoul, cardtable);
     /* create buff */
-    DEBUG
+
     buff_create("Weak", "Weak creatures deal 25%% less damage with Attacks.", Buff_Weak, bufftable);
 
     buff_create("Vulnerable", "Target takes 50%% more damage from attacks.", Buff_Vulnerable, bufftable);
@@ -90,15 +90,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     CardDeck deck;
     BuffDeck buff;
-    //Cultist
+    // Cultist
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
     add_card_into_deck(&deck, "DarkStrike");
     add_card_into_deck(&deck, "Incantation");
 
-    enemy_create("Cultist", Cultist, 50, 0, 50,&deck, &buff, enemytable);
-    //Mouse
+    enemy_create("Cultist", Cultist, 50, 0, 50, &deck, &buff, enemytable);
+    // Mouse
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
@@ -106,17 +106,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     add_card_into_deck(&deck, "Thrash");
     add_card_into_deck(&deck, "Bellow");
 
-    enemy_create("Mouse", Mouse, 40, 0, 40,&deck, &buff, enemytable);
-    //Lagavulin
+    enemy_create("Mouse", Mouse, 40, 0, 40, &deck, &buff, enemytable);
+    // Lagavulin
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
     add_card_into_deck(&deck, "LagavulinAttack");
     add_card_into_deck(&deck, "SiphonSoul");
 
-    enemy_create("Lagavulin", Lagavulin, 100, 8, 100,&deck, &buff, enemytable);
-
-
+    enemy_create("Lagavulin", Lagavulin, 100, 8, 100, &deck, &buff, enemytable);
 }
 
 void BattleTest(Player *player, Enemy *enemy, Field *field, CardTable *cardtable, EnemyTable *enemytable, BuffTable *bufftable)

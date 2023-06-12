@@ -46,7 +46,6 @@ signed main(int argc, char *argv[])
     BuffTable bufftable;
 
     /* Default Data Initialization */
-
     all_initialize(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
 
     /* Init GTK+ */

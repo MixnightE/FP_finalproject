@@ -8,6 +8,7 @@ typedef struct EnemyData
     char *name;
     char *description;
     int hp;
+    int max_hp;
     int def;
     BuffDeck buff;
     CardDeck deck;

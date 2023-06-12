@@ -66,18 +66,18 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", TYPE_ATK, 5, 0, 0, Whirlwind, cardtable);
 
     /* create enemy cards */
-
+    // Cultist
     card_create("DarkStrike", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
     card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
-    //Mouse
+    // Mouse
     card_create("Chomp", "None.", TYPE_ATK, 11, 0, 0, Chomp, cardtable);
     card_create("Thrash", "None.", TYPE_ATK, 6, 0, 0, Thrash, cardtable);
     card_create("Bellow", "None.", TYPE_SKL, 0, 0, 0, Bellow, cardtable);
-    //Lagavulin
+    // Lagavulin
     card_create("LagavulinAttack", "None.", TYPE_ATK, 10, 0, 0, LagavulinAttack, cardtable);
     card_create("SiphonSoul", "None.", TYPE_SKL, 0, 0, 0, SiphonSoul, cardtable);
     /* create buff */
-    DEBUG
+
     buff_create("Weak", "Weak creatures deal 25%% less damage with Attacks.", Buff_Weak, bufftable);
 
     buff_create("Vulnerable", "Target takes 50%% more damage from attacks.", Buff_Vulnerable, bufftable);
@@ -89,14 +89,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     CardDeck deck;
     BuffDeck buff;
+    // Cultist
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
     add_card_into_deck(&deck, "DarkStrike");
     add_card_into_deck(&deck, "Incantation");
 
-    enemy_create("Cultist", Cultist, 50, 0, 50,&deck, &buff, enemytable);
-    //Mouse
+    enemy_create("Cultist", Cultist, 50, 0, 50, &deck, &buff, enemytable);
+    // Mouse
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
@@ -104,15 +105,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     add_card_into_deck(&deck, "Thrash");
     add_card_into_deck(&deck, "Bellow");
 
-    enemy_create("Mouse", Mouse, 40, 0, 40,&deck, &buff, enemytable);
-    //Lagavulin
+    enemy_create("Mouse", Mouse, 40, 0, 40, &deck, &buff, enemytable);
+    // Lagavulin
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
 
     add_card_into_deck(&deck, "LagavulinAttack");
     add_card_into_deck(&deck, "SiphonSoul");
 
-    enemy_create("Lagavulin", Lagavulin, 100, 8, 100,&deck, &buff, enemytable);
+    enemy_create("Lagavulin", Lagavulin, 100, 8, 100, &deck, &buff, enemytable);
 }
 
 void game_initialize(Game *game, Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable, BuffTable *bufftable, EnemyTable *enemytable)
@@ -145,6 +146,7 @@ char *random_enemy_name(EnemyTable *enemytable)
 
 void round_start(Game *game)
 {
+    DEBUG
     for (int i = 0; i < 5; i++)
         draw_card_random(&(game->player->deck));
     GtkComboBoxText *ComboBox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
@@ -158,6 +160,10 @@ void round_start(Game *game)
         strcat(name, player->deck.drawCard.card[i].description);
         gtk_combo_box_text_append_text(ComboBox, name);
     }
+    hp_update(game);
+    DEBUG
+    buff_update(game);
+    DEBUG
 }
 
 void hp_update(Game *game)
@@ -188,21 +194,21 @@ void clear_box(GtkWidget *box)
 void buff_update(Game *game)
 {
     GtkBox *player_buff = GTK_BOX(gtk_builder_get_object(game->builder, "PlayerBuffBox"));
-    GtkBox *enemy_buff = GTK_BOX(gtk_builder_get_obj(game->builder, "EnemyBuffBox"));
+    GtkBox *enemy_buff = GTK_BOX(gtk_builder_get_object(game->builder, "EnemyBuffBox"));
     clear_box(GTK_WIDGET(player_buff));
     clear_box(GTK_WIDGET(enemy_buff));
     for (int i = 0; i < game->player->buff.size; i++)
     {
         char name[MAX_DESCRIPTION_LENGTH + 1];
-        sprintf(name, "%s: %s", game->player->buff.deck[i].name, game->player->buff.deck[i].level);
-        GtkLabel *label = gtk_label_new(name);
+        sprintf(name, "%s: %d", game->player->buff.deck[i].name, game->player->buff.deck[i].level);
+        GtkWidget *label = gtk_label_new(name);
         gtk_box_pack_start(player_buff, label, 0, 0, TRUE);
     }
     for (int i = 0; i < game->enemy->buff.size; i++)
     {
         char name[MAX_DESCRIPTION_LENGTH + 1];
-        sprintf(name, "%s: %s", game->enemy->buff.deck[i].name, game->enemy->buff.deck[i].level);
-        GtkLabel *label = gtk_label_new(name);
+        sprintf(name, "%s: %d", game->enemy->buff.deck[i].name, game->enemy->buff.deck[i].level);
+        GtkWidget *label = gtk_label_new(name);
         gtk_box_pack_start(enemy_buff, label, 0, 0, TRUE);
     }
 }

@@ -3,6 +3,7 @@
 		"name":	"Cultist",
 		"hp":	50,
 		"def":	0,
+		"max_hp":	50,
 		"deck":	["DarkStrike", "Incantation"],
 		"buff":	{
 		}
