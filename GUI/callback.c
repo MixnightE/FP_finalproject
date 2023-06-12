@@ -64,11 +64,13 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         Player *player = game->player;
         Enemy *enemy = game->enemy;
         Field *field = game->field;
+        field->round = 0;
         EnemyTable *enemytable = game->enemytable;
         /* 1 : 將deckCard中的牌加入drawCard */
         put_card(&(player->deck));
         int rd = rand() % (game->enemytable->size);
         call_enemy(game->enemy, game->enemytable->data[rd].name);
+        printf("enemy: %s\n", enemy->name);
         /* 2 : 載入Enemy圖像 */
         GtkWidget *BattlePage = gtk_stack_get_visible_child(GTK_STACK(stack));
         GList *list = gtk_container_get_children(GTK_CONTAINER(BattlePage));
@@ -157,6 +159,8 @@ void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
     GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
     char name[MAX_NAME_LENGTH + 1];
     char *str = gtk_combo_box_text_get_active_text(cbox);
+    if (str == NULL)
+        return;
     int len = strlen(str);
     int i;
     for (i = 0; i < len && str[i] != ':'; i++)
@@ -281,4 +285,9 @@ GdkPixbuf *scale_image(const char *image_name, int new_width /*新的寬度*/)
     // 在不再需要原图像时释放它
     g_object_unref(original_pixbuf);
     return scaled_pixbuf;
+}
+
+void WinButton_clicked_cb(GtkButton *button, gpointer data)
+{
+    gtk_stack_set_visible_child_name(GTK_STACK(data), "CardPage");
 }

@@ -96,7 +96,7 @@ void Strike(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Defend(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    add_buff_into_deck(&(player->buff), "Block", 6);
+    add_buff_into_deck(&(player->buff), "Block", 5);
 }
 
 void Bash(Card *card, Player *player, Enemy *enemy, Field *field)

@@ -77,13 +77,13 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
         card_remove(&(player->deck.handCard), name);
     else
     {
-        printf("!!!!!!!!\n");
         fold_card(&(player->deck), name);
     }
 }
 
 void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *table, const char *name)
 {
+    printf("Enemy Card: %s\n", name);
     if (player->hp <= 0 || enemy->hp <= 0)
     {
         battle_over(player, enemy, field);
@@ -114,6 +114,8 @@ void player_new_round(Player *player, Enemy *enemy, Field *field)
         enemy->buff.deck[idx].level--;
     if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) != -1)
         enemy->buff.deck[idx].level = 0;
+    if ((idx = find_buff_from_deck(&(player->buff), "Block")) != -1)
+        remove_buff_from_deck(&(player->buff), "Block");
     if (player->energy < 3)
         player->energy = 3;
     if (player->hp <= 0 || enemy->hp <= 0)
@@ -134,6 +136,8 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
         Buff_Ritual(NULL, NULL, enemy, field);
     if ((idx = find_buff_from_deck(&(player->buff), "Rage")) != -1)
         remove_buff_from_deck(&(player->buff), "Rage");
+    if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) != -1)
+        remove_buff_from_deck(&(enemy->buff), "Block");
 
     if (player->hp <= 0 || enemy->hp <= 0)
     {

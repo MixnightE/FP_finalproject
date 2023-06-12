@@ -146,6 +146,7 @@ char *random_enemy_name(EnemyTable *enemytable)
 
 void round_start(Game *game)
 {
+    game->field->round++;
     player_new_round(game->player, game->enemy, game->field);
     for (int i = 0; i < 5; i++)
         draw_card_random(&(game->player->deck));
@@ -209,7 +210,6 @@ void hp_update(Game *game)
     gtk_widget_show_all(GTK_WIDGET(enemy_hp));
     if (current <= 0)
     {
-        DEBUG
         gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "WinPage");
     }
 }

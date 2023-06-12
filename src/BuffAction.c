@@ -12,7 +12,9 @@ void Buff_Vulnerable(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Buff_Ritual(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    add_buff_into_deck(&(enemy->buff), "Strength", 1);
+    int idx = find_buff_from_deck(&(enemy->buff), "Ritual");
+    if (idx != -1)
+        add_buff_into_deck(&(enemy->buff), "Strength", enemy->buff.deck[idx].level);
 }
 
 void Buff_Strength(Card *card, Player *player, Enemy *enemy, Field *field)

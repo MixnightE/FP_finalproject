@@ -39,6 +39,8 @@ void EventChooseButton2_clicked_cb(GtkButton *button, gpointer data);
 
 void EndButton_clicked_cb(GtkButton *button, gpointer data);
 
+void WinButton_clicked_cb(GtkButton *button, gpointer data);
+
 // 將名為image_name的圖檔導入，回傳GdkPixbuf物件
 GdkPixbuf *scale_image(const char *image_name, int new_width /*新的寬度*/);
 
