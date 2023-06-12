@@ -94,6 +94,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
 void game_initialize(Game *game, Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable, BuffTable *bufftable, EnemyTable *enemytable)
 {
+    basic_card_add(player);
     game->card = card;
     game->player = player;
     game->enemy = enemy;

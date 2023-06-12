@@ -70,6 +70,8 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         EnemyTable *enemytable = game->enemytable;
         GtkWidget *BattlePage = gtk_stack_get_visible_child(GTK_STACK(stack));
         GList *list = gtk_container_get_children(GTK_CONTAINER(BattlePage));
+        /* 1 : 將deckCard中的牌加入drawCard */
+        put_card(&(player->deck));
         /* 2 : 載入Enemy圖像 */
         GtkWidget *Box = list->next->data;
         g_list_free(list);
@@ -90,7 +92,6 @@ void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
     GtkWidget *window = ((Game *)data)->window;
     GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-    // 在这里添加你想要显示的内容
     Player *player = ((Game *)data)->player;
     GtkWidget *label = gtk_label_new("These are your cards...");
     gtk_container_add(GTK_CONTAINER(content_area), label);
@@ -100,6 +101,7 @@ void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
         memset(name, 0, sizeof(name));
         strcat(name, player->deck.drawCard.card[i].name);
         strcat(name, player->deck.drawCard.card[i].description);
+        // printf("%s\n", name);
         GtkWidget *label = gtk_label_new(name);
         gtk_container_add(GTK_CONTAINER(content_area), label);
     }
