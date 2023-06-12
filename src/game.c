@@ -74,8 +74,8 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Thrash", "None.", TYPE_ATK, 6, 0, 0, Thrash, cardtable);
     card_create("Bellow", "None.", TYPE_SKL, 0, 0, 0, Bellow, cardtable);
     // Lagavulin
-    card_create("LagavulinAttack", "None.", TYPE_ATK, 10, 0, 0, LagavulinAttack, cardtable);
-    card_create("SiphonSoul", "None.", TYPE_SKL, 0, 0, 0, SiphonSoul, cardtable);
+    // card_create("LagavulinAttack", "None.", TYPE_ATK, 10, 0, 0, LagavulinAttack, cardtable);
+    // card_create("SiphonSoul", "None.", TYPE_SKL, 0, 0, 0, SiphonSoul, cardtable);
     /* create buff */
 
     buff_create("Weak", "Weak creatures deal 25%% less damage with Attacks.", Buff_Weak, bufftable);
@@ -96,7 +96,7 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     add_card_into_deck(&deck, "DarkStrike");
     add_card_into_deck(&deck, "Incantation");
 
-    enemy_create("Cultist", Cultist, 50, 0, 50, &deck, &buff, enemytable);
+    enemy_create("Cultist", Cultist, 50, 0, &deck, &buff, enemytable);
     // Mouse
     card_deck_initialize(&deck);
     buff_deck_initialize(&buff);
@@ -105,15 +105,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     add_card_into_deck(&deck, "Thrash");
     add_card_into_deck(&deck, "Bellow");
 
-    enemy_create("Mouse", Mouse, 40, 0, 40, &deck, &buff, enemytable);
+    enemy_create("Mouse", Mouse, 40, 0, &deck, &buff, enemytable);
     // Lagavulin
-    card_deck_initialize(&deck);
-    buff_deck_initialize(&buff);
+    // card_deck_initialize(&deck);
+    // buff_deck_initialize(&buff);
 
-    add_card_into_deck(&deck, "LagavulinAttack");
-    add_card_into_deck(&deck, "SiphonSoul");
+    // add_card_into_deck(&deck, "LagavulinAttack");
+    // add_card_into_deck(&deck, "SiphonSoul");
 
-    enemy_create("Lagavulin", Lagavulin, 100, 8, 100, &deck, &buff, enemytable);
+    // enemy_create("Lagavulin", Lagavulin, 100, 8, 100, &deck, &buff, enemytable);
 }
 
 void game_initialize(Game *game, Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable, BuffTable *bufftable, EnemyTable *enemytable)
@@ -146,7 +146,7 @@ char *random_enemy_name(EnemyTable *enemytable)
 
 void round_start(Game *game)
 {
-    DEBUG
+    player_new_round(game->player, game->enemy, game->field);
     for (int i = 0; i < 5; i++)
         draw_card_random(&(game->player->deck));
     GtkComboBoxText *ComboBox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
@@ -155,30 +155,53 @@ void round_start(Game *game)
     {
         char name[MAX_DESCRIPTION_LENGTH + 1];
         memset(name, 0, sizeof(name));
-        strcat(name, player->deck.drawCard.card[i].name);
+        strcat(name, player->deck.handCard.card[i].name);
         strcat(name, ": ");
-        strcat(name, player->deck.drawCard.card[i].description);
+        strcat(name, player->deck.handCard.card[i].description);
         gtk_combo_box_text_append_text(ComboBox, name);
     }
+    GtkWidget *energy_label = GTK_WIDGET(gtk_builder_get_object(game->builder, "PlayerEnergyLabel"));
+    char player_energy[20];
+    sprintf(player_energy, "Energy: %d", player->energy);
+    gtk_label_set_text(GTK_LABEL(energy_label), player_energy);
     hp_update(game);
-    DEBUG
     buff_update(game);
-    DEBUG
+}
+
+void round_end(Game *game)
+{
+    drop_card(&(game->player->deck));
+    GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cbox));
+    enemy_new_round(game->player, game->enemy, game->field);
+    EnemyFunction function = enemy_table_transform(game->enemytable, game->enemy->name);
+    function(game->player, game->enemy, game->field, game->cardtable);
+    hp_update(game);
+    buff_update(game);
 }
 
 void hp_update(Game *game)
 {
-    GtkProgressBar *player_hp = GTK_PROGRESS_BAR(gtk_builder_get_object(game->builder, "PlayerHpBar"));
-    GtkProgressBar *enemy_hp = GTK_PROGRESS_BAR(gtk_builder_get_object(game->builder, "EnemyHpBar"));
+    GtkWidget *widget = gtk_stack_get_visible_child(GTK_STACK(game->stack));
+    GList *list = gtk_container_get_children(GTK_CONTAINER(widget));
+    GtkWidget *data = list->next->next->data;
+    GtkProgressBar *player_hp = GTK_PROGRESS_BAR(gtk_container_get_children(GTK_CONTAINER(data))->data);
+    GtkProgressBar *enemy_hp = GTK_PROGRESS_BAR(gtk_container_get_children(GTK_CONTAINER(data))->next->data);
     double current = game->player->hp;
     double total = game->player->max_hp;
     char text[100];
     sprintf(text, "%.0f/%.0f", current, total); // 创建表示当前进度的字符串
+    printf("player: %s\n", text);
     gtk_progress_bar_set_text(player_hp, text);
+    gtk_progress_bar_set_fraction(player_hp, current / total);
+    gtk_widget_show_all(GTK_WIDGET(player_hp));
     current = game->enemy->hp;
-    current = game->enemy->max_hp;
+    total = game->enemy->max_hp;
     sprintf(text, "%.0f/%.0f", current, total);
+    printf("enemy: %s\n", text);
+    gtk_progress_bar_set_text(enemy_hp, text);
     gtk_progress_bar_set_fraction(enemy_hp, current / total); // 计算并设置进度
+    gtk_widget_show_all(GTK_WIDGET(enemy_hp));
 }
 
 void clear_box(GtkWidget *box)
@@ -193,22 +216,33 @@ void clear_box(GtkWidget *box)
 
 void buff_update(Game *game)
 {
-    GtkBox *player_buff = GTK_BOX(gtk_builder_get_object(game->builder, "PlayerBuffBox"));
-    GtkBox *enemy_buff = GTK_BOX(gtk_builder_get_object(game->builder, "EnemyBuffBox"));
+    GtkWidget *widget = gtk_stack_get_visible_child(GTK_STACK(game->stack));
+    GList *list = gtk_container_get_children(GTK_CONTAINER(widget));
+    GtkWidget *data = list->next->next->next->data;
+    GtkBox *player_buff = GTK_BOX(gtk_container_get_children(GTK_CONTAINER(data))->data);
+    GtkBox *enemy_buff = GTK_BOX(gtk_container_get_children(GTK_CONTAINER(data))->next->data);
     clear_box(GTK_WIDGET(player_buff));
     clear_box(GTK_WIDGET(enemy_buff));
+    printf("Player buff: \n");
     for (int i = 0; i < game->player->buff.size; i++)
     {
+        printf("%s\n", game->player->buff.deck[i].name);
         char name[MAX_DESCRIPTION_LENGTH + 1];
         sprintf(name, "%s: %d", game->player->buff.deck[i].name, game->player->buff.deck[i].level);
         GtkWidget *label = gtk_label_new(name);
+        gtk_style_context_add_class(gtk_widget_get_style_context(label), "HpBar");
         gtk_box_pack_start(player_buff, label, 0, 0, TRUE);
     }
+    gtk_widget_show_all(GTK_WIDGET(player_buff));
+    printf("Enemy buff: \n");
     for (int i = 0; i < game->enemy->buff.size; i++)
     {
+        printf("%s\n", game->enemy->buff.deck[i].name);
         char name[MAX_DESCRIPTION_LENGTH + 1];
         sprintf(name, "%s: %d", game->enemy->buff.deck[i].name, game->enemy->buff.deck[i].level);
         GtkWidget *label = gtk_label_new(name);
+        gtk_style_context_add_class(gtk_widget_get_style_context(label), "HpBar");
         gtk_box_pack_start(enemy_buff, label, 0, 0, TRUE);
     }
+    gtk_widget_show_all(GTK_WIDGET(enemy_buff));
 }

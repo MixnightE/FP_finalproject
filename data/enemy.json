@@ -3,8 +3,24 @@
 		"name":	"Cultist",
 		"hp":	50,
 		"def":	0,
-		"max_hp":	50,
 		"deck":	["DarkStrike", "Incantation"],
+		"buff":	{
+		}
+	},
+	"Mouse":	{
+		"name":	"Mouse",
+		"hp":	40,
+		"def":	0,
+		"deck":	["Chomp", "Thrash", "Bellow"],
+		"buff":	{
+		}
+	},
+	"Lagavulin":	{
+		"name":	"Lagavulin",
+		"hp":	100,
+		"def":	8,
+		"max_hp":	100,
+		"deck":	["LagavulinAttack", "SiphonSoul"],
 		"buff":	{
 		}
 	}

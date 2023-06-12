@@ -58,6 +58,7 @@ void card_add(CardDeck *cardDeck, Card *card)
 void fold_card(CardPile *cardPile, const char *name)
 {
     int idx;
+    add_card_into_deck(&(cardPile->foldCard), name);
     if ((idx = card_remove(&(cardPile->handCard), name)) == -1)
     {
         fprintf(stderr, "Fold Card Error: The card %s didn't in your hand.\n", name);

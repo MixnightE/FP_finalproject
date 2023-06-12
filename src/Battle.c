@@ -8,6 +8,7 @@ void call_enemy(Enemy *enemy, char *name)
     cJSON *enemy_data = cJSON_GetObjectItem(json, name);
     enemy->name = name;
     enemy->hp = cJSON_GetObjectItem(enemy_data, "hp")->valueint;
+    enemy->max_hp = cJSON_GetObjectItem(enemy_data, "hp")->valueint;
     enemy->def = cJSON_GetObjectItem(enemy_data, "def")->valueint;
     cJSON *card_deck = cJSON_GetObjectItem(enemy_data, "deck");
     for (int i = 0; i < cJSON_GetArraySize(card_deck); i++)

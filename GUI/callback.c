@@ -70,6 +70,8 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         EnemyTable *enemytable = game->enemytable;
         /* 1 : 將deckCard中的牌加入drawCard */
         put_card(&(player->deck));
+        int rd = rand() % (game->enemytable->size);
+        call_enemy(game->enemy, game->enemytable->data[rd].name);
         /* 2 : 載入Enemy圖像 */
         GtkWidget *BattlePage = gtk_stack_get_visible_child(GTK_STACK(stack));
         GList *list = gtk_container_get_children(GTK_CONTAINER(BattlePage));
@@ -117,6 +119,7 @@ void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
     GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
     Player *player = ((Game *)data)->player;
+    printf("@@@@@%d\n", player->deck.foldCard.size);
     for (int i = 0; i < player->deck.foldCard.size; i++)
     {
         char name[MAX_DESCRIPTION_LENGTH + 1];
@@ -139,23 +142,42 @@ void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
     char name[MAX_NAME_LENGTH + 1];
     char *str = gtk_combo_box_text_get_active_text(cbox);
     int len = strlen(str);
-    for (int i = 0; i < len && str[i] != ':'; i++)
+    int i;
+    for (i = 0; i < len && str[i] != ':'; i++)
         name[i] = str[i];
-    player_choose_card(game->player, game->enemy, game->field, game->cardtable, name);
+    name[i] = '\0';
+    printf("card name: %s\n", name);
+    player_choose_card(game->player, game->enemy, game->field, game->cardtable, name); // 這邊會結算玩家對敵人造成的傷害以及buff
     hp_update(game);
     buff_update(game);
+    GtkWidget *energy_label = GTK_WIDGET(gtk_builder_get_object(game->builder, "PlayerEnergyLabel"));
+    char player_energy[20];
+    sprintf(player_energy, "Energy: %d", game->player->energy);
+    gtk_label_set_text(GTK_LABEL(energy_label), player_energy);
+    gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(cbox));
+    Player *player = game->player;
+    for (int i = 0; i < game->player->deck.handCard.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        memset(name, 0, sizeof(name));
+        strcat(name, player->deck.handCard.card[i].name);
+        strcat(name, ": ");
+        strcat(name, player->deck.handCard.card[i].description);
+        gtk_combo_box_text_append_text(cbox, name);
+    }
 }
 
 void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     Game *game = data;
-    drop_card(&(game->player->deck));
+    round_end(game);
     // 將手牌的ui清光
 }
 
 void BattleRoundNextButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     // 結束敵人的回合，開啟新的回合
+    round_start((Game *)data);
 }
 
 void event_button_clicked(GtkButton *button, gpointer data)

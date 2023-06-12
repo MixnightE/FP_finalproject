@@ -3,14 +3,19 @@
 // --通用函式--------------------------------------------------------
 void player_deal_damage(Card *card, Player *player, Enemy *enemy)
 {
-    if (enemy->def < card->atk)
+    int idx;
+    if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) == -1)
     {
-        enemy->hp -= card->atk - enemy->def;
-        enemy->def = 0;
+        enemy->hp -= card->atk;
+    }
+    else if (enemy->buff.deck[idx].level <= card->atk)
+    {
+        enemy->hp -= card->atk - enemy->buff.deck[idx].level;
+        remove_buff_from_deck(&(player->buff), "Block");
     }
     else
     {
-        enemy->def -= card->atk;
+        enemy->buff.deck[idx].level -= card->atk;
     }
 }
 

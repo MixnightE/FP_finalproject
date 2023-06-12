@@ -366,5 +366,45 @@
 		"atk":	5,
 		"isExhaust":	false,
 		"energy":	0
+	},
+	"Chomp":	{
+		"name":	"Chomp",
+		"description":	"None.",
+		"type":	1,
+		"atk":	11,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Thrash":	{
+		"name":	"Thrash",
+		"description":	"None.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Bellow":	{
+		"name":	"Bellow",
+		"description":	"None.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"LagavulinAttack":	{
+		"name":	"LagavulinAttack",
+		"description":	"None.",
+		"type":	1,
+		"atk":	10,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"SiphonSoul":	{
+		"name":	"SiphonSoul",
+		"description":	"None.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
 	}
 }

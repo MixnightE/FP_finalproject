@@ -16,3 +16,8 @@
 .MainButtonClass {
     opacity: 0.5;
 }
+
+.HpBar {
+    font-size: 16px;
+    color: #0ff343;
+}

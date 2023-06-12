@@ -76,7 +76,10 @@ void player_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *t
     if (card.isExhaust)
         card_remove(&(player->deck.handCard), name);
     else
+    {
+        printf("!!!!!!!!\n");
         fold_card(&(player->deck), name);
+    }
 }
 
 void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *table, const char *name)
@@ -88,6 +91,10 @@ void enemy_choose_card(Player *player, Enemy *enemy, Field *field, CardTable *ta
     // 選卡
     int idx;
     Card card;
+    if ((idx = card_find(&(enemy->deck), name)) != -1)
+    {
+        card_assign(&card, &(enemy->deck.card[idx]));
+    }
     // Buff結算
     enemy_buff_action(&card, player, enemy, field);
     // CardAction
@@ -159,7 +166,7 @@ void card_create(char *name, const char *description, int type, int atk, bool is
     cJSON_Delete(json);
 }
 
-void enemy_create(char *name, EnemyFunction function, int hp, int def, int max_hp, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
+void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table)
 {
     cJSON *json = cJSON_Read("./data/enemy.json");
     cJSON *new_obj = cJSON_CreateObject();
@@ -172,7 +179,6 @@ void enemy_create(char *name, EnemyFunction function, int hp, int def, int max_h
     cJSON_AddStringToObject(new_obj, "name", name);
     cJSON_AddNumberToObject(new_obj, "hp", hp);
     cJSON_AddNumberToObject(new_obj, "def", def);
-    cJSON_AddNumberToObject(new_obj, "max_hp", max_hp);
     cJSON *new_arr = cJSON_CreateArray();
     if (new_arr == NULL)
     {
