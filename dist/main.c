@@ -92,6 +92,15 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
 
     enemy_create("Cultist", Cultist, 50, 0, &deck, &buff, enemytable);
 
+    card_deck_initialize(&deck);
+    buff_deck_initialize(&buff);
+
+    add_card_into_deck(&deck, "Chomp");
+    add_card_into_deck(&deck, "Thrash");
+    add_card_into_deck(&deck, "Bellow");
+
+    enemy_create("Mouse", Mouse, 40, 0, &deck, &buff, enemytable);
+
 
 }
 

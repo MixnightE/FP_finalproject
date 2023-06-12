@@ -34,6 +34,7 @@ void enemy_deal_damage(Card *card, Player *player, Enemy *enemy)
 // --通用函式--------------------------------------------------------
 
 // --敵人的卡--------------------------------------------------------
+// Cultist
 void Incantation(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     FILE *fp = fopen("./data/message.txt", "a");
@@ -41,10 +42,27 @@ void Incantation(Card *card, Player *player, Enemy *enemy, Field *field)
     fclose(fp);
     add_buff_into_deck(&(enemy->buff), "Ritual", 3);
 }
-
+// Cultist
 void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     enemy_deal_damage(card, player, enemy);
+}
+// Mouse
+void Chomp(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    enemy_deal_damage(card, player, enemy);
+}
+// Mouse
+void Thrash(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    enemy_deal_damage(card, player, enemy);
+    add_buff_into_deck(&(enemy->buff), "Block", 5);
+}
+// Mouse
+void Bellow(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(enemy->buff), "Strength", 3);
+    add_buff_into_deck(&(enemy->buff), "Block", 6);
 }
 // --敵人的卡--------------------------------------------------------
 
