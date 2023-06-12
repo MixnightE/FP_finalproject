@@ -28,4 +28,10 @@ char *random_enemy_name(EnemyTable *enemytable);
 
 void round_start(Game *game);
 
+void hp_update(Game *game);
+
+void clear_box(GtkWidget *box);
+
+void buff_update(Game *game);
+
 #endif // _GAME_H_

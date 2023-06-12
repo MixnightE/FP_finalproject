@@ -100,6 +100,7 @@ void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
         char name[MAX_DESCRIPTION_LENGTH + 1];
         memset(name, 0, sizeof(name));
         strcat(name, player->deck.drawCard.card[i].name);
+        strcat(name, ": ");
         strcat(name, player->deck.drawCard.card[i].description);
         GtkWidget *label = gtk_label_new(name);
         gtk_container_add(GTK_CONTAINER(content_area), label);
@@ -121,6 +122,7 @@ void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
         char name[MAX_DESCRIPTION_LENGTH + 1];
         memset(name, 0, sizeof(name));
         strcat(name, player->deck.foldCard.card[i].name);
+        strcat(name, ": ");
         strcat(name, player->deck.foldCard.card[i].description);
         GtkWidget *label = gtk_label_new(name);
         gtk_container_add(GTK_CONTAINER(content_area), label);
@@ -130,25 +132,18 @@ void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
     gtk_widget_destroy(dialog);
 }
 
-void HandCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
+void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
-    // 創造新的GtkDialog顯示卡牌
-    GtkWidget *window = ((Game *)data)->window;
-    GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
-    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
-    Player *player = ((Game *)data)->player;
-    for (int i = 0; i < player->deck.foldCard.size; i++)
-    {
-        char name[MAX_DESCRIPTION_LENGTH + 1];
-        memset(name, 0, sizeof(name));
-        strcat(name, player->deck.foldCard.card[i].name);
-        strcat(name, player->deck.foldCard.card[i].description);
-        GtkWidget *label = gtk_label_new(name);
-        gtk_container_add(GTK_CONTAINER(content_area), label);
-    }
-    gtk_widget_show_all(dialog);
-    gtk_dialog_run(GTK_DIALOG(dialog));
-    gtk_widget_destroy(dialog);
+    Game *game = (Game *)data;
+    GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    char name[MAX_NAME_LENGTH + 1];
+    char *str = gtk_combo_box_text_get_active_text(cbox);
+    int len = strlen(str);
+    for (int i = 0; i < len && str[i] != ':'; i++)
+        name[i] = str[i];
+    player_choose_card(game->player, game->enemy, game->field, game->cardtable, name);
+    hp_update(game);
+    buff_update(game);
 }
 
 void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data)
