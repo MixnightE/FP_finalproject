@@ -66,7 +66,13 @@ signed main(int argc, char *argv[])
     Game game;
     game_initialize(&game, &card, &player, &enemy, &field, &cardtable, &bufftable, &enemytable);
 
+#if __APPLE__
     app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+#elif __linux__
+    app = gtk_application_new("org.gtk.example", G_APPLICATION_FLAGS_NONE);
+#else
+    app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
+#endif
     g_signal_connect(app, "activate", G_CALLBACK(activate), &game);
     status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
