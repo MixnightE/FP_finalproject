@@ -67,9 +67,13 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Whirlwind", "Deal 5 damage to ALL enemies X times.", TYPE_ATK, 5, 0, 0, Whirlwind, cardtable);
 
     /* create enemy cards */
-
+    //Cultist
     card_create("DarkStrike", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
     card_create("Incantation", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
+    //Mouse
+    card_create("Chomp", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
+    card_create("Thrash", "None.", TYPE_SKL, 0, 0, 0, Incantation, cardtable);
+    card_create("Bellow", "None.", TYPE_ATK, 6, 0, 0, DarkStrike, cardtable);
 
     /* create buff */
     DEBUG
