@@ -1,10 +1,13 @@
 #ifndef _GAME_H_
 #define _GAME_H_
 
+#include <gtk/gtk.h>
 #include <Battle.h>
 
 typedef struct GameData
 {
+    GtkWidget *window;
+    GtkWidget *stack;
     Card *card;
     Player *player;
     Enemy *enemy;

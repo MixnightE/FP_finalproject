@@ -61,7 +61,7 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
             gtk_widget_show(button);
         }
     }
-    if (!strcmp(visible_child_name, "BattlePage"))
+    else if (!strcmp(visible_child_name, "BattlePage"))
     {
         Game *game = (Game *)user_data;
         Player *player = game->player;
@@ -87,11 +87,49 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
 void DrawCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     // 創造新的GtkDialog顯示卡牌
+    GtkWidget *window = ((Game *)data)->window;
+    GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+    // 在这里添加你想要显示的内容
+    Player *player = ((Game *)data)->player;
+    GtkWidget *label = gtk_label_new("These are your cards...");
+    gtk_container_add(GTK_CONTAINER(content_area), label);
+    for (int i = 0; i < player->deck.drawCard.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        memset(name, 0, sizeof(name));
+        strcat(name, player->deck.drawCard.card[i].name);
+        strcat(name, player->deck.drawCard.card[i].description);
+        GtkWidget *label = gtk_label_new(name);
+        gtk_container_add(GTK_CONTAINER(content_area), label);
+    }
+    gtk_widget_show_all(dialog);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
 }
 
 void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     // 創造新的GtkDialog顯示卡牌
+    GtkWidget *window = ((Game *)data)->window;
+    GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
+    GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
+    // 在这里添加你想要显示的内容
+    Player *player = ((Game *)data)->player;
+    GtkWidget *label = gtk_label_new("These are your cards...");
+    gtk_container_add(GTK_CONTAINER(content_area), label);
+    for (int i = 0; i < player->deck.foldCard.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        memset(name, 0, sizeof(name));
+        strcat(name, player->deck.foldCard.card[i].name);
+        strcat(name, player->deck.foldCard.card[i].description);
+        GtkWidget *label = gtk_label_new(name);
+        gtk_container_add(GTK_CONTAINER(content_area), label);
+    }
+    gtk_widget_show_all(dialog);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_destroy(dialog);
 }
 
 void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data)

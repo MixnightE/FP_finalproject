@@ -4,6 +4,7 @@ static void activate(GtkApplication *app, gpointer user_data)
 {
     GtkBuilder *builder;
     GtkWidget *window;
+    GtkWidget *stack;
 
     /* 从 Glade 文件加载 user interface */
     builder = gtk_builder_new_from_file("./GUI/GtkApp.glade");
@@ -11,6 +12,11 @@ static void activate(GtkApplication *app, gpointer user_data)
 
     /* 获取 'GtkApplicationWindow' 的实例 */
     window = GTK_WIDGET(gtk_builder_get_object(builder, "MainWindow"));
+    stack = GTK_WIDGET(gtk_builder_get_object(builder, "MainStack"));
+
+    Game *game = user_data;
+    game->window = window;
+    game->stack = stack;
 
     /* 确保 'GtkApplicationWindow' 知道它属于哪个 'GtkApplication' */
     gtk_window_set_application(GTK_WINDOW(window), app);
@@ -42,10 +48,6 @@ signed main(int argc, char *argv[])
 
     all_initialize(&player, &enemy, &field, &cardtable, &enemytable, &bufftable);
 
-    Card card;
-    Game game;
-    game_initialize(&game, &card, &player, &enemy, &field, &cardtable, &bufftable, &enemytable);
-
     /* Init GTK+ */
     gtk_init(&argc, &argv);
     srand(time(NULL));
@@ -59,6 +61,10 @@ signed main(int argc, char *argv[])
     /* -------------------------------------- */
 
     int status;
+
+    Card card;
+    Game game;
+    game_initialize(&game, &card, &player, &enemy, &field, &cardtable, &bufftable, &enemytable);
 
     app = gtk_application_new("org.gtk.example", G_APPLICATION_DEFAULT_FLAGS);
     g_signal_connect(app, "activate", G_CALLBACK(activate), &game);

@@ -1,7 +1,6 @@
 #ifndef _CALLBACK_H_
 #define _CALLBACK_H_
 
-#include <gtk/gtk.h>
 #include <game.h>
 
 typedef struct EventParamData

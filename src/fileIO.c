@@ -11,7 +11,7 @@ cJSON *cJSON_Read(const char *filename)
         fprintf(stderr, "cJSON Read Error: Unable to open the file: %s.\n", filename);
         exit(1);
     }
-    char buffer[MAX_BUFFER_SIZE];
+    char buffer[8192];
     memset(buffer, 0, sizeof(buffer));
     int len = fread(buffer, 1, sizeof(buffer), fp);
     fclose(fp);
@@ -22,7 +22,8 @@ cJSON *cJSON_Read(const char *filename)
         const char *err_ptr = cJSON_GetErrorPtr();
         if (err_ptr != NULL)
         {
-            fprintf(stderr, "cJSON Read Error: %s.\n", err_ptr);
+            fprintf(stderr, "%s", buffer);
+            fprintf(stderr, "cJSON Read Error on %s: %s.\n", filename, err_ptr);
             exit(1);
         }
     }

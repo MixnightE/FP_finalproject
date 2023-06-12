@@ -195,7 +195,7 @@ void PowerThrough(Card *card, Player *player, Enemy *enemy, Field *field)
 void Pummel(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     int n = 4;
-    for(int i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
         player_deal_damage(card, player, enemy);
     }
@@ -212,10 +212,10 @@ void Rampage(Card *card, Player *player, Enemy *enemy, Field *field)
     card->atk += 5;
 }
 
-void Rupture(Card *card, Player *player, Enemy *enemy, Field *field)
-{
-    if(enemy_deal_damage) add_buff_into_deck(&(player->buff), "Strength", 1);
-}
+// void Rupture(Card *card, Player *player, Enemy *enemy, Field *field)
+// {
+//     if(enemy_deal_damage) add_buff_into_deck(&(player->buff), "Strength", 1);
+// }
 
 void SearingBlow(Card *card, Player *player, Enemy *enemy, Field *field)
 {
@@ -235,12 +235,11 @@ void SeeingRed(Card *card, Player *player, Enemy *enemy, Field *field)
 void Sentinel(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     add_buff_into_deck(&(player->buff), "Block", 5);
-
 }
 
 void SeverSoul(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    //Exhaust all non-Attack
+    // Exhaust all non-Attack
 }
 
 void ShockWave(Card *card, Player *player, Enemy *enemy, Field *field)
@@ -258,7 +257,7 @@ void Uppercut(Card *card, Player *player, Enemy *enemy, Field *field)
 
 void Whirlwind(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    for(int i = 0; i < player->energy; i++)
+    for (int i = 0; i < player->energy; i++)
     {
         player_deal_damage(card, player, enemy);
     }

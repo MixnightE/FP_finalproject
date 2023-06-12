@@ -1,2 +1,370 @@
 {
+	"Strike":	{
+		"name":	"Strike",
+		"description":	"Deal 6 damage.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Defend":	{
+		"name":	"Defend",
+		"description":	"Gain 5 Block.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Bash":	{
+		"name":	"Bash",
+		"description":	"Deal 8 damage. Apply 2 Vulnerable.",
+		"type":	1,
+		"atk":	8,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Inflame":	{
+		"name":	"Inflame",
+		"description":	"Gain 2 strength",
+		"type":	4,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Anger":	{
+		"name":	"Anger",
+		"description":	"Deal 6 damage. Add a copy of this card to the discard pile.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Cleave":	{
+		"name":	"Cleave",
+		"description":	"Deal 8 damage.",
+		"type":	1,
+		"atk":	8,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Clothesline":	{
+		"name":	"Clothesline",
+		"description":	"Deal 12 damage. Apply 2 weak.",
+		"type":	1,
+		"atk":	12,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Flex":	{
+		"name":	"Flex",
+		"description":	"Gain 2 strength.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Heavy_Blade":	{
+		"name":	"Heavy_Blade",
+		"description":	"Deal 14 damage.",
+		"type":	1,
+		"atk":	14,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Iron_Wave":	{
+		"name":	"Iron_Wave",
+		"description":	"Gain 5 block. Deal 5 damage.",
+		"type":	2,
+		"atk":	5,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Perfected_Strike":	{
+		"name":	"Perfected_Strike",
+		"description":	"Deal 6 damage. If you have Strike in your deck, deal additional 2 damage.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Pommel_Strike":	{
+		"name":	"Pommel_Strike",
+		"description":	"Deal 9 damage. Draw a card.",
+		"type":	1,
+		"atk":	9,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Shrug_it_Off":	{
+		"name":	"Shrug_it_Off",
+		"description":	"Gain 8 block. Draw a card.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Sword_Boomerang":	{
+		"name":	"Sword_Boomerang",
+		"description":	"Deal 9 damage.",
+		"type":	1,
+		"atk":	3,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Thunderclap":	{
+		"name":	"Thunderclap",
+		"description":	"Deal 4 damage. Apply 1 vulnerable.",
+		"type":	1,
+		"atk":	8,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"True_Grit":	{
+		"name":	"True_Grit",
+		"description":	"Gain 7 block. Exhaust a random card",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"DarkStrike":	{
+		"name":	"DarkStrike",
+		"description":	"None.",
+		"type":	1,
+		"atk":	6,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Incantation":	{
+		"name":	"Incantation",
+		"description":	"None.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"TwinStrike":	{
+		"name":	"TwinStrike",
+		"description":	"Deal 5 damage twice.",
+		"type":	1,
+		"atk":	5,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Warcry":	{
+		"name":	"Warcry",
+		"description":	"Draw 1 card.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"WildStrike":	{
+		"name":	"WildStrike",
+		"description":	"Deal 12 damage.",
+		"type":	1,
+		"atk":	12,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"BattleTrance":	{
+		"name":	"BattleTrance",
+		"description":	"Draw 3 cards.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"BloodforBlood":	{
+		"name":	"BloodforBlood",
+		"description":	"Deal 18 damage.",
+		"type":	1,
+		"atk":	18,
+		"isExhaust":	false,
+		"energy":	4
+	},
+	"Bloodletting":	{
+		"name":	"Bloodletting",
+		"description":	"Lose 3 HP,Gain 2 Energy.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"BurningPact":	{
+		"name":	"BurningPact",
+		"description":	"Draw 2 cards.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Carnage":	{
+		"name":	"Carnage",
+		"description":	"Deal 20 damage.",
+		"type":	1,
+		"atk":	20,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Combust":	{
+		"name":	"Combust",
+		"description":	"lose 1 HP and deal 5 damage to ALL enemies.",
+		"type":	4,
+		"atk":	5,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Disarm":	{
+		"name":	"Disarm",
+		"description":	"Enemy loses 2 Icon Strength.",
+		"type":	4,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Entrench":	{
+		"name":	"Entrench",
+		"description":	"Double your Block.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Evolve":	{
+		"name":	"Evolve",
+		"description":	"draw 1 card.",
+		"type":	4,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"FeelNoPain":	{
+		"name":	"FeelNoPain",
+		"description":	"gain 3  Block.",
+		"type":	4,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"GhostlyArmor":	{
+		"name":	"GhostlyArmor",
+		"description":	"Gain 10 Block.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Hemokinesis":	{
+		"name":	"Hemokinesis",
+		"description":	"Lose 2 HP.Deal 15 damage.",
+		"type":	1,
+		"atk":	15,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"InfernalBlade":	{
+		"name":	"InfernalBlade",
+		"description":	"Add a random card cost 0.\nExhaust.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Intimidate":	{
+		"name":	"Intimidate",
+		"description":	"Apply 1 Weak to ALL enemies.\nExhaust.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Metallicize":	{
+		"name":	"Metallicize",
+		"description":	"At the end of your turn, gain 3 Block.",
+		"type":	4,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Pummel":	{
+		"name":	"Pummel",
+		"description":	"Deal 2 damage 4 times.\nExhaust.",
+		"type":	1,
+		"atk":	2,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Rage":	{
+		"name":	"Rage",
+		"description":	"Whenever you play Attack this turn, gain 3 Block.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	0
+	},
+	"Rampage":	{
+		"name":	"Rampage",
+		"description":	"Deal 8 damage. Increase this card's damage by 5.",
+		"type":	1,
+		"atk":	8,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"SearingBlow":	{
+		"name":	"SearingBlow",
+		"description":	"Deal 12 damage. Can be upgraded any number of times.",
+		"type":	1,
+		"atk":	12,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"SeeingRed":	{
+		"name":	"SeeingRed",
+		"description":	"Gain 2 energy.\nExhaust.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"Sentinel":	{
+		"name":	"Sentinel",
+		"description":	"Gain 5 Block. If this card is Exhausted, gain 2 energy.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	1
+	},
+	"SeverSoul":	{
+		"name":	"SeverSoul",
+		"description":	"Exhaust all non-Attack cards in your hand. Deal 16 damage.",
+		"type":	1,
+		"atk":	16,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"ShockWave":	{
+		"name":	"ShockWave",
+		"description":	"Apply 3 Weak and Icon Vulnerable Vulnerable to ALL enemies.\nExhaust.",
+		"type":	2,
+		"atk":	0,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Uppercut":	{
+		"name":	"Uppercut",
+		"description":	"Deal 13 damage. Apply 1 Weak. Apply 1 Vulnerable.",
+		"type":	1,
+		"atk":	13,
+		"isExhaust":	false,
+		"energy":	2
+	},
+	"Whirlwind":	{
+		"name":	"Whirlwind",
+		"description":	"Deal 5 damage to ALL enemies X times.",
+		"type":	1,
+		"atk":	5,
+		"isExhaust":	false,
+		"energy":	0
+	}
 }
