@@ -12,6 +12,9 @@ void DarkStrike(Card *card, Player *player, Enemy *enemy, Field *field);
 void Chomp(Card *card, Player *player, Enemy *enemy, Field *field);
 void Thrash(Card *card, Player *player, Enemy *enemy, Field *field);
 void Bellow(Card *card, Player *player, Enemy *enemy, Field *field);
+//Lagavulin
+void LagavulinAttack(Card *card, Player *player, Enemy *enemy, Field *field);
+void SiphonSoul(Card *card, Player *player, Enemy *enemy, Field *field);
 /* cards for player */
 
 void Inflame(Card *card, Player *player, Enemy *enemy, Field *field);

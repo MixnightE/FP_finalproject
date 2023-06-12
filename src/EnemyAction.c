@@ -27,3 +27,20 @@ void Mouse(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
         enemy_choose_card(player, enemy, field, cardtable, "Bellow");
     }
 }
+
+void Lagavulin(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
+{
+    if (field->round <= 3 && enemy->def > 0)
+    {
+        return 0;
+    }
+    
+    if (field->round % 2 == 1)
+    {
+        enemy_choose_card(player, enemy, field, cardtable, "LagavulinAttack");
+    }
+    else if (field->round % 2 == 0)
+    {
+        enemy_choose_card(player, enemy, field, cardtable, "SiphonSoul");
+    }
+}

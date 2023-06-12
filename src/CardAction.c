@@ -61,6 +61,15 @@ void Bellow(Card *card, Player *player, Enemy *enemy, Field *field)
     add_buff_into_deck(&(enemy->buff), "Strength", 3);
     add_buff_into_deck(&(enemy->buff), "Block", 6);
 }
+// Lagavulin
+void LagavulinAttack(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    enemy_deal_damage(card, player, enemy);
+}
+void SiphonSoul(Card *card, Player *player, Enemy *enemy, Field *field)
+{
+    add_buff_into_deck(&(player->buff), "Vulnerable", 1);
+}
 // --敵人的卡--------------------------------------------------------
 
 /*
