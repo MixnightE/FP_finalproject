@@ -57,7 +57,7 @@
           </object>
           <packing>
             <property name="name">MainPage</property>
-            <property name="title" translatable="yes">page0</property>
+            <property name="title" translatable="yes">MainPage</property>
           </packing>
         </child>
         <child>
@@ -76,7 +76,19 @@
                   <placeholder/>
                 </child>
                 <child>
-                  <placeholder/>
+                  <object class="GtkButton" id="BackButton">
+                    <property name="label" translatable="yes">Back To Main Page</property>
+                    <property name="name">BackButton</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="BackButton_clicked_cb" object="MainStack" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
                 </child>
                 <child>
                   <placeholder/>
@@ -169,7 +181,7 @@
           </object>
           <packing>
             <property name="name">SettingPage</property>
-            <property name="title" translatable="yes">page1</property>
+            <property name="title" translatable="yes">SettingPage</property>
             <property name="position">1</property>
           </packing>
         </child>
@@ -297,6 +309,9 @@
                     <property name="text" translatable="yes">Text</property>
                     <property name="show-text">True</property>
                     <property name="ellipsize">middle</property>
+                    <style>
+                      <class name="HpBar"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -313,6 +328,9 @@
                     <property name="text" translatable="yes">Text</property>
                     <property name="show-text">True</property>
                     <property name="ellipsize">middle</property>
+                    <style>
+                      <class name="HpBar"/>
+                    </style>
                   </object>
                   <packing>
                     <property name="expand">True</property>
@@ -485,7 +503,7 @@
           </object>
           <packing>
             <property name="name">BattlePage</property>
-            <property name="title" translatable="yes">page0</property>
+            <property name="title" translatable="yes">BattlePage</property>
             <property name="position">3</property>
           </packing>
         </child>
@@ -571,7 +589,7 @@
           </object>
           <packing>
             <property name="name">EventPage</property>
-            <property name="title" translatable="yes">page0</property>
+            <property name="title" translatable="yes">EventPage</property>
             <property name="position">4</property>
           </packing>
         </child>
@@ -611,15 +629,103 @@
           </object>
           <packing>
             <property name="name">CardPage</property>
-            <property name="title" translatable="yes">page0</property>
+            <property name="title" translatable="yes">CardPage</property>
             <property name="position">5</property>
           </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkBox" id="LosePage">
+            <property name="name">LosePage</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="opacity">0.69999999999999996</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="LoseLabel">
+                <property name="name">LoseLabel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">You Lose
+Click To Back Main Page</property>
+                <attributes>
+                  <attribute name="font-desc" value="Arial Black, weight=810 50"/>
+                  <attribute name="foreground" value="#81813d3d9c9c"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="LoseButton">
+                <property name="label" translatable="yes">Back To Main Page</property>
+                <property name="name">LoseButton</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+                <signal name="clicked" handler="LoseButton_clicked_cb" object="MainStack" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack-type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">LosePage</property>
+            <property name="title" translatable="yes">LosePage</property>
+            <property name="position">6</property>
+          </packing>
         </child>
         <child>
-          <placeholder/>
+          <object class="GtkBox" id="WinPage">
+            <property name="name">WinPage</property>
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+            <child>
+              <object class="GtkLabel" id="WinLabel">
+                <property name="name">WinLabel</property>
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="label" translatable="yes">You Win
+Click To Choose The Cards</property>
+                <attributes>
+                  <attribute name="font-desc" value="Arial Black, weight=810 50"/>
+                  <attribute name="foreground" value="#81813d3d9c9c"/>
+                </attributes>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="WinButton">
+                <property name="label" translatable="yes">button</property>
+                <property name="name">WinButton</property>
+                <property name="visible">True</property>
+                <property name="can-focus">True</property>
+                <property name="receives-default">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="pack-type">end</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="name">WinPage</property>
+            <property name="title" translatable="yes">WinPage</property>
+            <property name="position">7</property>
+          </packing>
         </child>
         <child>
           <placeholder/>

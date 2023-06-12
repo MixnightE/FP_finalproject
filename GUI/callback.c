@@ -55,10 +55,7 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         }
         else
         {
-            GtkWidget *button = gtk_button_new_with_label("魔王");
-            g_signal_connect(GTK_BUTTON(button), "clicked", G_CALLBACK(battle_button_clicked), stack);
-            gtk_container_add(GTK_CONTAINER(visible_child), button);
-            gtk_widget_show(button);
+            gtk_stack_set_visible_child_name(stack, "EndPage");
         }
     }
     else if (!strcmp(visible_child_name, "BattlePage"))
@@ -87,6 +84,25 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         gtk_image_set_from_pixbuf(GTK_IMAGE(enemyImage), pixbuf);
         /* 3 : Round Start */
         round_start((Game *)user_data);
+    }
+    else if (!strcmp(visible_child_name, "CardPage"))
+    {
+        Game *game = user_data;
+        GtkWidget *CardPage = gtk_stack_get_visible_child(GTK_STACK(stack));
+        GList *list = gtk_container_get_children(GTK_CONTAINER(CardPage));
+        GtkWidget *ComboText = list->data;
+        g_list_free(list);
+        gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(ComboText));
+        CardDeck deck;
+        card_deck_initialize(&deck);
+        for (int i = 0; i < 3; i++)
+        {
+            int rd = rand() % (game->cardtable->size - 6);
+            add_card_into_deck(&deck, game->cardtable->data[rd].name);
+            char name[101];
+            sprintf("%s: %s", deck.card[i].name, deck.card[i].description);
+            gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(ComboText), name);
+        }
     }
 }
 
@@ -167,6 +183,22 @@ void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
     }
 }
 
+void CardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
+{
+    Game *game = (Game *)data;
+    GtkComboBoxText *cbox = GTK_COMBO_BOX_TEXT(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    char name[MAX_NAME_LENGTH + 1];
+    char *str = gtk_combo_box_text_get_active_text(cbox);
+    int len = strlen(str);
+    int i;
+    for (i = 0; i < len && str[i] != ':'; i++)
+        name[i] = str[i];
+    name[i] = '\0';
+    printf("card name: %s\n", name);
+    add_card_into_deck(&(game->player->deck.deckCard), name);
+    gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "PathPage");
+}
+
 void BattleRoundEndButton_clicked_cb(GtkWidget *widget, gpointer data)
 {
     Game *game = data;
@@ -188,6 +220,38 @@ void event_button_clicked(GtkButton *button, gpointer data)
 void battle_button_clicked(GtkButton *button, gpointer data)
 {
     gtk_stack_set_visible_child_name(GTK_STACK(data), "BattlePage");
+}
+
+void LoseButton_clicked_cb(GtkButton *button, gpointer data)
+{
+    gtk_stack_set_visible_child_name(GTK_STACK(data), "MainPage");
+}
+
+void BackButton_clicked_cb(GtkButton *button, gpointer data)
+{
+    gtk_stack_set_visible_child_name(GTK_STACK(data), "MainPage");
+}
+
+void EventChooseButton1_clicked_cb(GtkButton *button, gpointer data)
+{
+    Game *game = (Game *)data;
+    game->player->hp += (game->player->hp > (game->player->max_hp - 6) ? game->player->max_hp - game->player->hp : 6);
+    gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "PathPage");
+}
+
+void EventChooseButton2_clicked_cb(GtkButton *button, gpointer data)
+{
+    Game *game = (Game *)data;
+    game->player->hp -= 6;
+    if (game->player->hp <= 0)
+        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "LosePage");
+    else
+        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "CardPage");
+}
+
+void EndButton_clicked_cb(GtkButton *button, gpointer data)
+{
+    gtk_stack_set_visible_child_name(GTK_STACK(data), "MainPage");
 }
 
 // 將名為image_name的圖檔導入，回傳GtkImage物件
