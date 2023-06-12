@@ -6,6 +6,7 @@
 typedef struct PlayerData
 {
     int hp;
+    int max_hp;
     int def; // 護盾
     BuffDeck buff;
     CardPile deck;

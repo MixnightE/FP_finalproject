@@ -119,3 +119,19 @@ char *random_enemy_name(EnemyTable *enemytable)
     int idx = rand() % enemytable->size;
     return enemytable->data[idx].name;
 }
+
+void round_start(Game *game)
+{
+    for (int i = 0; i < 5; i++)
+        draw_card_random(&(game->player->deck));
+    GtkComboBox *Combobox = GTK_COMBO_BOX(gtk_builder_get_object(game->builder, "HandCardChooseBox"));
+    Player *player = game->player;
+    for (int i = 0; i < game->player->deck.handCard.size; i++)
+    {
+        char name[MAX_DESCRIPTION_LENGTH + 1];
+        memset(name, 0, sizeof(name));
+        strcat(name, player->deck.drawCard.card[i].name);
+        strcat(name, player->deck.drawCard.card[i].description);
+        gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(ComboBox), name);
+    }
+}

@@ -15,6 +15,7 @@ static void activate(GtkApplication *app, gpointer user_data)
     stack = GTK_WIDGET(gtk_builder_get_object(builder, "MainStack"));
 
     Game *game = user_data;
+    game->builder = builder;
     game->window = window;
     game->stack = stack;
 
@@ -23,7 +24,7 @@ static void activate(GtkApplication *app, gpointer user_data)
 
     gtk_widget_show_all(window);
 
-    g_object_unref(builder);
+    // g_object_unref(builder);
 }
 
 signed main(int argc, char *argv[])

@@ -402,12 +402,15 @@
                 <property name="can-focus">False</property>
                 <property name="spacing">10</property>
                 <child>
-                  <object class="GtkButton" id="DrawCardDeckButton">
-                    <property name="label" translatable="yes">抽牌堆</property>
-                    <property name="name">DrawCardDeckButton</property>
+                  <object class="GtkLabel" id="PlayerEnergyLabel">
+                    <property name="name">PlayerEnergyLabel</property>
                     <property name="visible">True</property>
-                    <property name="can-focus">True</property>
-                    <property name="receives-default">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="label" translatable="yes">Label</property>
+                    <attributes>
+                      <attribute name="font-desc" value="Arial Bold 16"/>
+                      <attribute name="background" value="#ffffffffffff"/>
+                    </attributes>
                   </object>
                   <packing>
                     <property name="expand">False</property>
@@ -416,45 +419,33 @@
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkBox" id="HandCardDeckBox">
-                    <property name="name">HandCardDeckBox</property>
+                  <object class="GtkButton" id="DrawCardDeckButton">
+                    <property name="label" translatable="yes">抽牌堆</property>
+                    <property name="name">DrawCardDeckButton</property>
                     <property name="visible">True</property>
-                    <property name="can-focus">False</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
-                    <child>
-                      <placeholder/>
-                    </child>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="DrawCardDeckButton_clicked_cb" swapped="no"/>
                   </object>
                   <packing>
-                    <property name="expand">True</property>
+                    <property name="expand">False</property>
                     <property name="fill">True</property>
                     <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="HandCardDeckButton">
+                    <property name="label" translatable="yes">手牌堆</property>
+                    <property name="name">HandCardDeckButton</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                    <signal name="clicked" handler="HandCardDeckButton_clicked_cb" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
                   </packing>
                 </child>
                 <child>
@@ -469,8 +460,35 @@
                   <packing>
                     <property name="expand">False</property>
                     <property name="fill">True</property>
+                    <property name="position">3</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="HandCardChooseButton">
+                    <property name="label" translatable="yes">出牌</property>
+                    <property name="name">HandCardChooseButton</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">True</property>
+                    <property name="receives-default">True</property>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
                     <property name="pack-type">end</property>
-                    <property name="position">2</property>
+                    <property name="position">4</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkComboBox" id="HandCardChooseBox">
+                    <property name="name">HandCardChooseBox</property>
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                  </object>
+                  <packing>
+                    <property name="expand">True</property>
+                    <property name="fill">True</property>
+                    <property name="pack-type">end</property>
+                    <property name="position">5</property>
                   </packing>
                 </child>
               </object>
@@ -498,7 +516,8 @@
               <placeholder/>
             </child>
             <child>
-              <object class="GtkBox">
+              <object class="GtkBox" id="EventBox">
+                <property name="name">EventBox</property>
                 <property name="visible">True</property>
                 <property name="can-focus">False</property>
                 <property name="orientation">vertical</property>
