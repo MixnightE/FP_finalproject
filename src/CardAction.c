@@ -172,19 +172,12 @@ void True_Grit(Card *card, Player *player, Enemy *enemy, Field *field)
     add_buff_into_deck(&(player->buff), "Block", 7);
     // exhaust
 }
-/*
 void Metallicize(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int def = card->value_def;
-    if(card->isExhaust)
-    {
-        def += 1;
-    }
-    player->def += def;
-    fprintf(stdout, "Player got %d shield.\n", def);
+    add_buff_into_deck(&(player->buff), "Block", 3);
 }
 
+/*
 void PowerThrough(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     player->energy -= card->energy;
@@ -197,163 +190,80 @@ void PowerThrough(Card *card, Player *player, Enemy *enemy, Field *field)
     player->def += def;
     fprintf(stdout, "Player got %d shield.\n", def);
 }
+*/
 
 void Pummel(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
     int n = 4;
-    if(card->isExhaust)
-    {
-        n += 1;
-    }
     for(int i = 0; i < n; i++)
     {
-        int atk = card->value_atk;
-        enemy->def -= atk;
-        if (enemy->def < 0)
-        {
-            enemy->hp += enemy->def;
-            enemy->def = 0;
-        }
-        fprintf(stdout, "Player cause %d damage.\n", card->value_atk);
+        player_deal_damage(card, player, enemy);
     }
-    card_remove(CardPile->handCard, "Pummel");
 }
 
 void Rage(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-
+    add_buff_into_deck(&(player->buff), "Rage", 1);
 }
 
 void Rampage(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-        enemy->def -= atk;
-        if (enemy->def < 0)
-        {
-            enemy->hp += enemy->def;
-            enemy->def = 0;
-        }
-        fprintf(stdout, "Player cause %d damage.\n", atk);
-    if(card->isExhaust) card->value_atk += 8;
-    else card->value_atk += 5;
+    player_deal_damage(card, player, enemy);
+    card->atk += 5;
 }
 
-void RecklessCharge(Card *card, Player *player, Enemy *enemy, Field *field)
+void Rupture(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 3;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
-    //shuffle dazed into draw pile
+    if(enemy_deal_damage) add_buff_into_deck(&(player->buff), "Strength", 1);
 }
 
 void SearingBlow(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    if(card->isExhaust)
-    {
-        atk += 4;
-    }
-    enemy->def -= atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", atk);
-    card->isExhaust = false;
+    player_deal_damage(card, player, enemy);
 }
-
+/*
 void SecondWind(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-
+    //Exhaust all non-Attack cards
 }
-
+*/
 void SeeingRed(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int energy = 1;
-    if(card->isExhaust) energy += 1;
-    player->energy += energy;
-    fprintf(stdout, "Player got %d energy.\n", energy);
-    card_remove(CardPile->handCard, "SeeingRed");
+    player->energy += 2;
 }
 
 void Sentinel(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int def = card->value_def;
-    if(card->isExhaust)
-    {
-        def += 3;
-    }
-    player->def += def;
-    fprintf(stdout, "Player got %d shield.\n", def);
-    if(card_find(CardPile->handCard, "Sentinel") == -1)
-    {
-        int energy = 2;
-        if(card->isExhaust)energy += 1;
-        player->energy += energy;
-    }
+    add_buff_into_deck(&(player->buff), "Block", 5);
+
 }
 
 void SeverSoul(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-
+    //Exhaust all non-Attack
 }
 
 void ShockWave(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    //apply 3 weak and vulnerable to all enemies
-    card_remove(CardPile->handCard, "ShockWave");
+    add_buff_into_deck(&(enemy->buff), "Weak", 3);
+    add_buff_into_deck(&(enemy->buff), "Vulnerable", 3);
 }
 
 void Uppercut(Card *card, Player *player, Enemy *enemy, Field *field)
 {
-    player->energy -= card->energy;
-    int atk = card->value_atk;
-    enemy->def -= card->value_atk;
-    if (enemy->def < 0)
-    {
-        enemy->hp += enemy->def;
-        enemy->def = 0;
-    }
-    fprintf(stdout, "Player cause %d damage.\n", card->value_atk);
-    //apply 1 weak 1 vulnerable
+    player_deal_damage(card, player, enemy);
+    add_buff_into_deck(&(enemy->buff), "Weak", 1);
+    add_buff_into_deck(&(enemy->buff), "Vulnerable", 1);
 }
 
 void Whirlwind(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     for(int i = 0; i < player->energy; i++)
     {
-        int atk = card->value_atk;
-        if(card->isExhaust)
-        {
-            atk += 3;
-        }
-        enemy->def -= atk;
-        if (enemy->def < 0)
-        {
-            enemy->hp += enemy->def;
-            enemy->def = 0;
-        }
-        fprintf(stdout, "Player cause %d damage.\n", atk);
+        player_deal_damage(card, player, enemy);
     }
     player->energy = 0;
 }
-*/
 void TwinStrike(Card *card, Player *player, Enemy *enemy, Field *field)
 {
     for (int i = 0; i < 2; i++)
