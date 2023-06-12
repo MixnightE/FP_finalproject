@@ -74,7 +74,9 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     card_create("Chomp", "None.", TYPE_ATK, 11, 0, 0, Chomp, cardtable);
     card_create("Thrash", "None.", TYPE_ATK, 6, 0, 0, Thrash, cardtable);
     card_create("Bellow", "None.", TYPE_SKL, 0, 0, 0, Bellow, cardtable);
-
+    //Lagavulin
+    card_create("LagavulinAttack", "None.", TYPE_ATK, 10, 0, 0, LagavulinAttack, cardtable);
+    card_create("SiphonSoul", "None.", TYPE_SKL, 0, 0, 0, SiphonSoul, cardtable);
     /* create buff */
     DEBUG
     buff_create("Weak", "Weak creatures deal 25%% less damage with Attacks.", Buff_Weak, bufftable);
