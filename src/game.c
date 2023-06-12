@@ -89,7 +89,24 @@ void all_initialize(Player *player, Enemy *enemy, Field *field, CardTable *cardt
     add_card_into_deck(&deck, "DarkStrike");
     add_card_into_deck(&deck, "Incantation");
 
-    enemy_create("Cultist", Cultist, 50, 0, &deck, &buff, enemytable);
+    enemy_create("Cultist", Cultist, 50, 0, 50,&deck, &buff, enemytable);
+    //Mouse
+    card_deck_initialize(&deck);
+    buff_deck_initialize(&buff);
+
+    add_card_into_deck(&deck, "Chomp");
+    add_card_into_deck(&deck, "Thrash");
+    add_card_into_deck(&deck, "Bellow");
+
+    enemy_create("Mouse", Mouse, 40, 0, 40,&deck, &buff, enemytable);
+    //Lagavulin
+    card_deck_initialize(&deck);
+    buff_deck_initialize(&buff);
+
+    add_card_into_deck(&deck, "LagavulinAttack");
+    add_card_into_deck(&deck, "SiphonSoul");
+
+    enemy_create("Lagavulin", Lagavulin, 100, 8, 100,&deck, &buff, enemytable);
 }
 
 void game_initialize(Game *game, Card *card, Player *player, Enemy *enemy, Field *field, CardTable *cardtable, BuffTable *bufftable, EnemyTable *enemytable)

@@ -32,7 +32,7 @@ void Lagavulin(Player *player, Enemy *enemy, Field *field, CardTable *cardtable)
 {
     if (field->round <= 3 && enemy->def > 0)
     {
-        return 0;
+        return ;
     }
     
     if (field->round % 2 == 1)

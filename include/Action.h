@@ -29,7 +29,7 @@ void card_create(char *name, const char *description, int type, int atk, bool is
 /**
  * @brief 創造敵人
  */
-void enemy_create(char *name, EnemyFunction function, int hp, int def, CardDeck *deck, BuffDeck *buff, EnemyTable *table);
+void enemy_create(char *name, EnemyFunction function, int hp, int def,  int max_hp,CardDeck *deck, BuffDeck *buff, EnemyTable *table);
 
 /**
  * @brief 創造buff
