@@ -1,37 +1,21 @@
----
-type: slide
-title: PD FinalProject
----
-
 Programming Design
 Final Project
+The Rogue Game
 GroupMembers:
 羅冠翔 顏鈺峰 莊順閎 王政崴 王子奕
 
----
+## 1. Introduction
 
-1. Introduction
-
----
-
-Game Intro
-
----
+### Game Intro
 
 Rough: The Card Game
 It is a game that combines elements of card games and roguelikes.
 
----
-
 The game allows players to assume the role of an adventurer, exploring uncharted territories filled with danger and mysterious trials. Players must construct powerful decks of cards and employ strategies to overcome various enemies and challenges.
-
----
 
 Players need to choose cards to play each turn and respond to enemy attacks and abilities. Strategically using cards, managing resources, and health points are key to achieving victory in the game.
 
----
-
-Game Flow
+### Game Flow
 
 ```graphviz
 digraph tree{
@@ -41,13 +25,7 @@ digraph tree{
 }
 ```
 
----
-
----
-
-2. Program Design
-
----
+## 2. Program Design
 
 Program Flow
 
@@ -65,9 +43,7 @@ digraph tree{
 }
 ```
 
----
-
-Program Flow
+### Program Flow
 
 ```graphviz
 digraph tree{
@@ -86,9 +62,7 @@ digraph tree{
 }
 ```
 
----
-
-Choose Card
+### Choose Card
 
 ```graphviz
 digraph tree{
@@ -96,9 +70,7 @@ digraph tree{
 }
 ```
 
----
-
-Battle
+### Battle
 
 ```graphviz
 digraph tree{
@@ -109,13 +81,9 @@ digraph tree{
 
 ```
 
----
+## 4.Advance Part
 
-4.Advance Part
-
----
-
-GUI
+### GUI
 
 ```clike=
 
@@ -139,11 +107,7 @@ void battle_button_clicked(GtkButton *button, gpointer data);
 
 ```
 
----
-
-5.展示
-
----
+## 5. demo
 
 # FP_finalproject
 
@@ -158,21 +122,11 @@ make
 ./myproject
 ```
 
----
-
 The start
 ![](https://hackmd.io/_uploads/B1uNT9EP3.png)
-
----
 
 The battle
 ![](https://hackmd.io/_uploads/BJaHp54wh.png)
 
----
-
 github link
 https://github.com/CCU5703/ProgrammingDesign_FinalProject.git
-
----
-
-End
