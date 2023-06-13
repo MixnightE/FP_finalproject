@@ -147,19 +147,16 @@ void battle_button_clicked(GtkButton *button, gpointer data);
 
 # FP_finalproject
 
-## Makefile
+## build
 
-如果使用者想要使用其他編譯器，可從命令列設定：
-
-```bash
-make CC=gcc
+```bash=
+brew install gtk+3
+git clone https://github.com/MixnightE/FP_finalproject.git
+# 主要是確定有<gtk/gtk.h>
+cd our/project/place/directory # clone的資料夾
+make
+./myproject
 ```
-
-預設之編譯器：
-
--   Windows: `cl`
--   MacOS: `clang`
--   Unix: `gcc`
 
 ---
 
