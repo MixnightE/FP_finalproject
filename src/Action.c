@@ -106,14 +106,24 @@ void player_new_round(Player *player, Enemy *enemy, Field *field)
 {
     // 回合開始卡
     int idx;
-    if ((idx = find_buff_from_deck(&(enemy->buff), "Weak")) != -1)
-        enemy->buff.deck[idx].level--;
+    if ((idx = find_buff_from_deck(&(player->buff), "Weak")) != -1)
+    {
+        player->buff.deck[idx].level--;
+        if (player->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(player->buff), "Weak");
+    }
     if ((idx = find_buff_from_deck(&(player->buff), "Poison")) != -1)
+    {
         player->hp -= player->buff.deck[idx].level--;
-    if ((idx = find_buff_from_deck(&(enemy->buff), "Vulnerable")) != -1)
-        enemy->buff.deck[idx].level--;
-    if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) != -1)
-        enemy->buff.deck[idx].level = 0;
+        if (player->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(player->buff), "Poison");
+    }
+    if ((idx = find_buff_from_deck(&(player->buff), "Vulnerable")) != -1)
+    {
+        player->buff.deck[idx].level--;
+        if (player->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(player->buff), "Weak");
+    }
     if ((idx = find_buff_from_deck(&(player->buff), "Block")) != -1)
         remove_buff_from_deck(&(player->buff), "Block");
     if (player->energy < 3)
@@ -126,18 +136,33 @@ void enemy_new_round(Player *player, Enemy *enemy, Field *field)
 {
     // 回合開始卡
     int idx;
-    if ((idx = find_buff_from_deck(&(player->buff), "Weak")) != -1)
-        player->buff.deck[idx].level--;
+    if ((idx = find_buff_from_deck(&(enemy->buff), "Weak")) != -1)
+    {
+        enemy->buff.deck[idx].level--;
+        if (enemy->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(enemy->buff), "Weak");
+    }
+
     if ((idx = find_buff_from_deck(&(enemy->buff), "Poison")) != -1)
+    {
         enemy->hp -= enemy->buff.deck[idx].level--;
-    if ((idx = find_buff_from_deck(&(player->buff), "Vulnerable")) != -1)
-        player->buff.deck[idx].level--;
+        if (enemy->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(enemy->buff), "Poison");
+    }
+    if ((idx = find_buff_from_deck(&(enemy->buff), "Vulnerable")) != -1)
+    {
+        enemy->buff.deck[idx].level--;
+        if (enemy->buff.deck[idx].level <= 0)
+            remove_buff_from_deck(&(enemy->buff), "Vulnerable");
+    }
     if ((idx = find_buff_from_deck(&(enemy->buff), "Ritual")) != -1)
         Buff_Ritual(NULL, NULL, enemy, field);
     if ((idx = find_buff_from_deck(&(player->buff), "Rage")) != -1)
         remove_buff_from_deck(&(player->buff), "Rage");
     if ((idx = find_buff_from_deck(&(enemy->buff), "Block")) != -1)
+    {
         remove_buff_from_deck(&(enemy->buff), "Block");
+    }
 
     if (player->hp <= 0 || enemy->hp <= 0)
     {

@@ -80,9 +80,9 @@ void MainStack_visible_child_name_notify_cb(GObject *gobject, GParamSpec *pspec,
         GtkWidget *enemyImage = list->next->data;
         g_list_free(list);
         char enemyName[51] = "./image/";
-        strcat(enemyName, random_enemy_name(enemytable));
+        strcat(enemyName, enemy->name);
         strcat(enemyName, ".png");
-        GdkPixbuf *pixbuf = scale_image(enemyName, 300);
+        GdkPixbuf *pixbuf = scale_image(enemyName, 400);
         gtk_image_set_from_pixbuf(GTK_IMAGE(enemyImage), pixbuf);
         /* 3 : Round Start */
         round_start((Game *)user_data);
@@ -137,7 +137,6 @@ void FoldCardDeckButton_clicked_cb(GtkWidget *widget, gpointer data)
     GtkWidget *dialog = gtk_dialog_new_with_buttons("Deck Details", GTK_WINDOW(window), GTK_DIALOG_MODAL, "_OK", GTK_RESPONSE_ACCEPT, NULL);
     GtkWidget *content_area = gtk_dialog_get_content_area(GTK_DIALOG(dialog));
     Player *player = ((Game *)data)->player;
-    printf("@@@@@%d\n", player->deck.foldCard.size);
     for (int i = 0; i < player->deck.foldCard.size; i++)
     {
         char name[MAX_DESCRIPTION_LENGTH + 1];
@@ -185,6 +184,10 @@ void HandCardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)
         strcat(name, player->deck.handCard.card[i].description);
         gtk_combo_box_text_append_text(cbox, name);
     }
+    if (player->hp <= 0)
+        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "LosePage");
+    if (game->enemy->hp <= 0)
+        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "WinPage");
 }
 
 void CardChooseButton_clicked_cb(GtkWidget *widget, gpointer data)

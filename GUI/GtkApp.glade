@@ -65,7 +65,7 @@
             <property name="name">SettingPage</property>
             <property name="visible">True</property>
             <property name="can-focus">True</property>
-            <property name="opacity">0.5</property>
+            <property name="opacity">0.69999999999999996</property>
             <child>
               <object class="GtkBox" id="NormalSettingBox">
                 <property name="name">NormalSettingBox</property>

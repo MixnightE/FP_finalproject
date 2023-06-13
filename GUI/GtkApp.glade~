@@ -701,7 +701,7 @@ Click To Choose The Cards</property>
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
                 <property name="receives-default">True</property>
-                <signal name="clicked" handler="WinButton_clicked_cb" swapped="no"/>
+                <signal name="clicked" handler="WinButton_clicked_cb" object="MainStack" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>

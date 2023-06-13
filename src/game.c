@@ -196,11 +196,6 @@ void hp_update(Game *game)
     gtk_progress_bar_set_text(player_hp, text);
     gtk_progress_bar_set_fraction(player_hp, current / total);
     gtk_widget_show_all(GTK_WIDGET(player_hp));
-    if (current <= 0)
-    {
-        DEBUG
-        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "LosePage");
-    }
     current = game->enemy->hp;
     total = game->enemy->max_hp;
     sprintf(text, "%.0f/%.0f", current, total);
@@ -208,10 +203,6 @@ void hp_update(Game *game)
     gtk_progress_bar_set_text(enemy_hp, text);
     gtk_progress_bar_set_fraction(enemy_hp, current / total); // 计算并设置进度
     gtk_widget_show_all(GTK_WIDGET(enemy_hp));
-    if (current <= 0)
-    {
-        gtk_stack_set_visible_child_name(GTK_STACK(game->stack), "WinPage");
-    }
 }
 
 void clear_box(GtkWidget *box)

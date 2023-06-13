@@ -11,7 +11,7 @@ int find_buff_from_deck(BuffDeck *deck, const char *name)
 {
     for (int i = 0; i < deck->size; i++)
     {
-        if (!strcmp(name, deck->deck[i].name))
+        if (strcmp(name, deck->deck[i].name) == 0)
             return i;
     }
     return -1;
@@ -68,5 +68,6 @@ void remove_buff_from_deck(BuffDeck *buff, const char *name)
         {
             buff_assign(&(buff->deck[i - 1]), &(buff->deck[i]));
         }
+        buff->size--;
     }
 }
