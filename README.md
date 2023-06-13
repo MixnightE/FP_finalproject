@@ -1,8 +1,8 @@
-Programming Design
-Final Project
-The Rogue Game
-GroupMembers:
-羅冠翔 顏鈺峰 莊順閎 王政崴 王子奕
+# Programming Design Final Project
+
+## The Rogue Game
+
+### GroupMembers: 羅冠翔 顏鈺峰 莊順閎 王政崴 王子奕
 
 ## 1. Introduction
 
